@@ -261,7 +261,91 @@ footer{padding:11px 48px;border-top:1px solid var(--b1);display:flex;align-items
 footer .ac{color:var(--ac);}
 #hidden{position:fixed;top:0;left:0;opacity:0;pointer-events:none;width:1px;height:1px;}
 
-/* tag colors */
+/* ── AUTH SCREEN ── */
+#auth-screen{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+#auth-screen.hide{animation:authOut .5s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes authOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04);pointer-events:none}}
+
+/* animated bg particles */
+.auth-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.auth-particle{position:absolute;width:2px;height:2px;background:var(--ac);border-radius:50%;opacity:0;animation:partFloat linear infinite;}
+@keyframes partFloat{0%{opacity:0;transform:translateY(0) scale(0)}20%{opacity:.6}80%{opacity:.3}100%{opacity:0;transform:translateY(-100vh) scale(1.5)}}
+
+/* grid lines bg */
+.auth-grid{position:absolute;inset:0;background-image:linear-gradient(var(--b1) 1px,transparent 1px),linear-gradient(90deg,var(--b1) 1px,transparent 1px);background-size:48px 48px;opacity:.4;animation:gridPulse 4s ease-in-out infinite;}
+@keyframes gridPulse{0%,100%{opacity:.2}50%{opacity:.45}}
+
+/* glow orbs */
+.auth-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbFloat 8s ease-in-out infinite;}
+.auth-orb-1{width:400px;height:400px;background:rgba(226,183,20,.08);top:-100px;left:-100px;}
+.auth-orb-2{width:300px;height:300px;background:rgba(226,183,20,.06);bottom:-80px;right:-80px;animation-delay:-4s;}
+
+/* card */
+.auth-card{position:relative;z-index:2;width:420px;max-width:95vw;background:var(--s1);border:1px solid var(--b2);border-radius:18px;padding:40px;box-shadow:0 32px 80px rgba(0,0,0,.6);animation:cardIn .6s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* logo in auth */
+.auth-logo{text-align:center;margin-bottom:32px;}
+.auth-logo-mark{display:inline-flex;align-items:center;gap:10px;font-family:var(--ui);font-weight:900;font-size:2rem;color:var(--ac);letter-spacing:-1px;animation:logoPop .8s cubic-bezier(.4,0,.2,1) .2s both;}
+@keyframes logoPop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.auth-logo-dot{width:10px;height:10px;border-radius:50%;background:var(--ac);box-shadow:0 0 12px var(--ac),0 0 24px var(--ac);animation:dotPulse 2s ease-in-out infinite;}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 8px var(--ac),0 0 16px var(--ac)}50%{box-shadow:0 0 16px var(--ac),0 0 32px var(--ac),0 0 48px var(--ac)}}
+.auth-logo-sub{font-size:.6rem;color:var(--d2);font-family:var(--font);display:block;margin-top:4px;letter-spacing:2px;text-transform:uppercase;}
+
+/* tabs */
+.auth-tabs{display:flex;background:var(--bg);border-radius:8px;padding:3px;gap:3px;margin-bottom:28px;}
+.auth-tab{flex:1;background:none;border:none;color:var(--d2);font-family:var(--font);font-size:.72rem;padding:8px;border-radius:6px;cursor:pointer;transition:.2s;}
+.auth-tab:hover{color:var(--tx);}
+.auth-tab.on{background:var(--s2);color:var(--ac);box-shadow:0 2px 8px rgba(0,0,0,.3);}
+
+/* form */
+.auth-form{display:flex;flex-direction:column;gap:16px;animation:formIn .3s ease both;}
+@keyframes formIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.auth-field{position:relative;}
+.auth-field label{display:block;font-size:.62rem;color:var(--d2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;font-family:var(--font);}
+.auth-field input{width:100%;background:var(--bg);border:1px solid var(--b2);border-radius:8px;color:var(--tx);font-family:var(--font);font-size:.82rem;padding:11px 14px 11px 38px;outline:none;transition:.2s;}
+.auth-field input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--acg);}
+.auth-field input::placeholder{color:var(--d1);}
+.auth-field-icon{position:absolute;bottom:11px;left:12px;color:var(--d2);font-size:.85rem;pointer-events:none;}
+.auth-field input:focus~.auth-field-icon{color:var(--ac);}
+
+/* strength bar */
+.pw-strength{height:3px;border-radius:2px;background:var(--b1);margin-top:6px;overflow:hidden;}
+.pw-strength-bar{height:100%;border-radius:2px;width:0%;transition:width .3s,background .3s;}
+
+/* submit btn */
+.auth-submit{background:var(--ac);color:#0d0f14;border:none;border-radius:8px;padding:13px;font-family:var(--ui);font-weight:700;font-size:.9rem;cursor:pointer;transition:.2s;position:relative;overflow:hidden;margin-top:4px;}
+.auth-submit:hover{background:var(--ac2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(226,183,20,.3);}
+.auth-submit:active{transform:translateY(0);}
+.auth-submit::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:.4s;}
+.auth-submit:hover::after{transform:translateX(100%);}
+
+/* divider */
+.auth-divider{display:flex;align-items:center;gap:10px;color:var(--d1);font-size:.62rem;margin:4px 0;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--b2);}
+
+/* guest btn */
+.auth-guest{background:none;border:1px solid var(--b2);color:var(--d2);border-radius:8px;padding:11px;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.2s;width:100%;}
+.auth-guest:hover{border-color:var(--d2);color:var(--tx);}
+
+/* error / success msg */
+.auth-msg{font-size:.68rem;padding:9px 12px;border-radius:6px;display:none;animation:msgIn .2s ease;}
+@keyframes msgIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.auth-msg.err{background:rgba(242,92,110,.1);border:1px solid rgba(242,92,110,.3);color:#f25c6e;display:block;}
+.auth-msg.ok{background:rgba(95,204,138,.1);border:1px solid rgba(95,204,138,.3);color:#5fcc8a;display:block;}
+
+/* user chip in header */
+.user-chip{display:flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--b1);border-radius:20px;padding:4px 12px 4px 4px;cursor:pointer;transition:.13s;}
+.user-chip:hover{border-color:var(--b2);}
+.user-avatar{width:24px;height:24px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:#0d0f14;font-family:var(--ui);}
+.user-name{font-size:.67rem;color:var(--tx);font-family:var(--font);}
+.user-menu{position:absolute;top:52px;right:48px;background:var(--s1);border:1px solid var(--b2);border-radius:10px;padding:6px;min-width:160px;z-index:100;box-shadow:0 16px 40px rgba(0,0,0,.5);animation:menuIn .15s ease;}
+@keyframes menuIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.user-menu-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;cursor:pointer;font-size:.68rem;color:var(--d3);font-family:var(--font);transition:.12s;}
+.user-menu-item:hover{background:var(--s2);color:var(--tx);}
+.user-menu-item.danger{color:var(--rd);}
+.user-menu-item.danger:hover{background:var(--rdb);}
+
 .tag-html{background:rgba(242,92,110,.12);color:#f25c6e;}
 .tag-css{background:rgba(91,200,216,.12);color:#5bc8d8;}
 .tag-js{background:rgba(240,192,96,.12);color:#f0c060;}
@@ -278,7 +362,68 @@ footer .ac{color:var(--ac);}
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- ══ AUTH SCREEN ══ -->
+<div id="auth-screen">
+  <div class="auth-bg" id="auth-bg"></div>
+  <div class="auth-grid"></div>
+  <div class="auth-orb auth-orb-1"></div>
+  <div class="auth-orb auth-orb-2"></div>
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="auth-logo-mark">
+        <div class="auth-logo-dot"></div>lucode
+      </div>
+      <span class="auth-logo-sub">// type code. get faster.</span>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab on" id="tab-login" onclick="switchAuthTab('login')">sign in</button>
+      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">sign up</button>
+    </div>
+
+    <div id="auth-msg" class="auth-msg"></div>
+
+    <!-- LOGIN FORM -->
+    <div id="form-login" class="auth-form">
+      <div class="auth-field">
+        <label>username</label>
+        <input type="text" id="l-user" placeholder="your username" autocomplete="username">
+        <span class="auth-field-icon">◈</span>
+      </div>
+      <div class="auth-field">
+        <label>password</label>
+        <input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        <span class="auth-field-icon">◉</span>
+      </div>
+      <button class="auth-submit" onclick="doLogin()">sign in →</button>
+      <div class="auth-divider">or</div>
+      <button class="auth-guest" onclick="doGuest()">continue as guest</button>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="form-register" class="auth-form" style="display:none;">
+      <div class="auth-field">
+        <label>username</label>
+        <input type="text" id="r-user" placeholder="choose a username" autocomplete="username">
+        <span class="auth-field-icon">◈</span>
+      </div>
+      <div class="auth-field">
+        <label>email <span style="opacity:.4">(optional)</span></label>
+        <input type="email" id="r-email" placeholder="you@example.com" autocomplete="email">
+        <span class="auth-field-icon">✉</span>
+      </div>
+      <div class="auth-field">
+        <label>password</label>
+        <input type="password" id="r-pass" placeholder="min 6 characters" oninput="checkPwStrength(this.value)" autocomplete="new-password" onkeydown="if(event.key==='Enter')doRegister()">
+        <span class="auth-field-icon">◉</span>
+        <div class="pw-strength"><div class="pw-strength-bar" id="pw-bar"></div></div>
+      </div>
+      <button class="auth-submit" onclick="doRegister()">create account →</button>
+      <div class="auth-divider">or</div>
+      <button class="auth-guest" onclick="doGuest()">continue as guest</button>
+    </div>
+  </div>
+</div>
 <div id="hdr">
   <div class="logo"><div class="logo-dot"></div>lucode<sub>// type code</sub></div>
   <div class="hdr-nav">
@@ -289,7 +434,16 @@ footer .ac{color:var(--ac);}
     <button class="nav-btn run" onclick="runCode()" id="run-nav">▶ run</button>
     <div class="sep"></div>
     <button class="nav-btn" onclick="toggleSettings()">settings</button>
+    <div class="sep"></div>
+    <div class="user-chip" id="user-chip" onclick="toggleUserMenu()">
+      <div class="user-avatar" id="user-avatar">?</div>
+      <span class="user-name" id="user-name-display">guest</span>
+    </div>
   </div>
+</div>
+<div id="user-menu" class="user-menu" style="display:none;">
+  <div class="user-menu-item" onclick="showProfile()">◈ &nbsp;profile</div>
+  <div class="user-menu-item danger" onclick="doLogout()">⇤ &nbsp;sign out</div>
 </div>
 
 <div id="wrap">
@@ -2161,12 +2315,160 @@ if('serviceWorker' in navigator) {
 }
 
 // ═══════════════════════════════════════════════════════
+// AUTH SYSTEM
+// ═══════════════════════════════════════════════════════
+let AUTH = { user: null };
+
+// spawn floating particles
+(function spawnParticles() {
+  const bg = document.getElementById('auth-bg');
+  if(!bg) return;
+  for(let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'auth-particle';
+    p.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${1+Math.random()*3}px;height:${1+Math.random()*3}px;animation-duration:${4+Math.random()*8}s;animation-delay:${Math.random()*6}s;`;
+    bg.appendChild(p);
+  }
+})();
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem('lucode_users') || '{}'); } catch(e) { return {}; }
+}
+function saveUsers(u) { localStorage.setItem('lucode_users', JSON.stringify(u)); }
+
+function switchAuthTab(tab) {
+  document.getElementById('tab-login').classList.toggle('on', tab==='login');
+  document.getElementById('tab-register').classList.toggle('on', tab==='register');
+  document.getElementById('form-login').style.display = tab==='login' ? 'flex' : 'none';
+  document.getElementById('form-register').style.display = tab==='register' ? 'flex' : 'none';
+  document.getElementById('auth-msg').className = 'auth-msg';
+}
+
+function showAuthMsg(msg, type) {
+  const el = document.getElementById('auth-msg');
+  el.textContent = msg;
+  el.className = 'auth-msg ' + type;
+}
+
+function checkPwStrength(pw) {
+  const bar = document.getElementById('pw-bar');
+  let score = 0;
+  if(pw.length >= 6) score++;
+  if(pw.length >= 10) score++;
+  if(/[A-Z]/.test(pw)) score++;
+  if(/[0-9]/.test(pw)) score++;
+  if(/[^a-zA-Z0-9]/.test(pw)) score++;
+  const colors = ['#f25c6e','#f09060','#e2b714','#5fcc8a','#5bc8d8'];
+  const widths = ['20%','40%','60%','80%','100%'];
+  bar.style.width = pw ? widths[Math.min(score-1,4)] : '0%';
+  bar.style.background = pw ? colors[Math.min(score-1,4)] : 'transparent';
+}
+
+function doLogin() {
+  const user = document.getElementById('l-user').value.trim();
+  const pass = document.getElementById('l-pass').value;
+  if(!user || !pass) { showAuthMsg('fill in all fields', 'err'); return; }
+  const users = getUsers();
+  if(!users[user]) { showAuthMsg('user not found', 'err'); return; }
+  if(users[user].pass !== btoa(pass)) { showAuthMsg('wrong password', 'err'); return; }
+  loginSuccess(user, users[user]);
+}
+
+function doRegister() {
+  const user = document.getElementById('r-user').value.trim();
+  const email = document.getElementById('r-email').value.trim();
+  const pass = document.getElementById('r-pass').value;
+  if(!user || !pass) { showAuthMsg('username and password are required', 'err'); return; }
+  if(user.length < 3) { showAuthMsg('username must be at least 3 characters', 'err'); return; }
+  if(pass.length < 6) { showAuthMsg('password must be at least 6 characters', 'err'); return; }
+  if(!/^[a-zA-Z0-9_]+$/.test(user)) { showAuthMsg('username: only letters, numbers, _', 'err'); return; }
+  const users = getUsers();
+  if(users[user]) { showAuthMsg('username already taken', 'err'); return; }
+  users[user] = { pass: btoa(pass), email, joined: Date.now() };
+  saveUsers(users);
+  showAuthMsg('account created! signing in...', 'ok');
+  setTimeout(() => loginSuccess(user, users[user]), 900);
+}
+
+function doGuest() {
+  loginSuccess('guest', { guest: true });
+}
+
+function loginSuccess(username, data) {
+  AUTH.user = { username, ...data };
+  localStorage.setItem('lucode_session', JSON.stringify({ username, ts: Date.now() }));
+  // update header chip
+  const chip = document.getElementById('user-chip');
+  const avatar = document.getElementById('user-avatar');
+  const nameEl = document.getElementById('user-name-display');
+  chip.style.display = 'flex';
+  avatar.textContent = username[0].toUpperCase();
+  nameEl.textContent = username;
+  // animate out auth screen
+  const screen = document.getElementById('auth-screen');
+  screen.classList.add('hide');
+  setTimeout(() => { screen.style.display = 'none'; focus_(); }, 500);
+  toast('welcome, ' + username + ' 👋');
+}
+
+function checkSession() {
+  try {
+    const s = JSON.parse(localStorage.getItem('lucode_session') || 'null');
+    if(s && s.username && (Date.now() - s.ts < 7*24*60*60*1000)) {
+      // auto login if session < 7 days
+      const users = getUsers();
+      if(s.username === 'guest' || users[s.username]) {
+        loginSuccess(s.username, users[s.username] || { guest: true });
+        return;
+      }
+    }
+  } catch(e) {}
+}
+
+function doLogout() {
+  AUTH.user = null;
+  localStorage.removeItem('lucode_session');
+  document.getElementById('user-menu').style.display = 'none';
+  document.getElementById('user-chip').style.display = 'none';
+  // show auth screen again
+  const screen = document.getElementById('auth-screen');
+  screen.style.display = 'flex';
+  screen.classList.remove('hide');
+  document.getElementById('l-user').value = '';
+  document.getElementById('l-pass').value = '';
+  document.getElementById('auth-msg').className = 'auth-msg';
+  switchAuthTab('login');
+}
+
+function toggleUserMenu() {
+  const menu = document.getElementById('user-menu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+function showProfile() {
+  document.getElementById('user-menu').style.display = 'none';
+  if(AUTH.user) {
+    const joined = AUTH.user.joined ? new Date(AUTH.user.joined).toLocaleDateString() : 'today';
+    toast(`${AUTH.user.username} · joined ${joined}`);
+  }
+}
+
+document.addEventListener('click', e => {
+  const menu = document.getElementById('user-menu');
+  const chip = document.getElementById('user-chip');
+  if(menu.style.display !== 'none' && !menu.contains(e.target) && !chip.contains(e.target)) {
+    menu.style.display = 'none';
+  }
+});
+
+// ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
 loadCF();
 qi('ft-count').textContent = DB.length + ' snippets';
 qi('res-run-btn').style.display = 'none';
 pickSnippet('h1');
+checkSession();
 </script>
 </body>
 </html>
