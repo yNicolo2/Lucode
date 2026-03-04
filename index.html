@@ -263,8 +263,8 @@ footer .ac{color:var(--ac);}
 
 /* ── AUTH SCREEN ── */
 #auth-screen{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;}
-#auth-screen.hide{animation:authOut .5s cubic-bezier(.4,0,.2,1) forwards;}
-@keyframes authOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04);pointer-events:none}}
+#auth-screen.hide{animation:authOut .5s cubic-bezier(.4,0,.2,1) forwards;pointer-events:none;}
+@keyframes authOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04);}}
 
 /* animated bg particles */
 .auth-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
@@ -363,7 +363,7 @@ footer .ac{color:var(--ac);}
 <body>
 
 <!-- ══ AUTH SCREEN ══ -->
-<div id="auth-screen">
+<div id="auth-screen" style="display:flex;">
   <div class="auth-bg" id="auth-bg"></div>
   <div class="auth-grid"></div>
   <div class="auth-orb auth-orb-1"></div>
@@ -648,7 +648,7 @@ footer .ac{color:var(--ac);}
     </div>
 
     <div class="sg">
-      <div class="sg-t">Theme (21)</div>
+      <div class="sg-t">Theme (25)</div>
       <div class="theme-grid" id="theme-grid">
         <div class="tc on" data-theme="default" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0d0f14"></div><div class="tcs" style="background:#13161e"></div><div class="tcs" style="background:#e2b714"></div><div class="tcs" style="background:#c8cde0"></div></div><div class="tcn">lucode</div></div>
         <div class="tc" data-theme="midnight" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#06080f"></div><div class="tcs" style="background:#0c1020"></div><div class="tcs" style="background:#b48ef0"></div><div class="tcs" style="background:#c0c8e8"></div></div><div class="tcn">midnight</div></div>
@@ -670,6 +670,10 @@ footer .ac{color:var(--ac);}
         <div class="tc" data-theme="palenight" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#292d3e"></div><div class="tcs" style="background:#1b1e2b"></div><div class="tcs" style="background:#c792ea"></div><div class="tcs" style="background:#a6accd"></div></div><div class="tcn">palenight</div></div>
         <div class="tc" data-theme="material" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#212121"></div><div class="tcs" style="background:#2d2d2d"></div><div class="tcs" style="background:#80cbc4"></div><div class="tcs" style="background:#eeffff"></div></div><div class="tcn">material</div></div>
         <div class="tc" data-theme="synthwave" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#1a1333"></div><div class="tcs" style="background:#241943"></div><div class="tcs" style="background:#ff7edb"></div><div class="tcs" style="background:#f0e6ff"></div></div><div class="tcn">synthwave</div></div>
+        <div class="tc" data-theme="cobalt" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0b1a2b"></div><div class="tcs" style="background:#0d2137"></div><div class="tcs" style="background:#ffa040"></div><div class="tcs" style="background:#b8d4f0"></div></div><div class="tcn">cobalt</div></div>
+        <div class="tc" data-theme="rose" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0f0a0d"></div><div class="tcs" style="background:#1a1018"></div><div class="tcs" style="background:#ff6eb4"></div><div class="tcs" style="background:#f0d8e8"></div></div><div class="tcn">rose</div></div>
+        <div class="tc" data-theme="ocean" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#060d1a"></div><div class="tcs" style="background:#08122a"></div><div class="tcs" style="background:#40c8e0"></div><div class="tcs" style="background:#a0c8f0"></div></div><div class="tcn">ocean</div></div>
+        <div class="tc" data-theme="matrix" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#000a00"></div><div class="tcs" style="background:#001200"></div><div class="tcs" style="background:#00ff41"></div><div class="tcs" style="background:#00cc44"></div></div><div class="tcn">matrix</div></div>
       </div>
     </div>
 
@@ -1429,6 +1433,343 @@ public:
   bool empty() const { return data_.empty(); }
   size_t size() const { return data_.size(); }
 };`},
+  // ── NEW SNIPPETS ──
+  {id:'js5',lang:'js',title:'Fetch & Async/Await',file:'api.js',code:`async function fetchUser(id) {
+  try {
+    const res = await fetch(\`https://api.example.com/users/\${id}\`);
+    if (!res.ok) throw new Error(\`HTTP \${res.status}\`);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error('Failed to fetch user:', err);
+    throw err;
+  }
+}
+
+async function loadUsers(ids) {
+  const results = await Promise.allSettled(
+    ids.map(id => fetchUser(id))
+  );
+  return results
+    .filter(r => r.status === 'fulfilled')
+    .map(r => r.value);
+}
+
+loadUsers([1, 2, 3]).then(users => {
+  console.log('Loaded:', users.length, 'users');
+});`},
+  {id:'js6',lang:'js',title:'Event Emitter',file:'emitter.js',code:`class EventEmitter {
+  #listeners = new Map();
+
+  on(event, fn) {
+    if (!this.#listeners.has(event)) {
+      this.#listeners.set(event, new Set());
+    }
+    this.#listeners.get(event).add(fn);
+    return () => this.off(event, fn);
+  }
+
+  off(event, fn) {
+    this.#listeners.get(event)?.delete(fn);
+  }
+
+  emit(event, ...args) {
+    this.#listeners.get(event)?.forEach(fn => fn(...args));
+  }
+
+  once(event, fn) {
+    const off = this.on(event, (...args) => {
+      fn(...args);
+      off();
+    });
+  }
+}
+
+const bus = new EventEmitter();
+bus.on('data', val => console.log('received:', val));
+bus.emit('data', 42);`},
+  {id:'ts3',lang:'ts',title:'Generic Repository',file:'repository.ts',code:`interface Entity {
+  id: string;
+}
+
+class Repository<T extends Entity> {
+  private items = new Map<string, T>();
+
+  add(item: T): void {
+    this.items.set(item.id, item);
+  }
+
+  get(id: string): T | undefined {
+    return this.items.get(id);
+  }
+
+  getAll(): T[] {
+    return Array.from(this.items.values());
+  }
+
+  update(id: string, patch: Partial<T>): T | null {
+    const item = this.items.get(id);
+    if (!item) return null;
+    const updated = { ...item, ...patch };
+    this.items.set(id, updated);
+    return updated;
+  }
+
+  delete(id: string): boolean {
+    return this.items.delete(id);
+  }
+
+  find(predicate: (item: T) => boolean): T[] {
+    return this.getAll().filter(predicate);
+  }
+}
+
+interface User extends Entity {
+  name: string;
+  email: string;
+}
+
+const users = new Repository<User>();
+users.add({ id: '1', name: 'Alice', email: 'alice@dev.io' });`},
+  {id:'py3',lang:'python',title:'Decorators',file:'decorators.py',code:`import time
+import functools
+from typing import Callable, Any
+
+def timer(func: Callable) -> Callable:
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs) -> Any:
+        start = time.perf_counter()
+        result = func(*args, **kwargs)
+        end = time.perf_counter()
+        print(f"{func.__name__} took {end - start:.4f}s")
+        return result
+    return wrapper
+
+def retry(times: int = 3, exceptions=(Exception,)):
+    def decorator(func: Callable) -> Callable:
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs) -> Any:
+            for attempt in range(1, times + 1):
+                try:
+                    return func(*args, **kwargs)
+                except exceptions as e:
+                    if attempt == times:
+                        raise
+                    print(f"Attempt {attempt} failed: {e}")
+        return wrapper
+    return decorator
+
+@timer
+@retry(times=3, exceptions=(ValueError,))
+def fetch_data(url: str) -> dict:
+    print(f"Fetching {url}")
+    return {"status": "ok"}
+
+fetch_data("https://api.example.com")`},
+  {id:'py4',lang:'python',title:'Dataclasses',file:'models.py',code:`from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Optional
+
+@dataclass
+class Address:
+    street: str
+    city: str
+    country: str = "US"
+
+    def __str__(self) -> str:
+        return f"{self.street}, {self.city}, {self.country}"
+
+@dataclass(order=True)
+class User:
+    sort_index: float = field(init=False, repr=False)
+    id: int
+    name: str
+    email: str
+    address: Optional[Address] = None
+    created_at: datetime = field(default_factory=datetime.now)
+    tags: list[str] = field(default_factory=list)
+
+    def __post_init__(self):
+        self.sort_index = self.id
+        if not "@" in self.email:
+            raise ValueError(f"Invalid email: {self.email}")
+
+    @property
+    def username(self) -> str:
+        return self.email.split("@")[0]
+
+alice = User(1, "Alice", "alice@dev.io",
+             address=Address("123 Main St", "NYC"),
+             tags=["admin", "dev"])
+print(alice.username)`},
+  {id:'css3',lang:'css',title:'Glass UI',file:'glass.css',code:`.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+}`},
+  {id:'css4',lang:'css',title:'Animations',file:'animations.css',code:`@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.fade-in    { animation: fadeIn 0.4s ease both; }
+.slide-in   { animation: slideIn 0.3s cubic-bezier(0.4,0,0.2,1) both; }
+.pulse      { animation: pulse 2s ease-in-out infinite; }
+.spin       { animation: spin 1s linear infinite; }
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #1c2030 25%,
+    #2a2f3f 50%,
+    #1c2030 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.5s linear infinite;
+  border-radius: 4px;
+}`},
+  {id:'h3',lang:'html',title:'Login Form',file:'login.html',code:`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0d0f14;
+      font-family: system-ui, sans-serif;
+    }
+    .card {
+      background: #13161e;
+      border: 1px solid #242840;
+      border-radius: 16px;
+      padding: 40px;
+      width: 360px;
+    }
+    h2 { color: #e8ecf8; font-size: 1.4rem; margin-bottom: 24px; }
+    label { display: block; font-size: .75rem; color: #5a6285;
+            margin-bottom: 6px; }
+    input {
+      width: 100%; background: #0d0f14;
+      border: 1px solid #242840; border-radius: 8px;
+      color: #c8cde0; padding: 10px 14px;
+      font-size: .9rem; outline: none; margin-bottom: 16px;
+    }
+    input:focus { border-color: #e2b714; }
+    button {
+      width: 100%; background: #e2b714; color: #0d0f14;
+      border: none; border-radius: 8px; padding: 12px;
+      font-weight: 700; font-size: .95rem; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Sign in</h2>
+    <label>Email</label>
+    <input type="email" placeholder="you@example.com">
+    <label>Password</label>
+    <input type="password" placeholder="••••••••">
+    <button>Continue →</button>
+  </div>
+</body>
+</html>`},
+  {id:'rust3',lang:'rust',title:'Error Handling',file:'errors.rs',code:`use std::fmt;
+use std::num::ParseIntError;
+
+#[derive(Debug)]
+enum AppError {
+    ParseError(ParseIntError),
+    DivisionByZero,
+    NegativeNumber(i32),
+}
+
+impl fmt::Display for AppError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            AppError::ParseError(e) => write!(f, "parse error: {}", e),
+            AppError::DivisionByZero => write!(f, "division by zero"),
+            AppError::NegativeNumber(n) => write!(f, "negative: {}", n),
+        }
+    }
+}
+
+impl From<ParseIntError> for AppError {
+    fn from(e: ParseIntError) -> Self {
+        AppError::ParseError(e)
+    }
+}
+
+fn parse_and_divide(a: &str, b: &str) -> Result<i32, AppError> {
+    let x: i32 = a.parse()?;
+    let y: i32 = b.parse()?;
+    if y == 0 { return Err(AppError::DivisionByZero); }
+    if x < 0 { return Err(AppError::NegativeNumber(x)); }
+    Ok(x / y)
+}
+
+fn main() {
+    match parse_and_divide("42", "6") {
+        Ok(v)  => println!("Result: {}", v),
+        Err(e) => eprintln!("Error: {}", e),
+    }
+}`},
 ];
 
 // ═══════════════════════════════════════════════════════
@@ -1455,6 +1796,10 @@ const THEMES = {
   palenight:  {bg:'#292d3e',s1:'#1b1e2b',s2:'#252837',b1:'#32364a',b2:'#414660',tx:'#a6accd',tb:'#d0d5f0',d1:'#3b4060',d2:'#545c80',d3:'#717cb0',ac:'#c792ea',ac2:'#a570c8'},
   material:   {bg:'#212121',s1:'#2d2d2d',s2:'#373737',b1:'#424242',b2:'#545454',tx:'#eeffff',tb:'#ffffff',d1:'#4a4a4a',d2:'#616161',d3:'#7c7c7c',ac:'#80cbc4',ac2:'#4db6ac'},
   synthwave:  {bg:'#1a1333',s1:'#241943',s2:'#2c2050',b1:'#3d2b6a',b2:'#503880',tx:'#f0e6ff',tb:'#ffffff',d1:'#4a3570',d2:'#6a5090',d3:'#9070c0',ac:'#ff7edb',ac2:'#e050c0'},
+  cobalt:     {bg:'#0b1a2b',s1:'#0d2137',s2:'#0f2844',b1:'#163354',b2:'#1e4068',tx:'#b8d4f0',tb:'#e0f0ff',d1:'#1e3a58',d2:'#2a5070',d3:'#4070a0',ac:'#ffa040',ac2:'#e08020'},
+  rose:       {bg:'#0f0a0d',s1:'#1a1018',s2:'#201420',b1:'#2c1828',b2:'#3a2035',tx:'#f0d8e8',tb:'#ffe8f0',d1:'#4a2040',d2:'#6a3058',d3:'#905080',ac:'#ff6eb4',ac2:'#e04090'},
+  ocean:      {bg:'#060d1a',s1:'#08122a',s2:'#0c1838',b1:'#102040',b2:'#162a54',tx:'#a0c8f0',tb:'#d0e8ff',d1:'#1a2e50',d2:'#2a4070',d3:'#406090',ac:'#40c8e0',ac2:'#20a8c0'},
+  matrix:     {bg:'#000a00',s1:'#001200',s2:'#001800',b1:'#002200',b2:'#003000',tx:'#00cc44',tb:'#00ff66',d1:'#003300',d2:'#005500',d3:'#008800',ac:'#00ff41',ac2:'#00cc33'},
 };
 
 // ═══════════════════════════════════════════════════════
