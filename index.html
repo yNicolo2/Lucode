@@ -2412,17 +2412,8 @@ function loginSuccess(username, data) {
 }
 
 function checkSession() {
-  try {
-    const s = JSON.parse(localStorage.getItem('lucode_session') || 'null');
-    if(s && s.username && (Date.now() - s.ts < 7*24*60*60*1000)) {
-      // auto login if session < 7 days
-      const users = getUsers();
-      if(s.username === 'guest' || users[s.username]) {
-        loginSuccess(s.username, users[s.username] || { guest: true });
-        return;
-      }
-    }
-  } catch(e) {}
+  // Always show auth screen — no auto-login
+  document.getElementById('auth-screen').style.display = 'flex';
 }
 
 function doLogout() {
