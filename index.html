@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>lucode</title>
 <link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="lucode">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="msapplication-TileImage" content="icon-192.png">
+<meta name="msapplication-TileColor" content="#0d0f14">
 <meta name="theme-color" content="#0d0f14">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -805,9 +812,13 @@ footer .ac{color:var(--ac);}
             <div class="about-avatar">Y</div>
             <div class="about-dev-info">
               <div class="name">yNicolo</div>
-              <div class="sub">14 years old · self-taught developer<br>Built lucode from scratch — solo project, no frameworks, no tutorials.<br>Just curiosity, caffeine, and a lot of broken code.</div>
+              <div class="sub">14 years old · self-taught developer<br>
+                Built lucode from scratch — solo project, no frameworks, no tutorials.<br>
+                Just curiosity, caffeine, and a lot of broken code.<br>
+                <span style="color:var(--ac);">5165 lines of vanilla HTML/CSS/JS</span> and counting.
+              </div>
               <div style="margin-top:8px;">
-                <span class="about-tag">HTML</span><span class="about-tag">CSS</span><span class="about-tag">Vanilla JS</span><span class="about-tag">No frameworks</span><span class="about-tag">14yo</span>
+                <span class="about-tag">HTML</span><span class="about-tag">CSS</span><span class="about-tag">Vanilla JS</span><span class="about-tag">No frameworks</span><span class="about-tag">14yo</span><span class="about-tag">self-taught</span>
               </div>
             </div>
           </div>
@@ -817,13 +828,14 @@ footer .ac{color:var(--ac);}
       <!-- STORY OF FAILURES -->
       <div class="about-section">
         <div class="about-section-title">The honest story — things that went wrong 💀</div>
-        <div class="failure-card"><div class="failure-icon">🔥</div><div class="failure-text"><b>Firebase disaster.</b> Spent a whole session integrating Google Sign-In with Firebase. Auth worked locally, but GitHub Pages kept throwing "unauthorized domain" errors. Removed everything. Gone.</div></div>
-        <div class="failure-card"><div class="failure-icon">👻</div><div class="failure-text"><b>Service Worker nightmare.</b> The app cached itself so aggressively that updates wouldn't show. Users (and the dev) were stuck on broken old versions for hours. Took 3 attempts to fix.</div></div>
-        <div class="failure-card"><div class="failure-icon">⬛</div><div class="failure-text"><b>Black screen of death.</b> After removing Firebase, the whole app went blank. The JS was running before the DOM loaded. DOMContentLoaded saved the day — eventually.</div></div>
-        <div class="failure-card"><div class="failure-icon">🗃️</div><div class="failure-text"><b>Incomplete uploads.</b> Multiple times, an uploaded index.html turned out to be only 2099 lines — half the file. The other half just... vanished.</div></div>
-        <div class="failure-card"><div class="failure-icon">📋</div><div class="failure-text"><b>Changelog rendering bug.</b> v1.4.0 entry in the changelog was missing a closing </div> tag. The whole modal layout broke silently for an entire version.</div></div>
-        <div class="failure-card"><div class="failure-icon">🎨</div><div class="failure-text"><b>31 themes and counting.</b> What started as "let me add a dark mode" turned into 39 themes with a full custom theme builder. Scope creep at its finest.</div></div>
-        <div class="failure-card"><div class="failure-icon">🤖</div><div class="failure-text"><b>Built with AI assistance.</b> This entire project was built collaboratively with Claude (Anthropic). Every bug, every fix, every feature — all in this chat. 100% transparent.</div></div>
+        <div class="failure-card"><div class="failure-icon">🔥</div><div class="failure-text"><b>Firebase disaster.</b> Spent a whole session integrating Google Sign-In. Auth worked locally, but GitHub Pages kept throwing "unauthorized domain" errors. Removed everything. Gone.</div></div>
+        <div class="failure-card"><div class="failure-icon">👻</div><div class="failure-text"><b>Service Worker nightmare.</b> The app cached itself so aggressively that updates wouldn't show. Stuck on broken old versions for hours. Took 3 separate attempts to fix the caching logic.</div></div>
+        <div class="failure-card"><div class="failure-icon">⬛</div><div class="failure-text"><b>Black screen of death.</b> After removing Firebase, the whole app went blank. JS was running before the DOM loaded. DOMContentLoaded saved the day — eventually.</div></div>
+        <div class="failure-card"><div class="failure-icon">🗃️</div><div class="failure-text"><b>Incomplete file uploads.</b> Multiple times, an uploaded index.html was only 2099 lines — exactly half the file. The other half just vanished. Still don't know why.</div></div>
+        <div class="failure-card"><div class="failure-icon">📋</div><div class="failure-text"><b>Changelog rendering bug.</b> v1.4.0 was missing a closing &lt;/div&gt; tag in the modal. The layout broke silently for an entire version with no console errors.</div></div>
+        <div class="failure-card"><div class="failure-icon">🎨</div><div class="failure-text"><b>Scope creep × 10.</b> "Let me add a dark mode" became 39 themes, a custom theme builder, 15 fonts, and a color wheel picker. Still adding more.</div></div>
+        <div class="failure-card"><div class="failure-icon">💥</div><div class="failure-text"><b>Syntax error cascade.</b> Adding CSS inside a JS template literal broke the entire script silently. Two separate crashes from the same pattern in one session.</div></div>
+        <div class="failure-card"><div class="failure-icon">🤖</div><div class="failure-text"><b>Built with Claude (AI).</b> Every bug, fix, and feature in this app was built collaboratively with Claude by Anthropic — all in one chat. 100% transparent about it.</div></div>
       </div>
 
       <!-- FAQ -->
@@ -831,31 +843,51 @@ footer .ac{color:var(--ac);}
         <div class="about-section-title">FAQ</div>
         <div class="about-card">
           <div class="faq-q" onclick="toggleFaq(this)"><span>Is lucode free?</span><span>+</span></div>
-          <div class="faq-a">Yes, completely free. No ads, no subscriptions, no tracking. Just a typing app made for fun.</div>
+          <div class="faq-a">Yes, completely free forever. No ads, no subscriptions, no paywalls, no tracking. Just a typing app built for fun by a 14 year old.</div>
         </div>
         <div class="about-card">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>Is my data safe?</span><span>+</span></div>
-          <div class="faq-a">Everything is stored locally on your device using localStorage. Nothing is sent to any server. Your account, stats, and settings never leave your browser.</div>
+          <div class="faq-q" onclick="toggleFaq(this)"><span>Do I need to create an account?</span><span>+</span></div>
+          <div class="faq-a">No. You can use "continue as guest" and everything works. An account lets you keep your stats and settings across devices — but it's optional.</div>
         </div>
         <div class="about-card">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>Why does it sometimes show a blank screen?</span><span>+</span></div>
-          <div class="faq-a">Old service worker cache. Open DevTools → Application → Storage → Clear site data, then hard reload (Ctrl+Shift+R). Known issue, being worked on.</div>
+          <div class="faq-q" onclick="toggleFaq(this)"><span>Is my data safe? Does it go to a server?</span><span>+</span></div>
+          <div class="faq-a">Nothing ever leaves your device. Everything — accounts, stats, settings, themes — is stored in your browser's localStorage. No server, no database, no cloud.</div>
+        </div>
+        <div class="about-card">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>What's the difference between lucode and MonkeyType?</span><span>+</span></div>
+          <div class="faq-a">MonkeyType uses random words. Lucode uses real code snippets across 9 languages — so you're actually practicing typing the stuff you'd write as a developer. There's also a run code panel, syntax highlighting, and a typing race vs AI.</div>
         </div>
         <div class="about-card">
           <div class="faq-q" onclick="toggleFaq(this)"><span>Can I use my own code to practice?</span><span>+</span></div>
-          <div class="faq-a">Yes! Click "paste code" or press Ctrl+V in the app. It auto-detects the language and lets you type your own snippets.</div>
+          <div class="faq-a">Yes! Click "paste your code" in the header or hit Ctrl+V. Paste any code and type it. Great for memorizing your own functions or algorithms.</div>
         </div>
         <div class="about-card">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>What languages are supported?</span><span>+</span></div>
-          <div class="faq-a">HTML, CSS, JavaScript, TypeScript, Python, Rust, Lua, Go, and C++. Syntax highlighting works for all of them.</div>
+          <div class="faq-q" onclick="toggleFaq(this)"><span>What programming languages are supported?</span><span>+</span></div>
+          <div class="faq-a">HTML, CSS, JavaScript, TypeScript, Python, Rust, Lua, Go, and C++. Syntax highlighting and real snippets for all of them.</div>
         </div>
         <div class="about-card">
           <div class="faq-q" onclick="toggleFaq(this)"><span>Can I run the code I type?</span><span>+</span></div>
-          <div class="faq-a">Yes! After finishing a snippet, click "▶ run code". HTML/CSS/JS runs directly in the preview panel. Python, Rust, Go, Lua, and C++ open in OneCompiler in a new tab.</div>
+          <div class="faq-a">Yes! After finishing, click "▶ run code". HTML/CSS/JS runs live in the panel. Python, Rust, Go, Lua, C++ open in OneCompiler. You can also drag the panel to resize it or go fullscreen.</div>
+        </div>
+        <div class="about-card">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>Why does the app sometimes show a blank screen?</span><span>+</span></div>
+          <div class="faq-a">It's a service worker cache issue. Fix: open DevTools (F12) → Application tab → Storage → Clear site data → hard reload with Ctrl+Shift+R. Or open in incognito mode.</div>
+        </div>
+        <div class="about-card">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>How does the streak work?</span><span>+</span></div>
+          <div class="faq-a">Complete at least one typing session per day. Your streak counter (🔥) in the header goes up by 1 each day you play. Miss a day and it resets to 0. Your best streak is saved forever.</div>
+        </div>
+        <div class="about-card">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>What are XP and levels?</span><span>+</span></div>
+          <div class="faq-a">Every session gives you XP based on your WPM × accuracy. Levels go from Novice all the way to 10x Dev. Click the 🔥 streak button in the header to see your progress and all achievements.</div>
+        </div>
+        <div class="about-card">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>Can I download lucode to use offline?</span><span>+</span></div>
+          <div class="faq-a">Yes! Go to Settings → Account → "Download as offline app". It downloads lucode.html — a single file that works in any browser with no internet needed.</div>
         </div>
         <div class="about-card">
           <div class="faq-q" onclick="toggleFaq(this)"><span>Why only 14 years old?</span><span>+</span></div>
-          <div class="faq-a">Started coding at 12. Built first real projects at 13. lucode is the biggest thing so far. Age is just a number — shipping is what counts.</div>
+          <div class="faq-a">Started coding at 12. Built first real projects at 13. lucode is the biggest thing so far — 5000+ lines of code built solo with AI assistance. Age is just a number. Shipping is what counts.</div>
         </div>
       </div>
 
@@ -1193,7 +1225,13 @@ footer .ac{color:var(--ac);}
 </div>
 
 <footer>
-  <span style="display:flex;align-items:center;gap:8px;"><span class="ac">lucode</span><span style="color:var(--d0)">·</span><span style="cursor:pointer;color:var(--d1);transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openAbout()">made by yNicolo, 14</span></span>
+  <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+    <span class="ac">lucode</span>
+    <span style="color:var(--d0)">·</span>
+    <span style="cursor:pointer;color:var(--d1);transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openAbout()">made by yNicolo, 14</span>
+    <span style="color:var(--d0)">·</span>
+    <button id="pwa-install-btn" onclick="installPWA()" style="display:none;align-items:center;gap:5px;background:var(--acg);border:1px solid var(--ac);color:var(--ac);font-family:var(--font);font-size:.58rem;padding:3px 9px;border-radius:5px;cursor:pointer;transition:.2s;">⬇ install app</button>
+  </span>
   <span style="display:flex;align-items:center;gap:10px;">
     <span id="ft-count">0 snippets</span>
     <span style="color:var(--d0)">·</span>
@@ -1267,6 +1305,7 @@ footer .ac{color:var(--ac);}
       <div id="s-account-info" style="font-size:.69rem;color:var(--d3);margin-bottom:10px;">not signed in</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;">
         <button class="btn" onclick="toggleSettings();doLogout()">⇤ sign out / switch account</button>
+        <button class="btn" onclick="downloadApp()" style="display:flex;align-items:center;gap:5px;">⬇ download as offline app</button>
       </div>
     </div>
 
@@ -3987,6 +4026,28 @@ document.addEventListener('keydown', e => {
 // ═══════════════════════════════════════════════════════
 // PWA — SERVICE WORKER
 // ═══════════════════════════════════════════════════════
+// PWA install prompt
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById('pwa-install-btn');
+  if(btn) btn.style.display = 'flex';
+});
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('pwa-install-btn');
+  if(btn) btn.style.display = 'none';
+  toast('lucode installed as app ✓');
+});
+function installPWA() {
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(r => {
+    if(r.outcome === 'accepted') toast('Installing lucode...');
+    deferredPrompt = null;
+  });
+}
+
 if('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js')
@@ -5137,6 +5198,25 @@ function loadSnippet(snippet) {
   S.start=null; S.timer=null;
   const tb = document.getElementById('timer-bar');
   if(tb) tb.style.width = '100%';
+}
+
+
+// ═══════════════════════════════════════════════════════
+// DOWNLOAD APP AS LOCAL FILE
+// ═══════════════════════════════════════════════════════
+function downloadApp() {
+  // Get the full HTML source of this page
+  const source = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([source], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'lucode.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  toast('lucode.html downloaded — open it in any browser, no internet needed 🎉');
 }
 
 // ═══════════════════════════════════════════════════════
