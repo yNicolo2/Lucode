@@ -961,9 +961,13 @@ footer .ac{color:var(--ac);}
       <span class="auth-logo-sub">// type code. get faster.</span>
     </div>
 
-    <div class="auth-tabs">
+    <div class="auth-tabs" id="auth-tabs">
       <button class="auth-tab on" id="tab-login" onclick="switchAuthTab('login')">sign in</button>
       <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">sign up</button>
+    </div>
+    <div id="forgot-back-row" style="display:none;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <button onclick="switchAuthTab('login')" style="background:none;border:none;color:var(--d2);font-family:var(--font);font-size:.65rem;cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:.15s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d2)'">← back to sign in</button>
+      <span style="color:var(--d2);font-size:.65rem;font-family:var(--font);letter-spacing:1px;">recover password</span>
     </div>
 
     <div id="auth-msg" class="auth-msg"></div>
@@ -1030,7 +1034,6 @@ footer .ac{color:var(--ac);}
         </div>
       </div>
       <button class="auth-submit" onclick="doRevealPassword()">reveal password →</button>
-      <button class="auth-guest" onclick="switchAuthTab('login')">← back to login</button>
     </div>
 
     <!-- REGISTER FORM -->
@@ -1314,7 +1317,7 @@ footer .ac{color:var(--ac);}
         <div style="display:flex;gap:6px;flex-wrap:wrap;">
           <button id="pwa-install-btn" onclick="installPWA()" style="display:none;align-items:center;gap:6px;background:var(--ac);border:none;color:#0d0f14;font-family:var(--font);font-size:.65rem;font-weight:700;padding:7px 14px;border-radius:7px;cursor:pointer;transition:.2s;">⬇ install lucode</button>
           <button id="pwa-manual-btn" onclick="showInstallHelp()" style="display:none;align-items:center;gap:6px;background:var(--acg);border:1px solid var(--ac);color:var(--ac);font-family:var(--font);font-size:.62rem;padding:6px 12px;border-radius:7px;cursor:pointer;transition:.2s;">📖 how to install</button>
-          <button onclick="downloadApp()" style="display:flex;align-items:center;gap:6px;background:none;border:1px solid var(--b2);color:var(--d3);font-family:var(--font);font-size:.62rem;padding:6px 12px;border-radius:7px;cursor:pointer;transition:.2s;">⬇ download offline file</button>
+
         </div>
         <div id="install-help" style="display:none;margin-top:10px;font-size:.62rem;color:var(--d3);line-height:1.8;background:var(--s1);border-radius:7px;padding:10px 12px;">
           <b style="color:var(--tx);">Chrome / Edge (PC):</b> look for the ⊕ icon in the address bar → click "Install lucode"<br>
@@ -4270,7 +4273,21 @@ function switchAuthTab(tab) {
   document.getElementById('form-register').style.display = tab==='register' ? 'flex' : 'none';
   document.getElementById('form-forgot').style.display = tab==='forgot' ? 'flex' : 'none';
   document.getElementById('auth-msg').className = 'auth-msg';
-  if(tab === 'forgot') genCaptcha();
+  // hide tabs row when on forgot, show back arrow instead
+  const tabsRow = document.getElementById('auth-tabs');
+  const backRow = document.getElementById('forgot-back-row');
+  if(tabsRow) tabsRow.style.display = tab==='forgot' ? 'none' : '';
+  if(backRow) backRow.style.display = tab==='forgot' ? 'flex' : 'none';
+  if(tab === 'forgot') {
+    genCaptcha();
+    // clear fields
+    const fu = document.getElementById('f-user');
+    const fa = document.getElementById('captcha-ans');
+    const rb = document.getElementById('reveal-box');
+    if(fu) fu.value = '';
+    if(fa) fa.value = '';
+    if(rb) rb.style.display = 'none';
+  }
 }
 
 function showAuthMsg(msg, type) {
