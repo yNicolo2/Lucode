@@ -11,6 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="lucode">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@300;400;500&family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;1,300&family=Inconsolata:wght@300;400;500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital,wght@0,400;1,400&family=Roboto+Mono:ital,wght@0,300;0,400;1,300&family=Cousine:ital,wght@0,400;1,400&family=Overpass+Mono:wght@300;400;500&family=Share+Tech+Mono&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root {
   --bg:#0d0f14; --s1:#13161e; --s2:#171b27;
@@ -369,6 +370,21 @@ footer .ac{color:var(--ac);}
 /* guest btn */
 .auth-guest{background:none;border:1px solid var(--b2);color:var(--d2);border-radius:8px;padding:11px;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.2s;width:100%;}
 .auth-guest:hover{border-color:var(--d2);color:var(--tx);}
+/* google btn */
+.auth-google{
+  background:#fff;border:none;border-radius:10px;
+  padding:12px 16px;font-family:var(--ui);font-size:.82rem;font-weight:600;
+  cursor:pointer;transition:all .2s;width:100%;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  color:#1f1f1f;box-shadow:0 2px 8px rgba(0,0,0,.25);
+  position:relative;overflow:hidden;
+}
+.auth-google:hover{background:#f8f8f8;box-shadow:0 4px 18px rgba(0,0,0,.35);transform:translateY(-2px);}
+.auth-google:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,0,0,.2);}
+.auth-google .fa-google{font-size:1rem;}
+.auth-google-divider{display:flex;align-items:center;gap:10px;margin:2px 0;}
+.auth-google-divider::before,.auth-google-divider::after{content:'';flex:1;height:1px;background:var(--b2);}
+.auth-google-divider span{font-size:.6rem;color:var(--d1);font-family:var(--font);}
 
 /* error / success msg */
 .auth-msg{font-size:.68rem;padding:9px 12px;border-radius:6px;display:none;animation:msgIn .2s ease;}
@@ -415,10 +431,25 @@ footer .ac{color:var(--ac);}
 
       <div class="cl-version">
         <div class="cl-ver-hdr">
-          <span class="cl-ver-tag latest">v1.4.0</span>
+          <span class="cl-ver-tag latest">v1.5.0</span>
           <span class="cl-ver-date">Mar 2026</span>
-          <span class="cl-ver-title">Profiles & Recovery</span>
+          <span class="cl-ver-title">Google Sign-In</span>
         </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Google Sign-In via Firebase — one click, no password needed</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Google profile photo used as avatar automatically</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Google button redesigned with Font Awesome icon — cleaner look</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>"or continue with" divider between forms for better visual flow</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Google button SVG was misaligned — replaced with proper FA icon</div>
+          <div class="cl-item"><span class="cl-badge tweak">tweak</span>Button hover effect with lift animation</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.4.0</span>
         <div class="cl-items">
           <div class="cl-item"><span class="cl-badge new">new</span>Keyboard heatmap — shows which keys you press most while typing</div>
           <div class="cl-item"><span class="cl-badge new">new</span>Profile photo — upload a custom avatar from Settings → Profile</div>
@@ -438,7 +469,7 @@ footer .ac{color:var(--ac);}
 
       <div class="cl-version">
         <div class="cl-ver-hdr">
-          <span class="cl-ver-tag">v1.4.0</span>
+          <span class="cl-ver-tag">v1.3.0</span>
           <span class="cl-ver-date">Mar 2026</span>
           <span class="cl-ver-title">The Big Update</span>
         </div>
@@ -509,80 +540,6 @@ footer .ac{color:var(--ac);}
       </div>
 
     </div>
-        <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge new">new</span>Login & register system with account persistence</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>7 new themes: VS Code, GitHub Dark, Ayu, Palenight, Material, Synthwave, Cobalt, Rose, Ocean, Matrix</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>9 new code snippets across JS, TS, Python, CSS, HTML, Rust</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>PWA support — install as desktop app</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Panel height control (xs → VS Code fullscreen mode)</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Changelog modal (you're looking at it)</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Theme grid now scrollable, shows all 25 themes</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Account section in settings with sign out button</div>
-          <div class="cl-item"><span class="cl-badge fix">fix</span>Auth screen now always shows on page load</div>
-        </div>
-      </div>
-
-      <div class="cl-divider"></div>
-
-      <div class="cl-version">
-        <div class="cl-ver-hdr">
-          <span class="cl-ver-tag">v1.2.0</span>
-          <span class="cl-ver-date">Feb 2026</span>
-          <span class="cl-ver-title">Themes & Fonts</span>
-        </div>
-        <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge new">new</span>21 themes including Dracula, Nord, Tokyo Night, Monokai, Catppuccin, One Dark, Gruvbox</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>11 monospace font options with live preview</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Custom accent color swatches</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Cursor styles: bar, block, underline</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Font size, weight, line height, letter spacing controls</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Settings panel redesigned with organized sections</div>
-          <div class="cl-item"><span class="cl-badge tweak">tweak</span>Smoother theme transitions</div>
-        </div>
-      </div>
-
-      <div class="cl-divider"></div>
-
-      <div class="cl-version">
-        <div class="cl-ver-hdr">
-          <span class="cl-ver-tag">v1.1.0</span>
-          <span class="cl-ver-date">Jan 2026</span>
-          <span class="cl-ver-title">Run Code & Snippets</span>
-        </div>
-        <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge new">new</span>Run HTML/CSS/JS code in live preview panel</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Console output for JS snippets</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>External runner for Python, Rust, Go, Lua, C++ via OneCompiler</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Paste your own code to practice</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Snippet picker with search and language filter (Ctrl+K)</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>40+ snippets across 9 languages</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Syntax highlighting for all supported languages</div>
-          <div class="cl-item"><span class="cl-badge fix">fix</span>Newline symbol toggle now persists across sessions</div>
-        </div>
-      </div>
-
-      <div class="cl-divider"></div>
-
-      <div class="cl-version">
-        <div class="cl-ver-hdr">
-          <span class="cl-ver-tag">v1.0.0</span>
-          <span class="cl-ver-date">Dec 2025</span>
-          <span class="cl-ver-title">Initial Release 🎉</span>
-        </div>
-        <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge new">new</span>Core typing engine with WPM, accuracy, raw speed tracking</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Time mode (15s, 30s, 60s, 120s), Words mode, Zen mode</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Live WPM counter and progress bar</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Error highlighting with shake animation</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Results screen with WPM graph</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>ASMR key sounds (click, pop, typewriter, soft, mechanical)</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Stats tracking: best WPM, accuracy, total sessions</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Blind mode, confidence mode, stop on error</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Smooth scroll following cursor</div>
-        </div>
-      </div>
-
-    </div>
   </div>
 </div>
 
@@ -621,6 +578,11 @@ footer .ac{color:var(--ac);}
       </div>
       <div class="auth-forgot"><a onclick="switchAuthTab('forgot')">forgot password?</a></div>
       <button class="auth-submit" onclick="doLogin()">sign in →</button>
+      <div class="auth-google-divider"><span>or continue with</span></div>
+      <button class="auth-google" onclick="doGoogleLogin()">
+        <i class="fa-brands fa-google"></i>
+        Sign in with Google
+      </button>
       <div class="auth-divider">or</div>
       <button class="auth-guest" onclick="doGuest()">continue as guest</button>
     </div>
@@ -678,6 +640,11 @@ footer .ac{color:var(--ac);}
         <div class="pw-strength"><div class="pw-strength-bar" id="pw-bar"></div></div>
       </div>
       <button class="auth-submit" onclick="doRegister()">create account →</button>
+      <div class="auth-google-divider"><span>or continue with</span></div>
+      <button class="auth-google" onclick="doGoogleLogin()">
+        <i class="fa-brands fa-google"></i>
+        Sign up with Google
+      </button>
       <div class="auth-divider">or</div>
       <button class="auth-guest" onclick="doGuest()">continue as guest</button>
     </div>
@@ -835,7 +802,7 @@ footer .ac{color:var(--ac);}
   <span style="display:flex;align-items:center;gap:10px;">
     <span id="ft-count">0 snippets</span>
     <span style="color:var(--d0)">·</span>
-    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.4.0</span>
+    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.5.0</span>
   </span>
 </footer>
 
@@ -891,7 +858,7 @@ footer .ac{color:var(--ac);}
     <div class="sg" style="background:linear-gradient(135deg,rgba(226,183,20,.06),transparent);border-color:rgba(226,183,20,.2);">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
         <div class="sg-t" style="margin:0;">lucode</div>
-        <span style="font-size:.62rem;background:var(--acg);color:var(--ac);border:1px solid var(--ac);border-radius:4px;padding:2px 8px;font-family:var(--font);">v1.4.0</span>
+        <span style="font-size:.62rem;background:var(--acg);color:var(--ac);border:1px solid var(--ac);border-radius:4px;padding:2px 8px;font-family:var(--font);">v1.5.0</span>
       </div>
       <div style="font-size:.64rem;color:var(--d2);margin-bottom:10px;line-height:1.7;">type code. get faster. built for devs.</div>
       <button class="btn pri" style="width:100%;" onclick="toggleSettings();openChangelog()">📋 what's new — changelog</button>
@@ -3331,6 +3298,65 @@ pickSnippet('h1');
 // Always show auth screen on load
 document.getElementById('auth-screen').style.display = 'flex';
 document.getElementById('auth-screen').classList.remove('hide');
+</script>
+
+<!-- Firebase SDK (compat version — works without bundler) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script>
+// Fallback: if Firebase fails to load, doGoogleLogin shows friendly error
+window.doGoogleLogin = function() {
+  showAuthMsg('Google sign-in not available — use username/password', 'err');
+};
+window.doGoogleLogout = function() {};
+
+try {
+  const firebaseConfig = {
+    apiKey: "AIzaSyC-SqrAd5P9Bw6W-8z4Z4SfBa6RJK5F-R0",
+    authDomain: "lucode-972ef.firebaseapp.com",
+    projectId: "lucode-972ef",
+    storageBucket: "lucode-972ef.firebasestorage.app",
+    messagingSenderId: "1039658020992",
+    appId: "1:1039658020992:web:8e1f0298cf89d68718b665"
+  };
+
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  window.doGoogleLogin = async function() {
+    try {
+      showAuthMsg('opening Google...', '');
+      const result = await auth.signInWithPopup(provider);
+      const user = result.user;
+      const username = user.displayName || user.email.split('@')[0];
+      if(user.photoURL) localStorage.setItem('lucode_avatar_' + username, user.photoURL);
+      loginSuccess(username, { joined: Date.now(), google: true });
+    } catch(e) {
+      if(e.code !== 'auth/popup-closed-by-user') {
+        showAuthMsg('Google sign-in failed — try again', 'err');
+      } else {
+        document.getElementById('auth-msg').className = 'auth-msg';
+      }
+    }
+  };
+
+  window.doGoogleLogout = async function() {
+    await auth.signOut();
+  };
+
+  // auto login if Google session active
+  auth.onAuthStateChanged(user => {
+    if(user && document.getElementById('auth-screen').style.display !== 'none') {
+      const username = user.displayName || user.email.split('@')[0];
+      if(user.photoURL) localStorage.setItem('lucode_avatar_' + username, user.photoURL);
+      loginSuccess(username, { joined: Date.now(), google: true });
+    }
+  });
+
+} catch(e) {
+  console.warn('Firebase init failed:', e);
+}
 </script>
 </body>
 </html>
