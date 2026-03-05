@@ -1,4 +1,4 @@
-const CACHE = 'lucode-v1.3.0';
+const CACHE = 'lucode-v1.6.0';
 
 // On install — skip waiting immediately
 self.addEventListener('install', e => {
