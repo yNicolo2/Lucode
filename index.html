@@ -261,6 +261,27 @@ footer{padding:11px 48px;border-top:1px solid var(--b1);display:flex;align-items
 footer .ac{color:var(--ac);}
 #hidden{position:fixed;top:0;left:0;opacity:0;pointer-events:none;width:1px;height:1px;}
 
+/* ── KEYBOARD HEATMAP ── */
+#kbd-wrap{width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;padding:18px 0 8px;opacity:0;pointer-events:none;max-height:0;overflow:hidden;transition:opacity .3s,max-height .4s;}
+#kbd-wrap.show{opacity:1;pointer-events:all;max-height:220px;}
+.kbd-row{display:flex;gap:4px;align-items:center;}
+.kbd-key{min-width:26px;height:26px;border-radius:5px;background:var(--s2);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:.56rem;color:var(--d2);font-family:var(--font);transition:.3s;cursor:default;user-select:none;}
+.kbd-key.wide{min-width:38px;}
+.kbd-key.heat-1{background:rgba(226,183,20,.12);border-color:rgba(226,183,20,.25);color:var(--tx);}
+.kbd-key.heat-2{background:rgba(226,183,20,.28);border-color:rgba(226,183,20,.45);color:var(--tb);}
+.kbd-key.heat-3{background:rgba(226,183,20,.52);border-color:rgba(226,183,20,.7);color:#0d0f14;}
+.kbd-key.heat-4{background:var(--ac);border-color:var(--ac2);color:#0d0f14;font-weight:700;box-shadow:0 0 8px var(--ac);}
+.kbd-label{font-size:.54rem;color:var(--d1);text-align:center;font-family:var(--font);}
+
+/* ── FORGOT PASSWORD ── */
+.auth-forgot{text-align:right;margin-top:-8px;}
+.auth-forgot a{font-size:.62rem;color:var(--d2);cursor:pointer;transition:.15s;font-family:var(--font);}
+.auth-forgot a:hover{color:var(--ac);}
+#form-forgot{display:none;flex-direction:column;gap:16px;animation:formIn .3s ease both;}
+
+/* ── PROFILE AVATAR HOVER ── */
+#profile-avatar-big:hover{border-color:var(--ac)!important;box-shadow:0 0 0 3px var(--acg);}
+
 /* ── CHANGELOG MODAL ── */
 #cl-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:400;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
 #cl-modal.open{opacity:1;pointer-events:all;}
@@ -394,10 +415,100 @@ footer .ac{color:var(--ac);}
 
       <div class="cl-version">
         <div class="cl-ver-hdr">
-          <span class="cl-ver-tag latest">v1.3.0</span>
+          <span class="cl-ver-tag latest">v1.4.0</span>
+          <span class="cl-ver-date">Mar 2026</span>
+          <span class="cl-ver-title">Profiles & Recovery</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Keyboard heatmap — shows which keys you press most while typing</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Profile photo — upload a custom avatar from Settings → Profile</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Password recovery via math CAPTCHA — solve a challenge to reveal your password</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>6 new themes: Cyberpunk, Aurora, Blood, Slate, Amber (total 31)</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Profile section in Settings — shows join date and "remember me" option</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Forgot password link on login screen</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Login inputs no longer lose focus when typing</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Auth screen now always shows on page load without cache issues</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Service worker updated — app always loads latest version without manual reload</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Theme grid is now scrollable — all themes visible</div>
+          <div class="cl-item"><span class="cl-badge tweak">tweak</span>Version number shown in footer, clickable to open changelog</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.4.0</span>
           <span class="cl-ver-date">Mar 2026</span>
           <span class="cl-ver-title">The Big Update</span>
         </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Login & register system with account persistence</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>10 new themes: VS Code, GitHub Dark, Ayu, Palenight, Material, Synthwave, Cobalt, Rose, Ocean, Matrix</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>9 new code snippets across JS, TS, Python, CSS, HTML, Rust</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>PWA support — install as desktop app</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Panel height control (xs → VS Code fullscreen mode)</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Changelog modal</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Account section in settings with sign out button</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.2.0</span>
+          <span class="cl-ver-date">Feb 2026</span>
+          <span class="cl-ver-title">Themes & Fonts</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>21 themes including Dracula, Nord, Tokyo Night, Monokai, Catppuccin, One Dark, Gruvbox</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>11 monospace font options with live preview</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Custom accent color swatches</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Cursor styles: bar, block, underline</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Font size, weight, line height, letter spacing controls</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Settings panel redesigned with organized sections</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.1.0</span>
+          <span class="cl-ver-date">Jan 2026</span>
+          <span class="cl-ver-title">Run Code & Snippets</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Run HTML/CSS/JS in live preview panel</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Console output for JS snippets</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>External runner for Python, Rust, Go, Lua, C++ via OneCompiler</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Paste your own code to practice</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Snippet picker with search and language filter (Ctrl+K)</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>40+ snippets across 9 languages</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.0.0</span>
+          <span class="cl-ver-date">Dec 2025</span>
+          <span class="cl-ver-title">Initial Release 🎉</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Core typing engine with WPM, accuracy, raw speed tracking</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Time mode (15/30/60/120s), Words mode, Zen mode</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Live WPM counter and progress bar</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Results screen with WPM graph</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>ASMR key sounds (click, pop, typewriter, soft, mechanical)</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Stats tracking: best WPM, accuracy, total sessions</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Blind mode, confidence mode, stop on error</div>
+        </div>
+      </div>
+
+    </div>
         <div class="cl-items">
           <div class="cl-item"><span class="cl-badge new">new</span>Login & register system with account persistence</div>
           <div class="cl-item"><span class="cl-badge new">new</span>7 new themes: VS Code, GitHub Dark, Ayu, Palenight, Material, Synthwave, Cobalt, Rose, Ocean, Matrix</div>
@@ -508,9 +619,44 @@ footer .ac{color:var(--ac);}
         <input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
         <span class="auth-field-icon">◉</span>
       </div>
+      <div class="auth-forgot"><a onclick="switchAuthTab('forgot')">forgot password?</a></div>
       <button class="auth-submit" onclick="doLogin()">sign in →</button>
       <div class="auth-divider">or</div>
       <button class="auth-guest" onclick="doGuest()">continue as guest</button>
+    </div>
+
+    <!-- FORGOT PASSWORD FORM -->
+    <div id="form-forgot" class="auth-form">
+      <div style="font-size:.7rem;color:var(--d3);line-height:1.7;">
+        Enter your username and solve the challenge to reveal your password.
+      </div>
+      <div class="auth-field">
+        <label>username</label>
+        <input type="text" id="f-user" placeholder="your username" autocomplete="off">
+        <span class="auth-field-icon">◈</span>
+      </div>
+      <!-- CAPTCHA -->
+      <div id="captcha-box" style="background:var(--bg);border:1px solid var(--b2);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;">
+        <div style="font-size:.6rem;color:var(--d2);letter-spacing:1px;text-transform:uppercase;">human check</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div id="captcha-q" style="font-size:1.1rem;color:var(--tb);font-family:var(--ui);font-weight:700;letter-spacing:2px;background:var(--s2);padding:8px 16px;border-radius:7px;flex:1;text-align:center;user-select:none;"></div>
+          <button onclick="genCaptcha()" style="background:none;border:1px solid var(--b2);border-radius:6px;color:var(--d2);padding:6px 10px;cursor:pointer;font-size:.75rem;transition:.13s;" title="new challenge">↺</button>
+        </div>
+        <div class="auth-field" style="margin:0;">
+          <label>your answer</label>
+          <input type="text" id="captcha-ans" placeholder="type the answer" autocomplete="off" onkeydown="if(event.key==='Enter')doRevealPassword()" style="padding-left:14px;">
+        </div>
+      </div>
+      <!-- revealed password -->
+      <div id="reveal-box" style="display:none;background:rgba(95,204,138,.08);border:1px solid rgba(95,204,138,.3);border-radius:8px;padding:12px;">
+        <div style="font-size:.59rem;color:var(--d2);margin-bottom:6px;letter-spacing:1px;text-transform:uppercase;">your password</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div id="revealed-pw" style="font-size:.9rem;color:#5fcc8a;font-family:var(--font);flex:1;letter-spacing:1px;"></div>
+          <button onclick="copyRevealedPw()" style="background:none;border:1px solid rgba(95,204,138,.3);border-radius:5px;color:#5fcc8a;padding:4px 9px;cursor:pointer;font-size:.62rem;transition:.13s;">copy</button>
+        </div>
+      </div>
+      <button class="auth-submit" onclick="doRevealPassword()">reveal password →</button>
+      <button class="auth-guest" onclick="switchAuthTab('login')">← back to login</button>
     </div>
 
     <!-- REGISTER FORM -->
@@ -659,12 +805,37 @@ footer .ac{color:var(--ac);}
   </div>
 </div>
 
+<!-- ── KEYBOARD HEATMAP ── -->
+<div id="kbd-wrap">
+  <div class="kbd-row">
+    <div class="kbd-key" data-key="`">`</div>
+    <div class="kbd-key" data-key="1">1</div><div class="kbd-key" data-key="2">2</div><div class="kbd-key" data-key="3">3</div><div class="kbd-key" data-key="4">4</div><div class="kbd-key" data-key="5">5</div><div class="kbd-key" data-key="6">6</div><div class="kbd-key" data-key="7">7</div><div class="kbd-key" data-key="8">8</div><div class="kbd-key" data-key="9">9</div><div class="kbd-key" data-key="0">0</div>
+    <div class="kbd-key" data-key="-">-</div><div class="kbd-key" data-key="=">=</div>
+  </div>
+  <div class="kbd-row">
+    <div class="kbd-key wide" data-key="Tab">tab</div>
+    <div class="kbd-key" data-key="q">q</div><div class="kbd-key" data-key="w">w</div><div class="kbd-key" data-key="e">e</div><div class="kbd-key" data-key="r">r</div><div class="kbd-key" data-key="t">t</div><div class="kbd-key" data-key="y">y</div><div class="kbd-key" data-key="u">u</div><div class="kbd-key" data-key="i">i</div><div class="kbd-key" data-key="o">o</div><div class="kbd-key" data-key="p">p</div>
+    <div class="kbd-key" data-key="[">[</div><div class="kbd-key" data-key="]">]</div>
+  </div>
+  <div class="kbd-row">
+    <div class="kbd-key wide" data-key="CapsLock">caps</div>
+    <div class="kbd-key" data-key="a">a</div><div class="kbd-key" data-key="s">s</div><div class="kbd-key" data-key="d">d</div><div class="kbd-key" data-key="f">f</div><div class="kbd-key" data-key="g">g</div><div class="kbd-key" data-key="h">h</div><div class="kbd-key" data-key="j">j</div><div class="kbd-key" data-key="k">k</div><div class="kbd-key" data-key="l">l</div>
+    <div class="kbd-key" data-key=";">;</div><div class="kbd-key" data-key="'">'</div>
+  </div>
+  <div class="kbd-row">
+    <div class="kbd-key wide" data-key="Shift">shift</div>
+    <div class="kbd-key" data-key="z">z</div><div class="kbd-key" data-key="x">x</div><div class="kbd-key" data-key="c">c</div><div class="kbd-key" data-key="v">v</div><div class="kbd-key" data-key="b">b</div><div class="kbd-key" data-key="n">n</div><div class="kbd-key" data-key="m">m</div>
+    <div class="kbd-key" data-key=",">,</div><div class="kbd-key" data-key=".">.</div><div class="kbd-key" data-key="/">/</div>
+  </div>
+  <div class="kbd-label" id="kbd-label">keyboard heatmap — default</div>
+</div>
+
 <footer>
   <span class="ac">lucode</span> — type code like it's a sport
   <span style="display:flex;align-items:center;gap:10px;">
     <span id="ft-count">0 snippets</span>
     <span style="color:var(--d0)">·</span>
-    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.3.0</span>
+    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.4.0</span>
   </span>
 </footer>
 
@@ -720,7 +891,7 @@ footer .ac{color:var(--ac);}
     <div class="sg" style="background:linear-gradient(135deg,rgba(226,183,20,.06),transparent);border-color:rgba(226,183,20,.2);">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
         <div class="sg-t" style="margin:0;">lucode</div>
-        <span style="font-size:.62rem;background:var(--acg);color:var(--ac);border:1px solid var(--ac);border-radius:4px;padding:2px 8px;font-family:var(--font);">v1.3.0</span>
+        <span style="font-size:.62rem;background:var(--acg);color:var(--ac);border:1px solid var(--ac);border-radius:4px;padding:2px 8px;font-family:var(--font);">v1.4.0</span>
       </div>
       <div style="font-size:.64rem;color:var(--d2);margin-bottom:10px;line-height:1.7;">type code. get faster. built for devs.</div>
       <button class="btn pri" style="width:100%;" onclick="toggleSettings();openChangelog()">📋 what's new — changelog</button>
@@ -782,7 +953,7 @@ footer .ac{color:var(--ac);}
     </div>
 
     <div class="sg">
-      <div class="sg-t">Theme (25)</div>
+      <div class="sg-t">Theme (31)</div>
       <div class="theme-grid" id="theme-grid">
         <div class="tc on" data-theme="default" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0d0f14"></div><div class="tcs" style="background:#13161e"></div><div class="tcs" style="background:#e2b714"></div><div class="tcs" style="background:#c8cde0"></div></div><div class="tcn">lucode</div></div>
         <div class="tc" data-theme="midnight" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#06080f"></div><div class="tcs" style="background:#0c1020"></div><div class="tcs" style="background:#b48ef0"></div><div class="tcs" style="background:#c0c8e8"></div></div><div class="tcn">midnight</div></div>
@@ -808,6 +979,11 @@ footer .ac{color:var(--ac);}
         <div class="tc" data-theme="rose" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0f0a0d"></div><div class="tcs" style="background:#1a1018"></div><div class="tcs" style="background:#ff6eb4"></div><div class="tcs" style="background:#f0d8e8"></div></div><div class="tcn">rose</div></div>
         <div class="tc" data-theme="ocean" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#060d1a"></div><div class="tcs" style="background:#08122a"></div><div class="tcs" style="background:#40c8e0"></div><div class="tcs" style="background:#a0c8f0"></div></div><div class="tcn">ocean</div></div>
         <div class="tc" data-theme="matrix" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#000a00"></div><div class="tcs" style="background:#001200"></div><div class="tcs" style="background:#00ff41"></div><div class="tcs" style="background:#00cc44"></div></div><div class="tcn">matrix</div></div>
+        <div class="tc" data-theme="cyberpunk" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0d0015"></div><div class="tcs" style="background:#1a0030"></div><div class="tcs" style="background:#ffee00"></div><div class="tcs" style="background:#00ffff"></div></div><div class="tcn">cyberpunk</div></div>
+        <div class="tc" data-theme="aurora" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0a1628"></div><div class="tcs" style="background:#0f2040"></div><div class="tcs" style="background:#00ffaa"></div><div class="tcs" style="background:#a0f0e0"></div></div><div class="tcn">aurora</div></div>
+        <div class="tc" data-theme="blood" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0a0000"></div><div class="tcs" style="background:#1a0000"></div><div class="tcs" style="background:#cc0000"></div><div class="tcs" style="background:#ffaaaa"></div></div><div class="tcn">blood</div></div>
+        <div class="tc" data-theme="slate" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0f1923"></div><div class="tcs" style="background:#162030"></div><div class="tcs" style="background:#64748b"></div><div class="tcs" style="background:#cbd5e1"></div></div><div class="tcn">slate</div></div>
+        <div class="tc" data-theme="amber" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0c0800"></div><div class="tcs" style="background:#1a1200"></div><div class="tcs" style="background:#f59e0b"></div><div class="tcs" style="background:#fde68a"></div></div><div class="tcn">amber</div></div>
       </div>
     </div>
 
@@ -840,6 +1016,29 @@ footer .ac{color:var(--ac);}
           <option value="9999">full</option>
           <option value="vscode">VS Code</option>
         </select>
+      </div>
+      <div class="sr"><div class="sr-left"><div class="sn">Keyboard heatmap</div><div class="sd">Show key frequency overlay</div></div><label class="tog"><input type="checkbox" id="s-kbd" onchange="sv('showKbd',this.checked);toggleKbd(this.checked)"><div class="tog-t"></div><div class="tog-k"></div></label></div>
+    </div>
+
+    <div class="sg">
+      <div class="sg-t">Profile</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+        <div id="profile-avatar-big" onclick="triggerAvatarUpload()" style="width:56px;height:56px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;color:#0d0f14;font-family:var(--ui);cursor:pointer;border:2px solid transparent;transition:.2s;flex-shrink:0;overflow:hidden;" title="Click to change photo">
+          <span id="profile-avatar-letter">?</span>
+          <img id="profile-avatar-img" style="display:none;width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div>
+          <div id="profile-name-big" style="font-size:.85rem;color:var(--tb);font-family:var(--ui);font-weight:600;">not signed in</div>
+          <div id="profile-joined" style="font-size:.6rem;color:var(--d2);margin-top:2px;"></div>
+          <div style="font-size:.59rem;color:var(--d1);margin-top:4px;">click avatar to change photo</div>
+        </div>
+      </div>
+      <input type="file" id="avatar-upload" accept="image/*" style="display:none" onchange="handleAvatarUpload(this)">
+      <div class="sr"><div class="sr-left"><div class="sn">Remember me</div><div class="sd">Stay logged in for 30 days</div></div><label class="tog"><input type="checkbox" id="s-remember" checked onchange="sv('rememberMe',this.checked)"><div class="tog-t"></div><div class="tog-k"></div></label></div>
+      <div style="font-size:.62rem;color:var(--d2);padding:8px;background:var(--bg);border-radius:6px;border:1px solid var(--b1);margin-top:8px;line-height:1.7;">
+        ✓ &nbsp;Your account is saved locally on this device.<br>
+        ✓ &nbsp;You only need to log in once per device.<br>
+        ✓ &nbsp;Stats and settings are tied to your account.
       </div>
     </div>
 
@@ -1934,6 +2133,11 @@ const THEMES = {
   rose:       {bg:'#0f0a0d',s1:'#1a1018',s2:'#201420',b1:'#2c1828',b2:'#3a2035',tx:'#f0d8e8',tb:'#ffe8f0',d1:'#4a2040',d2:'#6a3058',d3:'#905080',ac:'#ff6eb4',ac2:'#e04090'},
   ocean:      {bg:'#060d1a',s1:'#08122a',s2:'#0c1838',b1:'#102040',b2:'#162a54',tx:'#a0c8f0',tb:'#d0e8ff',d1:'#1a2e50',d2:'#2a4070',d3:'#406090',ac:'#40c8e0',ac2:'#20a8c0'},
   matrix:     {bg:'#000a00',s1:'#001200',s2:'#001800',b1:'#002200',b2:'#003000',tx:'#00cc44',tb:'#00ff66',d1:'#003300',d2:'#005500',d3:'#008800',ac:'#00ff41',ac2:'#00cc33'},
+  cyberpunk:  {bg:'#0d0015',s1:'#1a0030',s2:'#220040',b1:'#2e0058',b2:'#3d006e',tx:'#e0d0ff',tb:'#ffffff',d1:'#3a0060',d2:'#5500a0',d3:'#8800d0',ac:'#ffee00',ac2:'#ccbb00'},
+  aurora:     {bg:'#0a1628',s1:'#0f2040',s2:'#122848',b1:'#183050',b2:'#1e3a60',tx:'#a0f0e0',tb:'#d0fff5',d1:'#1e3a50',d2:'#2a5070',d3:'#408090',ac:'#00ffaa',ac2:'#00cc88'},
+  blood:      {bg:'#0a0000',s1:'#1a0000',s2:'#220000',b1:'#300000',b2:'#400000',tx:'#ffaaaa',tb:'#ffe0e0',d1:'#3a0000',d2:'#600000',d3:'#880000',ac:'#cc0000',ac2:'#aa0000'},
+  slate:      {bg:'#0f1923',s1:'#162030',s2:'#1c2a3c',b1:'#243244',b2:'#2e3f55',tx:'#cbd5e1',tb:'#f1f5f9',d1:'#334155',d2:'#475569',d3:'#64748b',ac:'#64748b',ac2:'#475569'},
+  amber:      {bg:'#0c0800',s1:'#1a1200',s2:'#221800',b1:'#2e2200',b2:'#3d2e00',tx:'#fde68a',tb:'#fff8e1',d1:'#3d2e00',d2:'#604800',d3:'#886800',ac:'#f59e0b',ac2:'#d08000'},
 };
 
 // ═══════════════════════════════════════════════════════
@@ -2230,6 +2434,8 @@ function handleKey(e) {
   if(S.cursor >= S.chars.length) return;
   e.preventDefault();
   if(!S.start) startTyping();
+  // track for heatmap
+  if(e.key.length === 1) trackKey(e.key);
 
   if(e.key==='Backspace') {
     if(CF.conf) return;
@@ -2802,6 +3008,151 @@ function openChangelog() { document.getElementById('cl-modal').classList.add('op
 function closeChangelog() { document.getElementById('cl-modal').classList.remove('open'); }
 
 // ═══════════════════════════════════════════════════════
+// KEYBOARD HEATMAP
+// ═══════════════════════════════════════════════════════
+const KEY_COUNTS = {};
+
+function trackKey(k) {
+  const key = k.toLowerCase();
+  KEY_COUNTS[key] = (KEY_COUNTS[key] || 0) + 1;
+  if(document.getElementById('kbd-wrap').classList.contains('show')) updateKbd();
+}
+
+function updateKbd() {
+  const counts = Object.values(KEY_COUNTS);
+  const max = Math.max(...counts, 1);
+  document.querySelectorAll('.kbd-key').forEach(el => {
+    const k = el.dataset.key.toLowerCase();
+    const c = KEY_COUNTS[k] || 0;
+    el.classList.remove('heat-1','heat-2','heat-3','heat-4');
+    if(c === 0) return;
+    const ratio = c / max;
+    if(ratio < 0.25) el.classList.add('heat-1');
+    else if(ratio < 0.5) el.classList.add('heat-2');
+    else if(ratio < 0.75) el.classList.add('heat-3');
+    else el.classList.add('heat-4');
+    el.title = `${el.dataset.key}: ${c} presses`;
+  });
+  // find most pressed key
+  const top = Object.entries(KEY_COUNTS).sort((a,b)=>b[1]-a[1])[0];
+  if(top) document.getElementById('kbd-label').textContent = `most typed: "${top[0]}" (${top[1]}×)`;
+}
+
+function toggleKbd(on) {
+  const wrap = document.getElementById('kbd-wrap');
+  wrap.classList.toggle('show', on);
+  if(on) updateKbd();
+}
+
+// ═══════════════════════════════════════════════════════
+// PROFILE AVATAR
+// ═══════════════════════════════════════════════════════
+function triggerAvatarUpload() {
+  document.getElementById('avatar-upload').click();
+}
+
+function handleAvatarUpload(input) {
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 2*1024*1024) { toast('Image too large (max 2MB)'); return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const data = e.target.result;
+    // save to localStorage under user
+    if(AUTH.user) {
+      const users = getUsers();
+      if(users[AUTH.user.username]) {
+        users[AUTH.user.username].avatar = data;
+        saveUsers(users);
+      }
+      localStorage.setItem('lucode_avatar_' + AUTH.user.username, data);
+    }
+    applyAvatar(data);
+    toast('Profile photo updated ✓');
+  };
+  reader.readAsDataURL(file);
+}
+
+function applyAvatar(dataUrl) {
+  // header chip
+  const avatar = document.getElementById('user-avatar');
+  const bigLetter = document.getElementById('profile-avatar-letter');
+  const bigImg = document.getElementById('profile-avatar-img');
+  if(dataUrl) {
+    avatar.style.background = 'none';
+    avatar.innerHTML = `<img src="${dataUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+    if(bigLetter) bigLetter.style.display = 'none';
+    if(bigImg) { bigImg.src = dataUrl; bigImg.style.display = 'block'; }
+  }
+}
+
+function loadAvatar(username) {
+  const data = localStorage.getItem('lucode_avatar_' + username);
+  if(data) applyAvatar(data);
+}
+
+// ═══════════════════════════════════════════════════════
+// CAPTCHA + PASSWORD REVEAL
+// ═══════════════════════════════════════════════════════
+let CAPTCHA_ANS = 0;
+
+function genCaptcha() {
+  const ops = [
+    () => { const a=rn(2,12),b=rn(2,12); CAPTCHA_ANS=a+b; return `${a} + ${b} = ?`; },
+    () => { const a=rn(5,15),b=rn(1,a); CAPTCHA_ANS=a-b; return `${a} − ${b} = ?`; },
+    () => { const a=rn(2,9),b=rn(2,9); CAPTCHA_ANS=a*b; return `${a} × ${b} = ?`; },
+    () => { const a=rn(1,9),b=rn(2,5),r=a*b; CAPTCHA_ANS=a; return `${r} ÷ ${b} = ?`; },
+  ];
+  const fn = ops[Math.floor(Math.random()*ops.length)];
+  document.getElementById('captcha-q').textContent = fn();
+  document.getElementById('captcha-ans').value = '';
+  document.getElementById('reveal-box').style.display = 'none';
+}
+
+function rn(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+
+function doRevealPassword() {
+  const username = document.getElementById('f-user').value.trim();
+  const ans = parseInt(document.getElementById('captcha-ans').value.trim());
+  if(!username) { showAuthMsg('enter your username first', 'err'); return; }
+  const users = getUsers();
+  if(!users[username]) { showAuthMsg('username not found', 'err'); return; }
+  if(isNaN(ans) || ans !== CAPTCHA_ANS) { showAuthMsg('wrong answer — try again', 'err'); genCaptcha(); return; }
+  // decode password
+  const pw = atob(users[username].pass);
+  document.getElementById('revealed-pw').textContent = pw;
+  document.getElementById('reveal-box').style.display = 'block';
+  document.getElementById('auth-msg').className = 'auth-msg';
+  genCaptcha(); // reset captcha after use
+}
+
+function copyRevealedPw() {
+  const pw = document.getElementById('revealed-pw').textContent;
+  navigator.clipboard.writeText(pw).then(() => toast('Password copied ✓'));
+}
+
+// ═══════════════════════════════════════════════════════
+// FORGOT / DELETE ACCOUNT
+// ═══════════════════════════════════════════════════════
+function promptDeleteAccount() {
+  const user = document.getElementById('l-user').value.trim();
+  const name = user || 'your account';
+  if(confirm(`Delete ${name}? This cannot be undone.`)) {
+    const users = getUsers();
+    if(users[user]) {
+      delete users[user];
+      saveUsers(users);
+      localStorage.removeItem('lucode_avatar_' + user);
+      showAuthMsg('Account deleted. You can register again.', 'ok');
+      switchAuthTab('register');
+    } else {
+      showAuthMsg('Enter your username first, then try again.', 'err');
+      switchAuthTab('login');
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
 // AUTH SYSTEM
 // ═══════════════════════════════════════════════════════
 let AUTH = { user: null };
@@ -2828,7 +3179,9 @@ function switchAuthTab(tab) {
   document.getElementById('tab-register').classList.toggle('on', tab==='register');
   document.getElementById('form-login').style.display = tab==='login' ? 'flex' : 'none';
   document.getElementById('form-register').style.display = tab==='register' ? 'flex' : 'none';
+  document.getElementById('form-forgot').style.display = tab==='forgot' ? 'flex' : 'none';
   document.getElementById('auth-msg').className = 'auth-msg';
+  if(tab === 'forgot') genCaptcha();
 }
 
 function showAuthMsg(msg, type) {
@@ -2901,6 +3254,15 @@ function loginSuccess(username, data) {
       info.innerHTML = `signed in as <b style="color:var(--ac)">${username}</b> · joined ${joined}`;
     }
   }
+  // update settings profile section
+  const pName = document.getElementById('profile-name-big');
+  const pJoined = document.getElementById('profile-joined');
+  const pLetter = document.getElementById('profile-avatar-letter');
+  if(pName) pName.textContent = username;
+  if(pLetter) pLetter.textContent = username[0].toUpperCase();
+  if(pJoined && data && data.joined) pJoined.textContent = 'joined ' + new Date(data.joined).toLocaleDateString();
+  // load saved avatar
+  loadAvatar(username);
   // animate out auth screen
   const screen = document.getElementById('auth-screen');
   screen.classList.add('hide');
