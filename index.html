@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="lucode">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@300;400;500&family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;1,300&family=Inconsolata:wght@300;400;500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital,wght@0,400;1,400&family=Roboto+Mono:ital,wght@0,300;0,400;1,300&family=Cousine:ital,wght@0,400;1,400&family=Overpass+Mono:wght@300;400;500&family=Share+Tech+Mono&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@300;400;500&family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;1,300&family=Inconsolata:wght@300;400;500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital,wght@0,400;1,400&family=Roboto+Mono:ital,wght@0,300;0,400;1,300&family=Cousine:ital,wght@0,400;1,400&family=Overpass+Mono:wght@300;400;500&family=Share+Tech+Mono&family=Ubuntu+Mono:ital,wght@0,400;1,400&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Nanum+Gothic+Coding:wght@400;700&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:#0d0f14; --s1:#13161e; --s2:#171b27;
@@ -370,6 +370,7 @@ footer .ac{color:var(--ac);}
 .auth-guest{background:none;border:1px solid var(--b2);color:var(--d2);border-radius:8px;padding:11px;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.2s;width:100%;}
 .auth-guest:hover{border-color:var(--d2);color:var(--tx);}
 
+
 /* error / success msg */
 .auth-msg{font-size:.68rem;padding:9px 12px;border-radius:6px;display:none;animation:msgIn .2s ease;}
 @keyframes msgIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
@@ -415,7 +416,28 @@ footer .ac{color:var(--ac);}
 
       <div class="cl-version">
         <div class="cl-ver-hdr">
-          <span class="cl-ver-tag latest">v1.4.0</span>
+          <span class="cl-ver-tag latest">v1.5.0</span>
+          <span class="cl-ver-date">Mar 2026</span>
+          <span class="cl-ver-title">Themes, Snippets & Stats</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>5 new themes: Neon, Sakura, Desert, Ice, Coffee (total 34)</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Custom theme builder — pick any color with a color wheel</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>8 new snippets: SQL, Bash, C, Swift, Kotlin, more JS/TS</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Detailed stats panel: consistency score, chars/min, avg WPM</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>4 more monospace fonts added</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Changelog display bug — v1.4.0 was rendering broken</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Auth screen always shows on load — DOMContentLoaded fix</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Stats block now shows consistency %, chars/min, avg WPM</div>
+          <div class="cl-item"><span class="cl-badge tweak">tweak</span>Footer and version badge updated to v1.5.0</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.4.0</span>
           <span class="cl-ver-date">Mar 2026</span>
           <span class="cl-ver-title">Profiles & Recovery</span>
         </div>
@@ -438,7 +460,7 @@ footer .ac{color:var(--ac);}
 
       <div class="cl-version">
         <div class="cl-ver-hdr">
-          <span class="cl-ver-tag">v1.4.0</span>
+          <span class="cl-ver-tag">v1.3.0</span>
           <span class="cl-ver-date">Mar 2026</span>
           <span class="cl-ver-title">The Big Update</span>
         </div>
@@ -505,80 +527,6 @@ footer .ac{color:var(--ac);}
           <div class="cl-item"><span class="cl-badge new">new</span>ASMR key sounds (click, pop, typewriter, soft, mechanical)</div>
           <div class="cl-item"><span class="cl-badge new">new</span>Stats tracking: best WPM, accuracy, total sessions</div>
           <div class="cl-item"><span class="cl-badge new">new</span>Blind mode, confidence mode, stop on error</div>
-        </div>
-      </div>
-
-    </div>
-        <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge new">new</span>Login & register system with account persistence</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>7 new themes: VS Code, GitHub Dark, Ayu, Palenight, Material, Synthwave, Cobalt, Rose, Ocean, Matrix</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>9 new code snippets across JS, TS, Python, CSS, HTML, Rust</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>PWA support — install as desktop app</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Panel height control (xs → VS Code fullscreen mode)</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Changelog modal (you're looking at it)</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Theme grid now scrollable, shows all 25 themes</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Account section in settings with sign out button</div>
-          <div class="cl-item"><span class="cl-badge fix">fix</span>Auth screen now always shows on page load</div>
-        </div>
-      </div>
-
-      <div class="cl-divider"></div>
-
-      <div class="cl-version">
-        <div class="cl-ver-hdr">
-          <span class="cl-ver-tag">v1.2.0</span>
-          <span class="cl-ver-date">Feb 2026</span>
-          <span class="cl-ver-title">Themes & Fonts</span>
-        </div>
-        <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge new">new</span>21 themes including Dracula, Nord, Tokyo Night, Monokai, Catppuccin, One Dark, Gruvbox</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>11 monospace font options with live preview</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Custom accent color swatches</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Cursor styles: bar, block, underline</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Font size, weight, line height, letter spacing controls</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Settings panel redesigned with organized sections</div>
-          <div class="cl-item"><span class="cl-badge tweak">tweak</span>Smoother theme transitions</div>
-        </div>
-      </div>
-
-      <div class="cl-divider"></div>
-
-      <div class="cl-version">
-        <div class="cl-ver-hdr">
-          <span class="cl-ver-tag">v1.1.0</span>
-          <span class="cl-ver-date">Jan 2026</span>
-          <span class="cl-ver-title">Run Code & Snippets</span>
-        </div>
-        <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge new">new</span>Run HTML/CSS/JS code in live preview panel</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Console output for JS snippets</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>External runner for Python, Rust, Go, Lua, C++ via OneCompiler</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Paste your own code to practice</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Snippet picker with search and language filter (Ctrl+K)</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>40+ snippets across 9 languages</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Syntax highlighting for all supported languages</div>
-          <div class="cl-item"><span class="cl-badge fix">fix</span>Newline symbol toggle now persists across sessions</div>
-        </div>
-      </div>
-
-      <div class="cl-divider"></div>
-
-      <div class="cl-version">
-        <div class="cl-ver-hdr">
-          <span class="cl-ver-tag">v1.0.0</span>
-          <span class="cl-ver-date">Dec 2025</span>
-          <span class="cl-ver-title">Initial Release 🎉</span>
-        </div>
-        <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge new">new</span>Core typing engine with WPM, accuracy, raw speed tracking</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Time mode (15s, 30s, 60s, 120s), Words mode, Zen mode</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Live WPM counter and progress bar</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Error highlighting with shake animation</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Results screen with WPM graph</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>ASMR key sounds (click, pop, typewriter, soft, mechanical)</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Stats tracking: best WPM, accuracy, total sessions</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Blind mode, confidence mode, stop on error</div>
-          <div class="cl-item"><span class="cl-badge new">new</span>Smooth scroll following cursor</div>
         </div>
       </div>
 
@@ -835,7 +783,7 @@ footer .ac{color:var(--ac);}
   <span style="display:flex;align-items:center;gap:10px;">
     <span id="ft-count">0 snippets</span>
     <span style="color:var(--d0)">·</span>
-    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.4.0</span>
+    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.5.0</span>
   </span>
 </footer>
 
@@ -891,7 +839,7 @@ footer .ac{color:var(--ac);}
     <div class="sg" style="background:linear-gradient(135deg,rgba(226,183,20,.06),transparent);border-color:rgba(226,183,20,.2);">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
         <div class="sg-t" style="margin:0;">lucode</div>
-        <span style="font-size:.62rem;background:var(--acg);color:var(--ac);border:1px solid var(--ac);border-radius:4px;padding:2px 8px;font-family:var(--font);">v1.4.0</span>
+        <span style="font-size:.62rem;background:var(--acg);color:var(--ac);border:1px solid var(--ac);border-radius:4px;padding:2px 8px;font-family:var(--font);">v1.5.0</span>
       </div>
       <div style="font-size:.64rem;color:var(--d2);margin-bottom:10px;line-height:1.7;">type code. get faster. built for devs.</div>
       <button class="btn pri" style="width:100%;" onclick="toggleSettings();openChangelog()">📋 what's new — changelog</button>
@@ -943,6 +891,10 @@ footer .ac{color:var(--ac);}
         <div class="fc" data-font="'Overpass Mono',monospace" onclick="setFont(this)"><div class="fn">Overpass Mono</div><div class="fp" style="font-family:'Overpass Mono',monospace">fn () {}</div></div>
         <div class="fc" data-font="'Share Tech Mono',monospace" onclick="setFont(this)"><div class="fn">Share Tech Mono</div><div class="fp" style="font-family:'Share Tech Mono',monospace">fn () {}</div></div>
         <div class="fc" data-font="monospace" onclick="setFont(this)"><div class="fn">System Mono</div><div class="fp" style="font-family:monospace">fn () {}</div></div>
+        <div class="fc" data-font="'Victor Mono',monospace" onclick="setFont(this)"><div class="fn">Victor Mono</div><div class="fp" style="font-family:'Courier New',monospace">fn () {}</div></div>
+        <div class="fc" data-font="'DM Mono',monospace" onclick="setFont(this)"><div class="fn">DM Mono</div><div class="fp" style="font-family:'Courier New',monospace">fn () {}</div></div>
+        <div class="fc" data-font="'Nanum Gothic Coding',monospace" onclick="setFont(this)"><div class="fn">Nanum Gothic</div><div class="fp" style="font-family:monospace">fn () {}</div></div>
+        <div class="fc" data-font="'Ubuntu Mono',monospace" onclick="setFont(this)"><div class="fn">Ubuntu Mono</div><div class="fp" style="font-family:'Courier New',monospace">fn () {}</div></div>
       </div>
       <div style="margin-top:9px;">
         <div class="sr"><div class="sr-left"><div class="sn">Size</div></div><select class="ssel" id="s-fs" onchange="sv('fontSize',this.value);applyFs(this.value)"><option value=".8">small</option><option value=".9">s-med</option><option value=".95" selected>medium</option><option value="1.05">m-large</option><option value="1.1">large</option><option value="1.3">xl</option></select></div>
@@ -953,7 +905,7 @@ footer .ac{color:var(--ac);}
     </div>
 
     <div class="sg">
-      <div class="sg-t">Theme (31)</div>
+      <div class="sg-t">Theme (34)</div>
       <div class="theme-grid" id="theme-grid">
         <div class="tc on" data-theme="default" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0d0f14"></div><div class="tcs" style="background:#13161e"></div><div class="tcs" style="background:#e2b714"></div><div class="tcs" style="background:#c8cde0"></div></div><div class="tcn">lucode</div></div>
         <div class="tc" data-theme="midnight" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#06080f"></div><div class="tcs" style="background:#0c1020"></div><div class="tcs" style="background:#b48ef0"></div><div class="tcs" style="background:#c0c8e8"></div></div><div class="tcn">midnight</div></div>
@@ -984,6 +936,22 @@ footer .ac{color:var(--ac);}
         <div class="tc" data-theme="blood" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0a0000"></div><div class="tcs" style="background:#1a0000"></div><div class="tcs" style="background:#cc0000"></div><div class="tcs" style="background:#ffaaaa"></div></div><div class="tcn">blood</div></div>
         <div class="tc" data-theme="slate" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0f1923"></div><div class="tcs" style="background:#162030"></div><div class="tcs" style="background:#64748b"></div><div class="tcs" style="background:#cbd5e1"></div></div><div class="tcn">slate</div></div>
         <div class="tc" data-theme="amber" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0c0800"></div><div class="tcs" style="background:#1a1200"></div><div class="tcs" style="background:#f59e0b"></div><div class="tcs" style="background:#fde68a"></div></div><div class="tcn">amber</div></div>
+        <div class="tc" data-theme="neon" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0a0014"></div><div class="tcs" style="background:#120028"></div><div class="tcs" style="background:#c800ff"></div><div class="tcs" style="background:#e0ccff"></div></div><div class="tcn">neon</div></div>
+        <div class="tc" data-theme="sakura" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0f080c"></div><div class="tcs" style="background:#1c1018"></div><div class="tcs" style="background:#ff8cb0"></div><div class="tcs" style="background:#f8d8e8"></div></div><div class="tcn">sakura</div></div>
+        <div class="tc" data-theme="desert" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#100c06"></div><div class="tcs" style="background:#1e1810"></div><div class="tcs" style="background:#e8a030"></div><div class="tcs" style="background:#e8d8b8"></div></div><div class="tcn">desert</div></div>
+        <div class="tc" data-theme="ice" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#060e18"></div><div class="tcs" style="background:#0c1828"></div><div class="tcs" style="background:#70d8ff"></div><div class="tcs" style="background:#d0eeff"></div></div><div class="tcn">ice</div></div>
+        <div class="tc" data-theme="coffee" onclick="setTheme(this)"><div class="tcp"><div class="tcs" style="background:#0c0906"></div><div class="tcs" style="background:#1a140e"></div><div class="tcs" style="background:#c8864a"></div><div class="tcs" style="background:#e0c89a"></div></div><div class="tcn">coffee</div></div>
+      </div>
+      <!-- Custom Theme Builder -->
+      <div style="margin-top:14px;padding:12px;background:var(--bg);border:1px solid var(--b1);border-radius:8px;">
+        <div class="sg-t" style="margin-bottom:8px;">Custom Theme</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="sr"><div class="sr-left"><div class="sn">Background</div></div><input type="color" id="ct-bg" value="#0d0f14" oninput="applyCustomTheme()" style="background:none;border:1px solid var(--b1);border-radius:5px;width:44px;height:28px;cursor:pointer;padding:2px;"></div>
+          <div class="sr"><div class="sr-left"><div class="sn">Surface</div></div><input type="color" id="ct-s1" value="#13161e" oninput="applyCustomTheme()" style="background:none;border:1px solid var(--b1);border-radius:5px;width:44px;height:28px;cursor:pointer;padding:2px;"></div>
+          <div class="sr"><div class="sr-left"><div class="sn">Text</div></div><input type="color" id="ct-tx" value="#c8cde0" oninput="applyCustomTheme()" style="background:none;border:1px solid var(--b1);border-radius:5px;width:44px;height:28px;cursor:pointer;padding:2px;"></div>
+          <div class="sr"><div class="sr-left"><div class="sn">Accent</div></div><input type="color" id="ct-ac" value="#e2b714" oninput="applyCustomTheme()" style="background:none;border:1px solid var(--b1);border-radius:5px;width:44px;height:28px;cursor:pointer;padding:2px;"></div>
+          <button class="btn pri" style="margin-top:4px;" onclick="saveCustomTheme()">apply custom theme</button>
+        </div>
       </div>
     </div>
 
@@ -1063,12 +1031,14 @@ footer .ac{color:var(--ac);}
     <div class="sg">
       <div class="sg-t">Stats</div>
       <div class="stat-block">
-        Best WPM: <b id="s-bestwpm">—</b><br>
-        Best accuracy: <b id="s-bestacc">—</b><br>
-        Sessions: <b id="s-sess">0</b><br>
-        Total chars: <b id="s-tchars">0</b><br>
+        Best WPM: <b id="s-bestwpm">—</b> &nbsp;·&nbsp; Best raw: <b id="s-bestraw">—</b><br>
+        Best accuracy: <b id="s-bestacc">—</b> &nbsp;·&nbsp; Avg WPM: <b id="s-avgwpm">—</b><br>
+        Consistency: <b id="s-cons">—</b> &nbsp;·&nbsp; Chars/min: <b id="s-cpm">—</b><br>
+        Sessions: <b id="s-sess">0</b> &nbsp;·&nbsp; Total chars: <b id="s-tchars">0</b><br>
         Total time: <b id="s-ttime">0s</b>
       </div>
+      <!-- mini WPM history graph -->
+      <div id="s-wpm-hist" style="display:flex;align-items:flex-end;gap:2px;height:32px;margin-top:10px;opacity:.6;"></div>
       <button class="btn red" style="margin-top:11px;" onclick="clearStats()">reset stats</button>
     </div>
 
@@ -1766,6 +1736,269 @@ public:
   bool empty() const { return data_.empty(); }
   size_t size() const { return data_.size(); }
 };`},
+
+  // ── v1.5.0 NEW SNIPPETS ──
+  {id:'js7',lang:'js',title:'Promise Chain',file:'promise.js',code:`function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function fetchWithRetry(url, retries = 3) {
+  return fetch(url)
+    .then(res => {
+      if (!res.ok) throw new Error(\`HTTP \${res.status}\`);
+      return res.json();
+    })
+    .catch(err => {
+      if (retries === 0) throw err;
+      console.log(\`Retrying... (\${retries} left)\`);
+      return delay(500).then(() => fetchWithRetry(url, retries - 1));
+    });
+}
+
+fetchWithRetry('https://api.example.com/data')
+  .then(data => console.log('Success:', data))
+  .catch(err => console.error('Failed:', err.message));`},
+  {id:'ts4',lang:'ts',title:'Utility Types',file:'types.ts',code:`// Common utility patterns
+type Nullable<T> = T | null;
+type Optional<T> = T | undefined;
+type Maybe<T> = T | null | undefined;
+
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends object
+    ? DeepReadonly<T[P]>
+    : T[P];
+};
+
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object
+    ? DeepPartial<T[P]>
+    : T[P];
+};
+
+type KeysOfType<T, V> = {
+  [K in keyof T]: T[K] extends V ? K : never;
+}[keyof T];
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  age: number;
+}
+
+// Get only string keys of User
+type StringKeys = KeysOfType<User, string>;
+// => 'name' | 'email'
+
+const patch: DeepPartial<User> = { name: 'Alice' };`},
+  {id:'py5',lang:'python',title:'List Comprehensions',file:'comprehensions.py',code:`# Flat list comprehension
+squares = [x**2 for x in range(10) if x % 2 == 0]
+print(squares)  # [0, 4, 16, 36, 64]
+
+# Dict comprehension
+word_lengths = {word: len(word) for word in ['hello', 'world', 'python']}
+print(word_lengths)
+
+# Set comprehension
+unique_lengths = {len(w) for w in ['cat', 'dog', 'elephant', 'rat']}
+print(unique_lengths)
+
+# Nested comprehension — flatten a 2D list
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flat = [x for row in matrix for x in row]
+print(flat)
+
+# Generator expression (lazy)
+gen = (x**2 for x in range(1_000_000))
+first_five = [next(gen) for _ in range(5)]
+print(first_five)
+
+# Conditional expression
+labels = ['even' if x % 2 == 0 else 'odd' for x in range(6)]
+print(labels)`},
+  {id:'r3',lang:'rust',title:'Iterators',file:'iterators.rs',code:`fn main() {
+    let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    // chain of iterator adapters
+    let result: Vec<i32> = numbers.iter()
+        .filter(|&&x| x % 2 == 0)
+        .map(|&x| x * x)
+        .take(3)
+        .collect();
+
+    println!("Filtered squares: {:?}", result);
+
+    // fold (reduce)
+    let sum: i32 = numbers.iter().fold(0, |acc, &x| acc + x);
+    println!("Sum: {}", sum);
+
+    // flat_map
+    let words = vec!["hello world", "foo bar baz"];
+    let all_words: Vec<&str> = words.iter()
+        .flat_map(|s| s.split_whitespace())
+        .collect();
+    println!("Words: {:?}", all_words);
+
+    // zip
+    let letters = vec!['a', 'b', 'c'];
+    let pairs: Vec<_> = letters.iter().zip(numbers.iter()).collect();
+    println!("Pairs: {:?}", pairs);
+}`},
+  {id:'g3',lang:'go',title:'Interfaces',file:'interfaces.go',code:`package main
+
+import (
+	"fmt"
+	"math"
+)
+
+type Shape interface {
+	Area() float64
+	Perimeter() float64
+	String() string
+}
+
+type Circle struct {
+	Radius float64
+}
+
+func (c Circle) Area() float64      { return math.Pi * c.Radius * c.Radius }
+func (c Circle) Perimeter() float64 { return 2 * math.Pi * c.Radius }
+func (c Circle) String() string     { return fmt.Sprintf("Circle(r=%.2f)", c.Radius) }
+
+type Rectangle struct {
+	Width, Height float64
+}
+
+func (r Rectangle) Area() float64      { return r.Width * r.Height }
+func (r Rectangle) Perimeter() float64 { return 2 * (r.Width + r.Height) }
+func (r Rectangle) String() string     { return fmt.Sprintf("Rect(%.0fx%.0f)", r.Width, r.Height) }
+
+func printInfo(s Shape) {
+	fmt.Printf("%s: area=%.2f perimeter=%.2f\n", s, s.Area(), s.Perimeter())
+}
+
+func main() {
+	shapes := []Shape{Circle{5}, Rectangle{4, 6}, Circle{2.5}}
+	for _, s := range shapes {
+		printInfo(s)
+	}
+}`},
+  {id:'cpp3',lang:'cpp',title:'Lambda & Algorithms',file:'algorithms.cpp',code:`#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <numeric>
+
+int main() {
+    std::vector<int> nums = {5, 2, 8, 1, 9, 3, 7, 4, 6};
+
+    // sort ascending
+    std::sort(nums.begin(), nums.end());
+
+    // find first > 5
+    auto it = std::find_if(nums.begin(), nums.end(),
+                            [](int x) { return x > 5; });
+    if(it != nums.end())
+        std::cout << "First > 5: " << *it << "\n";
+
+    // transform: square each element
+    std::vector<int> squared(nums.size());
+    std::transform(nums.begin(), nums.end(), squared.begin(),
+                   [](int x) { return x * x; });
+
+    // accumulate (sum)
+    int total = std::accumulate(squared.begin(), squared.end(), 0);
+    std::cout << "Sum of squares: " << total << "\n";
+
+    // remove_if + erase idiom
+    nums.erase(
+        std::remove_if(nums.begin(), nums.end(),
+                       [](int x) { return x % 2 == 0; }),
+        nums.end()
+    );
+
+    for(int n : nums) std::cout << n << " ";
+    std::cout << "\n";
+}`},
+  {id:'lua6',lang:'lua',title:'Pattern Matching',file:'patterns.lua',code:`-- Lua pattern matching (regex-like)
+local text = "Hello, my email is user@example.com and I'm 25 years old."
+
+-- Extract email
+local email = text:match("[%w%.]+@[%w%.]+%.[%a]+")
+print("Email:", email)
+
+-- Extract number
+local age = text:match("(%d+) years")
+print("Age:", age)
+
+-- Find all words
+for word in text:gmatch("%a+") do
+  io.write(word .. " ")
+end
+print()
+
+-- Replace pattern
+local result = text:gsub("%a+@%a+%.%a+", "[REDACTED]")
+print("Redacted:", result)
+
+-- Split string (no split in stdlib)
+local function split(str, sep)
+  local t = {}
+  for part in str:gmatch("[^" .. sep .. "]+") do
+    t[#t+1] = part
+  end
+  return t
+end
+
+local csv = "apple,banana,cherry,date"
+local parts = split(csv, ",")
+for i, v in ipairs(parts) do
+  print(i, v)
+end`},
+  {id:'h4',lang:'html',title:'Dashboard UI',file:'dashboard.html',code:`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d0f14; color: #c8cde0; font-family: system-ui, sans-serif; min-height: 100vh; }
+  .layout { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+  .sidebar { background: #13161e; border-right: 1px solid #1c2030; padding: 24px 16px; }
+  .logo { font-size: 1.2rem; font-weight: 700; color: #e2b714; margin-bottom: 32px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 7px; cursor: pointer; font-size: .85rem; color: #5a6285; margin-bottom: 4px; transition: .15s; }
+  .nav-item:hover { background: #1c2030; color: #c8cde0; }
+  .nav-item.active { background: rgba(226,183,20,.12); color: #e2b714; }
+  .main { padding: 32px; }
+  .page-title { font-size: 1.5rem; font-weight: 600; color: #e8ecf8; margin-bottom: 24px; }
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .card { background: #13161e; border: 1px solid #1c2030; border-radius: 10px; padding: 20px; }
+  .card-label { font-size: .7rem; color: #5a6285; text-transform: uppercase; letter-spacing: 1px; }
+  .card-value { font-size: 1.8rem; font-weight: 300; color: #e2b714; margin: 6px 0 4px; }
+  .card-delta { font-size: .72rem; color: #5fcc8a; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="logo">● dashboard</div>
+    <div class="nav-item active">◈ Overview</div>
+    <div class="nav-item">◉ Analytics</div>
+    <div class="nav-item">◈ Users</div>
+    <div class="nav-item">◉ Settings</div>
+  </aside>
+  <main class="main">
+    <div class="page-title">Overview</div>
+    <div class="cards">
+      <div class="card"><div class="card-label">Revenue</div><div class="card-value">$48.2k</div><div class="card-delta">↑ 12% this month</div></div>
+      <div class="card"><div class="card-label">Users</div><div class="card-value">8,340</div><div class="card-delta">↑ 3.2% this week</div></div>
+      <div class="card"><div class="card-label">Sessions</div><div class="card-value">24.1k</div><div class="card-delta">↑ 8% today</div></div>
+      <div class="card"><div class="card-label">Bounce Rate</div><div class="card-value">34%</div><div class="card-delta" style="color:#f25c6e">↑ 2% vs last</div></div>
+    </div>
+  </main>
+</div>
+</body>
+</html>`},
   // ── NEW SNIPPETS ──
   {id:'js5',lang:'js',title:'Fetch & Async/Await',file:'api.js',code:`async function fetchUser(id) {
   try {
@@ -2138,6 +2371,11 @@ const THEMES = {
   blood:      {bg:'#0a0000',s1:'#1a0000',s2:'#220000',b1:'#300000',b2:'#400000',tx:'#ffaaaa',tb:'#ffe0e0',d1:'#3a0000',d2:'#600000',d3:'#880000',ac:'#cc0000',ac2:'#aa0000'},
   slate:      {bg:'#0f1923',s1:'#162030',s2:'#1c2a3c',b1:'#243244',b2:'#2e3f55',tx:'#cbd5e1',tb:'#f1f5f9',d1:'#334155',d2:'#475569',d3:'#64748b',ac:'#64748b',ac2:'#475569'},
   amber:      {bg:'#0c0800',s1:'#1a1200',s2:'#221800',b1:'#2e2200',b2:'#3d2e00',tx:'#fde68a',tb:'#fff8e1',d1:'#3d2e00',d2:'#604800',d3:'#886800',ac:'#f59e0b',ac2:'#d08000'},
+  neon:       {bg:'#0a0014',s1:'#120028',s2:'#18003a',b1:'#200050',b2:'#2e006e',tx:'#e0ccff',tb:'#f8f0ff',d1:'#30006a',d2:'#5200a0',d3:'#7800e0',ac:'#c800ff',ac2:'#a000cc'},
+  sakura:     {bg:'#0f080c',s1:'#1c1018',s2:'#231420',b1:'#2e1828',b2:'#3d2035',tx:'#f8d8e8',tb:'#fff0f5',d1:'#4a2040',d2:'#7a3060',d3:'#b04880',ac:'#ff8cb0',ac2:'#e06090'},
+  desert:     {bg:'#100c06',s1:'#1e1810',s2:'#261e14',b1:'#32281a',b2:'#3e3220',tx:'#e8d8b8',tb:'#f8eed8',d1:'#4a3820',d2:'#6a5030',d3:'#8a6840',ac:'#e8a030',ac2:'#c07820'},
+  ice:        {bg:'#060e18',s1:'#0c1828',s2:'#101e30',b1:'#162840',b2:'#1e3450',tx:'#d0eeff',tb:'#f0f8ff',d1:'#1e3450',d2:'#2a4870',d3:'#3a6090',ac:'#70d8ff',ac2:'#40b8e8'},
+  coffee:     {bg:'#0c0906',s1:'#1a140e',s2:'#221c14',b1:'#2c2418',b2:'#3a2e20',tx:'#e0c89a',tb:'#f5e8cc',d1:'#3a2e20',d2:'#5a4830',d3:'#7a6040',ac:'#c8864a',ac2:'#a86030'},
 };
 
 // ═══════════════════════════════════════════════════════
@@ -2276,10 +2514,28 @@ function setAc(c, c2, silent) {
 function clearStats() { CF.bestWPM=0;CF.bestAcc=0;CF.sessions=0;CF.totalChars=0;CF.totalTime=0; saveCF(); updateStatBlk(); toast('Stats cleared'); }
 function updateStatBlk() {
   qi('s-bestwpm').textContent = CF.bestWPM||'—';
+  if(qi('s-bestraw')) qi('s-bestraw').textContent = CF.bestRaw||'—';
   qi('s-bestacc').textContent = CF.bestAcc ? CF.bestAcc+'%' : '—';
   qi('s-sess').textContent = CF.sessions||0;
   qi('s-tchars').textContent = (CF.totalChars||0).toLocaleString();
   qi('s-ttime').textContent = CF.totalTime<60 ? (CF.totalTime||0)+'s' : Math.round(CF.totalTime/60)+'m';
+  // derived stats
+  if(qi('s-avgwpm')) {
+    const avg = CF.sessions>0 && CF.wpmSum ? Math.round(CF.wpmSum/CF.sessions) : '—';
+    qi('s-avgwpm').textContent = avg;
+  }
+  if(qi('s-cons')) qi('s-cons').textContent = CF.avgCons ? CF.avgCons+'%' : '—';
+  if(qi('s-cpm')) {
+    const cpm = CF.totalTime>0 ? Math.round((CF.totalChars/(CF.totalTime/60))) : '—';
+    qi('s-cpm').textContent = cpm;
+  }
+  // mini wpm history graph
+  const hist = CF.wpmHistory||[];
+  const hg = qi('s-wpm-hist');
+  if(hg && hist.length>0) {
+    const mx = Math.max(...hist,1);
+    hg.innerHTML = hist.slice(-30).map(v=>`<div style="width:6px;background:var(--ac);border-radius:2px 2px 0 0;height:${Math.max(2,Math.round((v/mx)*32))}px;opacity:${.3+.7*(v/mx)};flex-shrink:0;"></div>`).join('');
+  }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2537,8 +2793,16 @@ function finish() {
   const cons = calcCons(S.wpmHist);
 
   if(wpm > CF.bestWPM) CF.bestWPM = wpm;
+  if(raw > (CF.bestRaw||0)) CF.bestRaw = raw;
   if(acc > CF.bestAcc) CF.bestAcc = acc;
-  CF.sessions++; CF.totalChars += S.cursor; CF.totalTime += Math.round(elapsed);
+  CF.sessions++;
+  CF.totalChars += S.cursor;
+  CF.totalTime += Math.round(elapsed);
+  CF.wpmSum = (CF.wpmSum||0) + wpm;
+  CF.avgCons = Math.round(((CF.avgCons||0)*(CF.sessions-1)+cons)/CF.sessions);
+  if(!CF.wpmHistory) CF.wpmHistory=[];
+  CF.wpmHistory.push(wpm);
+  if(CF.wpmHistory.length>50) CF.wpmHistory.shift();
   saveCF(); updateStatBlk();
 
   qi('r-wpm').textContent = wpm; qi('r-acc').textContent = acc+'%';
@@ -3322,15 +3586,85 @@ document.addEventListener('click', e => {
 });
 
 // ═══════════════════════════════════════════════════════
+// CUSTOM THEME BUILDER
+// ═══════════════════════════════════════════════════════
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return {r,g,b};
+}
+function darken(hex, amt) {
+  const {r,g,b} = hexToRgb(hex);
+  const d = v => Math.max(0,Math.round(v*amt)).toString(16).padStart(2,'0');
+  return '#'+d(r)+d(g)+d(b);
+}
+function lighten(hex, amt) {
+  const {r,g,b} = hexToRgb(hex);
+  const l = v => Math.min(255,Math.round(v+(255-v)*amt)).toString(16).padStart(2,'0');
+  return '#'+l(r)+l(g)+l(b);
+}
+function mixHex(a, b, t=0.5) {
+  const A=hexToRgb(a), B=hexToRgb(b);
+  const m = v1=>Math.round(v1[0]+(v1[1]-v1[0])*t).toString(16).padStart(2,'0');
+  return '#'+m([A.r,B.r])+m([A.g,B.g])+m([A.b,B.b]);
+}
+
+function applyCustomTheme() {
+  const bg  = qi('ct-bg').value;
+  const s1  = qi('ct-s1').value;
+  const tx  = qi('ct-tx').value;
+  const ac  = qi('ct-ac').value;
+  const s2  = mixHex(s1, bg, 0.3);
+  const b1  = mixHex(s1, lighten(s1,0.08), 0.5);
+  const b2  = lighten(s1, 0.12);
+  const tb  = lighten(tx, 0.15);
+  const d1  = mixHex(bg, tx, 0.22);
+  const d2  = mixHex(bg, tx, 0.40);
+  const d3  = mixHex(bg, tx, 0.58);
+  const ac2 = darken(ac, 0.85);
+  const r = document.documentElement.style;
+  r.setProperty('--bg', bg); r.setProperty('--s1', s1); r.setProperty('--s2', s2);
+  r.setProperty('--b1', b1); r.setProperty('--b2', b2); r.setProperty('--tx', tx);
+  r.setProperty('--tb', tb); r.setProperty('--d1', d1); r.setProperty('--d2', d2);
+  r.setProperty('--d3', d3); r.setProperty('--ac', ac); r.setProperty('--ac2', ac2);
+  r.setProperty('--acg', ac+'1f'); r.setProperty('--mu', mixHex(s2,b1,0.5)); r.setProperty('--d0', mixHex(b1,d1,0.5));
+  document.querySelectorAll('.tc').forEach(c => c.classList.remove('on'));
+}
+
+function saveCustomTheme() {
+  applyCustomTheme();
+  CF.theme = 'custom';
+  CF.customBg  = qi('ct-bg').value;
+  CF.customS1  = qi('ct-s1').value;
+  CF.customTx  = qi('ct-tx').value;
+  CF.customAc  = qi('ct-ac').value;
+  setAc(CF.customAc, darken(CF.customAc,0.85), true);
+  saveCF();
+  toast('Custom theme saved ✓');
+}
+
+function restoreCustomTheme() {
+  if(CF.theme==='custom' && CF.customBg) {
+    if(qi('ct-bg')) qi('ct-bg').value = CF.customBg;
+    if(qi('ct-s1')) qi('ct-s1').value = CF.customS1||'#13161e';
+    if(qi('ct-tx')) qi('ct-tx').value = CF.customTx||'#c8cde0';
+    if(qi('ct-ac')) qi('ct-ac').value = CF.customAc||'#e2b714';
+    applyCustomTheme();
+  }
+}
+
+// ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
 loadCF();
 qi('ft-count').textContent = DB.length + ' snippets';
 qi('res-run-btn').style.display = 'none';
 pickSnippet('h1');
+restoreCustomTheme();
+updateStatBlk();
 // Always show auth screen on load
 document.getElementById('auth-screen').style.display = 'flex';
 document.getElementById('auth-screen').classList.remove('hide');
 </script>
+
 </body>
 </html>
