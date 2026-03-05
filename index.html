@@ -480,78 +480,95 @@ footer .ac{color:var(--ac);}
 .cl-badge.imp{background:rgba(109,156,248,.12);color:#6d9cf8;border:1px solid rgba(109,156,248,.25);}
 .cl-badge.tweak{background:rgba(91,200,216,.12);color:#5bc8d8;border:1px solid rgba(91,200,216,.25);}
 .cl-divider{height:1px;background:var(--b1);margin:16px 0;}
-#auth-screen{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+#auth-screen{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:stretch;overflow:hidden;}
 #auth-screen.hide{animation:authOut .5s cubic-bezier(.4,0,.2,1) forwards;pointer-events:none;}
 @keyframes authOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04);}}
 
-/* animated bg particles */
-.auth-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
-.auth-particle{position:absolute;width:2px;height:2px;background:var(--ac);border-radius:50%;opacity:0;animation:partFloat linear infinite;}
-@keyframes partFloat{0%{opacity:0;transform:translateY(0) scale(0)}20%{opacity:.6}80%{opacity:.3}100%{opacity:0;transform:translateY(-100vh) scale(1.5)}}
+/* ── MATRIX RAIN CANVAS ── */
+#matrix-canvas{position:absolute;inset:0;opacity:.13;pointer-events:none;z-index:0;}
 
-/* grid lines bg */
-.auth-grid{position:absolute;inset:0;background-image:linear-gradient(var(--b1) 1px,transparent 1px),linear-gradient(90deg,var(--b1) 1px,transparent 1px);background-size:48px 48px;opacity:.4;animation:gridPulse 4s ease-in-out infinite;}
-@keyframes gridPulse{0%,100%{opacity:.2}50%{opacity:.45}}
+/* ── LEFT PANEL — form ── */
+.auth-left{position:relative;z-index:2;width:480px;min-width:340px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:52px 48px;background:rgba(13,15,20,.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-right:1px solid var(--b1);}
+@media(max-width:860px){.auth-left{width:100%;border-right:none;padding:40px 24px;}.auth-right{display:none!important;}}
 
-/* glow orbs */
-.auth-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbFloat 8s ease-in-out infinite;}
-.auth-orb-1{width:400px;height:400px;background:rgba(226,183,20,.08);top:-100px;left:-100px;}
-.auth-orb-2{width:300px;height:300px;background:rgba(226,183,20,.06);bottom:-80px;right:-80px;animation-delay:-4s;}
+/* ── RIGHT PANEL — demo ── */
+.auth-right{flex:1;position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px;background:rgba(10,12,18,.6);overflow:hidden;}
+.auth-demo-window{width:100%;max-width:520px;background:rgba(13,15,20,.9);border:1px solid var(--b2);border-radius:14px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);animation:demoIn .8s cubic-bezier(.4,0,.2,1) .4s both;}
+@keyframes demoIn{from{opacity:0;transform:translateX(40px) scale(.96)}to{opacity:1;transform:translateX(0) scale(1)}}
+.demo-titlebar{background:rgba(255,255,255,.04);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--b1);}
+.demo-dot{width:10px;height:10px;border-radius:50%;}
+.demo-filename{font-size:.6rem;color:var(--d2);font-family:var(--font);margin-left:6px;letter-spacing:.5px;}
+.demo-code{padding:20px;font-family:var(--font);font-size:.72rem;line-height:1.8;color:var(--d3);min-height:220px;position:relative;}
+.demo-typed{color:var(--tx);}
+.demo-cursor{display:inline-block;width:2px;height:1.1em;background:var(--ac);margin-left:1px;vertical-align:text-bottom;animation:demoBlink .9s step-end infinite;}
+@keyframes demoBlink{0%,100%{opacity:1}50%{opacity:0}}
+.demo-ghost{color:var(--b2);}
+.auth-demo-stats{display:flex;gap:20px;margin-top:20px;animation:demoIn .8s cubic-bezier(.4,0,.2,1) .7s both;}
+.auth-demo-stat{text-align:center;}
+.auth-demo-stat .v{font-size:1.6rem;font-weight:300;color:var(--ac);font-family:var(--ui);line-height:1;}
+.auth-demo-stat .l{font-size:.52rem;color:var(--d2);letter-spacing:2px;text-transform:uppercase;margin-top:3px;font-family:var(--font);}
+.auth-right-tagline{font-size:.8rem;color:var(--d3);text-align:center;margin-top:28px;line-height:1.7;font-family:var(--font);animation:demoIn .8s cubic-bezier(.4,0,.2,1) 1s both;}
+.auth-right-tagline span{color:var(--ac);}
 
-/* card */
-.auth-card{position:relative;z-index:2;width:420px;max-width:95vw;background:var(--s1);border:1px solid var(--b2);border-radius:18px;padding:40px;box-shadow:0 32px 80px rgba(0,0,0,.6);animation:cardIn .6s cubic-bezier(.4,0,.2,1) forwards;}
-@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-/* logo in auth */
-.auth-logo{text-align:center;margin-bottom:32px;}
-.auth-logo-mark{display:inline-flex;align-items:center;gap:10px;font-family:var(--ui);font-weight:900;font-size:2rem;color:var(--ac);letter-spacing:-1px;animation:logoPop .8s cubic-bezier(.4,0,.2,1) .2s both;}
+/* ── LOGO ── */
+.auth-logo{margin-bottom:36px;}
+.auth-logo-mark{display:inline-flex;align-items:center;gap:10px;font-family:var(--ui);font-weight:900;font-size:2.4rem;color:var(--ac);letter-spacing:-1px;animation:logoPop .8s cubic-bezier(.4,0,.2,1) .2s both;}
 @keyframes logoPop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-.auth-logo-dot{width:10px;height:10px;border-radius:50%;background:var(--ac);box-shadow:0 0 12px var(--ac),0 0 24px var(--ac);animation:dotPulse 2s ease-in-out infinite;}
-@keyframes dotPulse{0%,100%{box-shadow:0 0 8px var(--ac),0 0 16px var(--ac)}50%{box-shadow:0 0 16px var(--ac),0 0 32px var(--ac),0 0 48px var(--ac)}}
-.auth-logo-sub{font-size:.6rem;color:var(--d2);font-family:var(--font);display:block;margin-top:4px;letter-spacing:2px;text-transform:uppercase;}
+.auth-logo-dot{width:12px;height:12px;border-radius:50%;background:var(--ac);box-shadow:0 0 12px var(--ac),0 0 28px var(--ac);animation:dotPulse 2s ease-in-out infinite;}
+@keyframes dotPulse{0%,100%{box-shadow:0 0 8px var(--ac),0 0 16px var(--ac)}50%{box-shadow:0 0 18px var(--ac),0 0 36px var(--ac),0 0 54px var(--ac)}}
+.auth-logo-sub{font-size:.58rem;color:var(--d2);font-family:var(--font);display:block;margin-top:6px;letter-spacing:2px;text-transform:uppercase;}
+.auth-logo-cursor{animation:demoBlink .9s step-end infinite;color:var(--ac);}
 
-/* tabs */
+/* ── TABS ── */
 .auth-tabs{display:flex;background:var(--bg);border-radius:8px;padding:3px;gap:3px;margin-bottom:28px;}
-.auth-tab{flex:1;background:none;border:none;color:var(--d2);font-family:var(--font);font-size:.72rem;padding:8px;border-radius:6px;cursor:pointer;transition:.2s;}
+.auth-tab{flex:1;background:none;border:none;color:var(--d2);font-family:var(--font);font-size:.72rem;padding:9px;border-radius:6px;cursor:pointer;transition:.2s;}
 .auth-tab:hover{color:var(--tx);}
 .auth-tab.on{background:var(--s2);color:var(--ac);box-shadow:0 2px 8px rgba(0,0,0,.3);}
 
-/* form */
-.auth-form{display:flex;flex-direction:column;gap:16px;animation:formIn .3s ease both;}
+/* ── FORM ── */
+.auth-form{display:flex;flex-direction:column;gap:18px;animation:formIn .3s ease both;}
 @keyframes formIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .auth-field{position:relative;}
-.auth-field label{display:block;font-size:.62rem;color:var(--d2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;font-family:var(--font);}
-.auth-field input{width:100%;background:var(--bg);border:1px solid var(--b2);border-radius:8px;color:var(--tx);font-family:var(--font);font-size:.82rem;padding:11px 14px 11px 38px;outline:none;transition:.2s;}
-.auth-field input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--acg);}
+.auth-field label{display:block;font-size:.6rem;color:var(--d2);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;font-family:var(--font);}
+.auth-field input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--b2);border-radius:9px;color:var(--tx);font-family:var(--font);font-size:.84rem;padding:12px 14px 12px 40px;outline:none;transition:.2s;}
+.auth-field input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--acg);background:rgba(255,255,255,.06);}
 .auth-field input::placeholder{color:var(--d1);}
-.auth-field-icon{position:absolute;bottom:11px;left:12px;color:var(--d2);font-size:.85rem;pointer-events:none;}
+.auth-field-icon{position:absolute;bottom:13px;left:13px;color:var(--d2);font-size:.85rem;pointer-events:none;}
 .auth-field input:focus~.auth-field-icon{color:var(--ac);}
-
-/* strength bar */
 .pw-strength{height:3px;border-radius:2px;background:var(--b1);margin-top:6px;overflow:hidden;}
 .pw-strength-bar{height:100%;border-radius:2px;width:0%;transition:width .3s,background .3s;}
 
-/* submit btn */
-.auth-submit{background:var(--ac);color:#0d0f14;border:none;border-radius:8px;padding:13px;font-family:var(--ui);font-weight:700;font-size:.9rem;cursor:pointer;transition:.2s;position:relative;overflow:hidden;margin-top:4px;}
-.auth-submit:hover{background:var(--ac2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(226,183,20,.3);}
-.auth-submit:active{transform:translateY(0);}
+/* ── SUBMIT ── */
+.auth-submit{background:var(--ac);color:#0d0f14;border:none;border-radius:9px;padding:14px;font-family:var(--ui);font-weight:700;font-size:.92rem;cursor:pointer;transition:.2s;position:relative;overflow:hidden;margin-top:4px;letter-spacing:.3px;}
+.auth-submit:hover{background:var(--ac2);transform:translateY(-1px);box-shadow:0 8px 28px rgba(226,183,20,.35);}
+.auth-submit:active{transform:translateY(0) scale(.98);}
 .auth-submit::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:.4s;}
 .auth-submit:hover::after{transform:translateX(100%);}
 
-/* divider */
+/* ── DIVIDER / GUEST ── */
 .auth-divider{display:flex;align-items:center;gap:10px;color:var(--d1);font-size:.62rem;margin:4px 0;}
 .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--b2);}
+.auth-guest{background:none;border:1px solid var(--b2);color:var(--d2);border-radius:9px;padding:12px;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.2s;width:100%;}
+.auth-guest:hover{border-color:var(--d2);color:var(--tx);background:rgba(255,255,255,.03);}
 
-/* guest btn */
-.auth-guest{background:none;border:1px solid var(--b2);color:var(--d2);border-radius:8px;padding:11px;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.2s;width:100%;}
-.auth-guest:hover{border-color:var(--d2);color:var(--tx);}
-
-
-/* error / success msg */
-.auth-msg{font-size:.68rem;padding:9px 12px;border-radius:6px;display:none;animation:msgIn .2s ease;}
+/* ── ERROR MSG ── */
+.auth-msg{font-size:.68rem;padding:9px 12px;border-radius:7px;display:none;animation:msgIn .2s ease;}
 @keyframes msgIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .auth-msg.err{background:rgba(242,92,110,.1);border:1px solid rgba(242,92,110,.3);color:#f25c6e;display:block;}
 .auth-msg.ok{background:rgba(95,204,138,.1);border:1px solid rgba(95,204,138,.3);color:#5fcc8a;display:block;}
+
+/* ── USER COUNT ── */
+.auth-user-count{margin-top:28px;display:flex;align-items:center;gap:8px;font-size:.6rem;color:var(--d2);font-family:var(--font);}
+.auth-count-dots{display:flex;gap:3px;}
+.auth-count-dot{width:5px;height:5px;border-radius:50%;background:var(--ac);opacity:.4;animation:countDot 1.5s ease-in-out infinite;}
+.auth-count-dot:nth-child(2){animation-delay:.2s;}
+.auth-count-dot:nth-child(3){animation-delay:.4s;}
+@keyframes countDot{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.auth-count-num{color:var(--ac);font-weight:700;}
+
+/* ── SHAKE ANIMATION ── */
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.auth-card.shake{animation:shake .4s ease;}
 
 /* user chip in header */
 .user-chip{display:flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--b1);border-radius:20px;padding:4px 12px 4px 4px;cursor:pointer;transition:.13s;}
@@ -949,16 +966,15 @@ footer .ac{color:var(--ac);}
 
 <!-- ══ AUTH SCREEN ══ -->
 <div id="auth-screen" style="display:flex;">
-  <div class="auth-bg" id="auth-bg"></div>
-  <div class="auth-grid"></div>
-  <div class="auth-orb auth-orb-1"></div>
-  <div class="auth-orb auth-orb-2"></div>
-  <div class="auth-card">
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- ── LEFT: form ── -->
+  <div class="auth-left">
     <div class="auth-logo">
       <div class="auth-logo-mark">
-        <div class="auth-logo-dot"></div>lucode
+        <div class="auth-logo-dot"></div><span id="auth-logo-text">lucode</span><span class="auth-logo-cursor">|</span>
       </div>
-      <span class="auth-logo-sub">// type code. get faster.</span>
+      <span class="auth-logo-sub" id="auth-tagline">// type code. get faster.</span>
     </div>
 
     <div class="auth-tabs" id="auth-tabs">
@@ -1058,7 +1074,42 @@ footer .ac{color:var(--ac);}
       <div class="auth-divider">or</div>
       <button class="auth-guest" onclick="doGuest()">continue as guest</button>
     </div>
-  </div>
+
+    <!-- user count -->
+    <div class="auth-user-count">
+      <div class="auth-count-dots">
+        <div class="auth-count-dot"></div>
+        <div class="auth-count-dot"></div>
+        <div class="auth-count-dot"></div>
+      </div>
+      <span>joined by <span class="auth-count-num" id="auth-user-count">1,247</span> users</span>
+    </div>
+
+  </div><!-- end auth-left -->
+
+  <!-- ── RIGHT: live demo ── -->
+  <div class="auth-right">
+    <div class="auth-demo-window">
+      <div class="demo-titlebar">
+        <div class="demo-dot" style="background:#ff5f57"></div>
+        <div class="demo-dot" style="background:#febc2e"></div>
+        <div class="demo-dot" style="background:#28c840"></div>
+        <span class="demo-filename">snippet.js — lucode</span>
+      </div>
+      <div class="demo-code" id="demo-code-display">
+        <span id="demo-typed-text"></span><span class="demo-cursor"></span><span id="demo-ghost-text" class="demo-ghost"></span>
+      </div>
+    </div>
+    <div class="auth-demo-stats">
+      <div class="auth-demo-stat"><div class="v" id="demo-stat-wpm">—</div><div class="l">wpm</div></div>
+      <div class="auth-demo-stat"><div class="v" id="demo-stat-acc">—</div><div class="l">accuracy</div></div>
+      <div class="auth-demo-stat"><div class="v" id="demo-stat-streak">—</div><div class="l">streak</div></div>
+    </div>
+    <div class="auth-right-tagline">
+      practice typing <span>real code</span>.<br>track your speed. beat the AI.
+    </div>
+  </div><!-- end auth-right -->
+
 </div>
 <div id="hdr">
   <div class="logo"><div class="logo-dot"></div>lucode<sub>// type code</sub></div>
@@ -4044,6 +4095,181 @@ document.addEventListener('keydown', e => {
 
 // ═══════════════════════════════════════════════════════
 // PWA — SERVICE WORKER
+
+// ═══════════════════════════════════════════════════════
+// AUTH LOGIN SCREEN EFFECTS
+// ═══════════════════════════════════════════════════════
+
+// ── MATRIX RAIN ──
+function initMatrix() {
+  const canvas = document.getElementById('matrix-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ{}[]()<>=/\\+*#@$%&?!;:.,';
+  const fontSize = 13;
+  let cols = Math.floor(canvas.width / fontSize);
+  const drops = Array(cols).fill(1).map(() => Math.random() * -50);
+  const acColor = getComputedStyle(document.documentElement).getPropertyValue('--ac').trim() || '#e2b714';
+  function draw() {
+    ctx.fillStyle = 'rgba(13,15,20,0.06)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = acColor;
+    ctx.font = fontSize + 'px monospace';
+    cols = Math.floor(canvas.width / fontSize);
+    while(drops.length < cols) drops.push(1);
+    for(let i = 0; i < cols; i++) {
+      const ch = chars[Math.floor(Math.random() * chars.length)];
+      ctx.globalAlpha = 0.4 + Math.random() * 0.3;
+      ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
+      ctx.globalAlpha = 1;
+      if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i] += 0.4;
+    }
+  }
+  return setInterval(draw, 50);
+}
+
+// ── LOGO TYPING ANIMATION ──
+function initLogoTyping() {
+  const el = document.getElementById('auth-logo-text');
+  if(!el) return;
+  const word = 'lucode';
+  let i = 0, deleting = false;
+  function tick() {
+    if(!deleting) {
+      el.textContent = word.slice(0, i+1);
+      i++;
+      if(i === word.length) { setTimeout(tick, 3000); return; }
+      setTimeout(tick, 120 + Math.random() * 60);
+    } else {
+      el.textContent = word.slice(0, i);
+      i--;
+      if(i < 0) { deleting = false; i = 0; setTimeout(tick, 400); return; }
+      setTimeout(tick, 60);
+    }
+    // after full word pause then retype
+    if(i === word.length && !deleting) {
+      deleting = true;
+      setTimeout(tick, 4000);
+      return;
+    }
+  }
+  el.textContent = '';
+  setTimeout(tick, 800);
+}
+
+// ── LIVE DEMO TYPING ──
+const DEMO_SNIPPET = `const greet = (name) => {
+  const msg = \`Hello, \${name}!
+  Welcome to lucode.\`;
+  console.log(msg);
+  return msg;
+};
+
+greet("developer");`;
+
+let demoPos = 0, demoTimer = null, demoWpm = 0, demoErrors = 0, demoStart = null;
+const DEMO_WPM_RANGE = [95, 135];
+
+function initDemoTyping() {
+  const typed = document.getElementById('demo-typed-text');
+  const ghost = document.getElementById('demo-ghost-text');
+  const wpmEl = document.getElementById('demo-stat-wpm');
+  const accEl = document.getElementById('demo-stat-acc');
+  if(!typed || !ghost) return;
+  demoPos = 0; demoErrors = 0; demoStart = Date.now();
+  let targetWpm = DEMO_WPM_RANGE[0] + Math.floor(Math.random() * (DEMO_WPM_RANGE[1] - DEMO_WPM_RANGE[0]));
+  function typeNext() {
+    if(demoPos >= DEMO_SNIPPET.length) {
+      // restart after pause
+      setTimeout(() => { demoPos=0; demoErrors=0; demoStart=Date.now(); typed.textContent=''; ghost.textContent=DEMO_SNIPPET; typeNext(); }, 1800);
+      return;
+    }
+    // syntax highlight the typed part
+    const done = DEMO_SNIPPET.slice(0, demoPos+1);
+    const rest = DEMO_SNIPPET.slice(demoPos+1);
+    typed.innerHTML = syntaxColorDemo(done);
+    ghost.textContent = rest;
+    demoPos++;
+    // update stats
+    const elapsed = (Date.now() - demoStart) / 60000;
+    const wpm = elapsed > 0 ? Math.round((demoPos/5)/elapsed) : 0;
+    if(wpmEl) wpmEl.textContent = wpm || '—';
+    const acc = Math.max(94, 100 - Math.floor(demoErrors * 0.3));
+    if(accEl) accEl.textContent = acc + '%';
+    // speed: ms per char based on wpm
+    const msPerChar = Math.max(20, 60000 / (targetWpm * 5));
+    const jitter = (Math.random() - 0.5) * msPerChar * 0.6;
+    // occasional "pause" on newlines
+    const extra = DEMO_SNIPPET[demoPos-1] === '\n' ? msPerChar * 3 : 0;
+    demoTimer = setTimeout(typeNext, msPerChar + jitter + extra);
+  }
+  ghost.textContent = DEMO_SNIPPET;
+  typed.textContent = '';
+  setTimeout(typeNext, 1200);
+  // streak stat
+  const strEl = document.getElementById('demo-stat-streak');
+  if(strEl) strEl.textContent = (typeof CF !== 'undefined' && CF.streak) ? CF.streak + ' 🔥' : '—';
+}
+
+function syntaxColorDemo(code) {
+  // simple highlight for the demo
+  return code
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/(const|let|var|return|function|=&gt;)/g,'<span style="color:#b47af0">$1</span>')
+    .replace(/(\`[^\`]*\`)/g,'<span style="color:#5fcc8a">$1</span>')
+    .replace(/(["'](.*?)["'])/g,'<span style="color:#5fcc8a">$1</span>')
+    .replace(/(\d+)/g,'<span style="color:#e2b714">$1</span>')
+    .replace(/(\/\/.*)/g,'<span style="color:#3a4060">$1</span>');
+}
+
+// ── USER COUNT — starts at 1200, grows 3-7 per visit ──
+function initUserCount() {
+  const el = document.getElementById('auth-user-count');
+  if(!el) return;
+  let count = parseInt(localStorage.getItem('lucode_usercount') || '1200');
+  // increment 3-7 on each load
+  const bump = 3 + Math.floor(Math.random() * 5);
+  count += bump;
+  localStorage.setItem('lucode_usercount', count);
+  // animate counting up
+  const target = count;
+  const start = Math.max(1200, target - 30);
+  let cur = start;
+  const step = () => {
+    cur += Math.ceil((target - cur) * 0.15) || 1;
+    el.textContent = cur.toLocaleString();
+    if(cur < target) requestAnimationFrame(step);
+    else el.textContent = target.toLocaleString();
+  };
+  step();
+}
+
+// ── SHAKE ON BAD LOGIN ──
+function shakeAuthCard() {
+  const card = document.querySelector('.auth-left');
+  if(!card) return;
+  card.style.animation = 'shake .4s ease';
+  setTimeout(() => card.style.animation = '', 400);
+}
+
+let matrixInterval = null;
+
+function startAuthEffects() {
+  matrixInterval = initMatrix();
+  initLogoTyping();
+  initDemoTyping();
+  initUserCount();
+}
+
+function stopAuthEffects() {
+  if(matrixInterval) { clearInterval(matrixInterval); matrixInterval = null; }
+  if(demoTimer) { clearTimeout(demoTimer); demoTimer = null; }
+}
+
 // ═══════════════════════════════════════════════════════
 // PWA install prompt
 let deferredPrompt;
@@ -4371,6 +4597,7 @@ function loginSuccess(username, data) {
   loadAvatar(username);
   // animate out auth screen
   const screen = document.getElementById('auth-screen');
+  stopAuthEffects();
   screen.classList.add('hide');
   setTimeout(() => { screen.style.display = 'none'; focus_(); }, 500);
   toast('welcome, ' + username + ' 👋');
@@ -5294,6 +5521,7 @@ if(qi('s-hlword')) qi('s-hlword').checked = !!CF.hlWord;
 // Always show auth screen on load
 document.getElementById('auth-screen').style.display = 'flex';
 document.getElementById('auth-screen').classList.remove('hide');
+startAuthEffects();
 </script>
 
 </body>
