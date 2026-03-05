@@ -377,11 +377,11 @@ footer .ac{color:var(--ac);}
   cursor:pointer;transition:all .2s;width:100%;
   display:flex;align-items:center;justify-content:center;gap:10px;
   color:#1f1f1f;box-shadow:0 2px 8px rgba(0,0,0,.25);
-  position:relative;overflow:hidden;
 }
 .auth-google:hover{background:#f8f8f8;box-shadow:0 4px 18px rgba(0,0,0,.35);transform:translateY(-2px);}
-.auth-google:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,0,0,.2);}
-.auth-google .fa-google{font-size:1rem;}
+.auth-google:active{transform:translateY(0);}
+.auth-google.loading{background:#f0f0f0;cursor:not-allowed;opacity:.8;transform:none;}
+.auth-google .fa-google{font-size:1rem;background:linear-gradient(135deg,#4285f4,#ea4335,#fbbc05,#34a853);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .auth-google-divider{display:flex;align-items:center;gap:10px;margin:2px 0;}
 .auth-google-divider::before,.auth-google-divider::after{content:'';flex:1;height:1px;background:var(--b2);}
 .auth-google-divider span{font-size:.6rem;color:var(--d1);font-family:var(--font);}
@@ -3300,61 +3300,18 @@ document.getElementById('auth-screen').style.display = 'flex';
 document.getElementById('auth-screen').classList.remove('hide');
 </script>
 
-<!-- Firebase SDK -->
+<!-- No Firebase — Google Sign-In coming soon -->
 <script>
-// Safe Google login — loads Firebase only when button is clicked
-window.doGoogleLogin = async function() {
+window.doGoogleLogin = function() {
   const btn = document.querySelector('.auth-google');
-  if(btn) { btn.textContent = 'loading...'; btn.disabled = true; }
-
-  try {
-    // Dynamically load Firebase compat scripts
-    await loadScript('https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js');
-    await loadScript('https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js');
-
-    if(!firebase.apps.length) {
-      firebase.initializeApp({
-        apiKey: "AIzaSyC-SqrAd5P9Bw6W-8z4Z4SfBa6RJK5F-R0",
-        authDomain: "lucode-972ef.firebaseapp.com",
-        projectId: "lucode-972ef",
-        storageBucket: "lucode-972ef.firebasestorage.app",
-        messagingSenderId: "1039658020992",
-        appId: "1:1039658020992:web:8e1f0298cf89d68718b665"
-      });
-    }
-
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const result = await auth.signInWithPopup(provider);
-    const user = result.user;
-    const username = user.displayName || user.email.split('@')[0];
-    if(user.photoURL) localStorage.setItem('lucode_avatar_' + username, user.photoURL);
-    loginSuccess(username, { joined: Date.now(), google: true });
-
-  } catch(e) {
-    if(btn) { btn.innerHTML = '<i class="fa-brands fa-google"></i> Sign in with Google'; btn.disabled = false; }
-    if(e.code === 'auth/popup-closed-by-user') return;
-    showAuthMsg('Google sign-in failed — try again', 'err');
-    console.warn('Google auth error:', e);
-  }
+  btn.classList.add('loading');
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> connecting...';
+  setTimeout(() => {
+    btn.classList.remove('loading');
+    btn.innerHTML = '<i class="fa-brands fa-google"></i> Sign in with Google';
+    showAuthMsg('Google Sign-In coming soon! Use username/password for now.', 'ok');
+  }, 1800);
 };
-
-window.doGoogleLogout = function() {
-  if(typeof firebase !== 'undefined' && firebase.apps.length) {
-    firebase.auth().signOut().catch(()=>{});
-  }
-};
-
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    if(document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
-    const s = document.createElement('script');
-    s.src = src;
-    s.onload = resolve;
-    s.onerror = reject;
-    document.head.appendChild(s);
-  });
-}
 </script>
 </body>
 </html>
