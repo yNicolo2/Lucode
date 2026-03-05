@@ -2764,6 +2764,11 @@ function focus_() { qi('hidden').focus(); }
 const hi = qi('hidden');
 hi.addEventListener('keydown', handleKey);
 hi.addEventListener('blur', () => {
+  // Don't steal focus if auth screen is showing or if user is typing in an input
+  const auth = document.getElementById('auth-screen');
+  if(auth && auth.style.display !== 'none') return;
+  const active = document.activeElement;
+  if(active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT')) return;
   if(!qi('spkr').classList.contains('open') &&
      !qi('pm').classList.contains('open') &&
      !qi('sp').classList.contains('open') &&
