@@ -261,7 +261,28 @@ footer{padding:11px 48px;border-top:1px solid var(--b1);display:flex;align-items
 footer .ac{color:var(--ac);}
 #hidden{position:fixed;top:0;left:0;opacity:0;pointer-events:none;width:1px;height:1px;}
 
-/* ── AUTH SCREEN ── */
+/* ── CHANGELOG MODAL ── */
+#cl-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:400;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+#cl-modal.open{opacity:1;pointer-events:all;}
+.cl-box{background:var(--s1);border:1px solid var(--b2);border-radius:14px;width:560px;max-width:95vw;max-height:82vh;display:flex;flex-direction:column;transform:scale(.97);transition:transform .2s;overflow:hidden;}
+#cl-modal.open .cl-box{transform:scale(1);}
+.cl-hdr{padding:16px 20px;border-bottom:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center;}
+.cl-title{font-family:var(--ui);font-weight:700;font-size:.95rem;color:var(--tb);display:flex;align-items:center;gap:10px;}
+.cl-body{overflow-y:auto;padding:20px;}
+.cl-version{margin-bottom:24px;}
+.cl-ver-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.cl-ver-tag{font-size:.7rem;background:var(--acg);color:var(--ac);border:1px solid var(--ac);border-radius:5px;padding:3px 9px;font-family:var(--font);}
+.cl-ver-tag.latest{background:var(--ac);color:#0d0f14;font-weight:700;}
+.cl-ver-date{font-size:.6rem;color:var(--d2);font-family:var(--font);}
+.cl-ver-title{font-size:.8rem;color:var(--tb);font-family:var(--ui);font-weight:600;}
+.cl-items{display:flex;flex-direction:column;gap:6px;padding-left:4px;}
+.cl-item{display:flex;align-items:flex-start;gap:8px;font-size:.69rem;color:var(--d3);line-height:1.6;}
+.cl-badge{font-size:.55rem;padding:1px 6px;border-radius:3px;flex-shrink:0;margin-top:2px;font-family:var(--font);}
+.cl-badge.new{background:rgba(95,204,138,.15);color:#5fcc8a;border:1px solid rgba(95,204,138,.3);}
+.cl-badge.fix{background:rgba(242,92,110,.12);color:#f25c6e;border:1px solid rgba(242,92,110,.25);}
+.cl-badge.imp{background:rgba(109,156,248,.12);color:#6d9cf8;border:1px solid rgba(109,156,248,.25);}
+.cl-badge.tweak{background:rgba(91,200,216,.12);color:#5bc8d8;border:1px solid rgba(91,200,216,.25);}
+.cl-divider{height:1px;background:var(--b1);margin:16px 0;}
 #auth-screen{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;}
 #auth-screen.hide{animation:authOut .5s cubic-bezier(.4,0,.2,1) forwards;pointer-events:none;}
 @keyframes authOut{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04);}}
@@ -361,6 +382,98 @@ footer .ac{color:var(--ac);}
 </style>
 </head>
 <body>
+
+<!-- ══ CHANGELOG MODAL ══ -->
+<div id="cl-modal" onclick="if(event.target===this)closeChangelog()">
+  <div class="cl-box">
+    <div class="cl-hdr">
+      <div class="cl-title">📋 changelog <span style="font-size:.62rem;color:var(--d2);font-weight:400;font-family:var(--font)">lucode</span></div>
+      <button class="btn" onclick="closeChangelog()">✕</button>
+    </div>
+    <div class="cl-body">
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag latest">v1.3.0</span>
+          <span class="cl-ver-date">Mar 2026</span>
+          <span class="cl-ver-title">The Big Update</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Login & register system with account persistence</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>7 new themes: VS Code, GitHub Dark, Ayu, Palenight, Material, Synthwave, Cobalt, Rose, Ocean, Matrix</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>9 new code snippets across JS, TS, Python, CSS, HTML, Rust</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>PWA support — install as desktop app</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Panel height control (xs → VS Code fullscreen mode)</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Changelog modal (you're looking at it)</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Theme grid now scrollable, shows all 25 themes</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Account section in settings with sign out button</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Auth screen now always shows on page load</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.2.0</span>
+          <span class="cl-ver-date">Feb 2026</span>
+          <span class="cl-ver-title">Themes & Fonts</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>21 themes including Dracula, Nord, Tokyo Night, Monokai, Catppuccin, One Dark, Gruvbox</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>11 monospace font options with live preview</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Custom accent color swatches</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Cursor styles: bar, block, underline</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Font size, weight, line height, letter spacing controls</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Settings panel redesigned with organized sections</div>
+          <div class="cl-item"><span class="cl-badge tweak">tweak</span>Smoother theme transitions</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.1.0</span>
+          <span class="cl-ver-date">Jan 2026</span>
+          <span class="cl-ver-title">Run Code & Snippets</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Run HTML/CSS/JS code in live preview panel</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Console output for JS snippets</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>External runner for Python, Rust, Go, Lua, C++ via OneCompiler</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Paste your own code to practice</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Snippet picker with search and language filter (Ctrl+K)</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>40+ snippets across 9 languages</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Syntax highlighting for all supported languages</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Newline symbol toggle now persists across sessions</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.0.0</span>
+          <span class="cl-ver-date">Dec 2025</span>
+          <span class="cl-ver-title">Initial Release 🎉</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Core typing engine with WPM, accuracy, raw speed tracking</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Time mode (15s, 30s, 60s, 120s), Words mode, Zen mode</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Live WPM counter and progress bar</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Error highlighting with shake animation</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Results screen with WPM graph</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>ASMR key sounds (click, pop, typewriter, soft, mechanical)</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Stats tracking: best WPM, accuracy, total sessions</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Blind mode, confidence mode, stop on error</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Smooth scroll following cursor</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- ══ AUTH SCREEN ══ -->
 <div id="auth-screen" style="display:flex;">
@@ -548,7 +661,11 @@ footer .ac{color:var(--ac);}
 
 <footer>
   <span class="ac">lucode</span> — type code like it's a sport
-  <span id="ft-count">0 snippets</span>
+  <span style="display:flex;align-items:center;gap:10px;">
+    <span id="ft-count">0 snippets</span>
+    <span style="color:var(--d0)">·</span>
+    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.3.0</span>
+  </span>
 </footer>
 
 <!-- ── RUN PANEL ── -->
@@ -599,6 +716,15 @@ footer .ac{color:var(--ac);}
 <div id="sp">
   <div class="sp-hdr"><span class="sp-title">settings</span><button class="btn" onclick="toggleSettings()">✕</button></div>
   <div class="sp-body">
+
+    <div class="sg" style="background:linear-gradient(135deg,rgba(226,183,20,.06),transparent);border-color:rgba(226,183,20,.2);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div class="sg-t" style="margin:0;">lucode</div>
+        <span style="font-size:.62rem;background:var(--acg);color:var(--ac);border:1px solid var(--ac);border-radius:4px;padding:2px 8px;font-family:var(--font);">v1.3.0</span>
+      </div>
+      <div style="font-size:.64rem;color:var(--d2);margin-bottom:10px;line-height:1.7;">type code. get faster. built for devs.</div>
+      <button class="btn pri" style="width:100%;" onclick="toggleSettings();openChangelog()">📋 what's new — changelog</button>
+    </div>
 
     <div class="sg">
       <div class="sg-t">Account</div>
@@ -2666,6 +2792,9 @@ if('serviceWorker' in navigator) {
       .catch(e => console.log('SW error', e));
   });
 }
+
+function openChangelog() { document.getElementById('cl-modal').classList.add('open'); }
+function closeChangelog() { document.getElementById('cl-modal').classList.remove('open'); }
 
 // ═══════════════════════════════════════════════════════
 // AUTH SYSTEM
