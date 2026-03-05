@@ -1230,7 +1230,7 @@ footer .ac{color:var(--ac);}
     <span style="color:var(--d0)">·</span>
     <span style="cursor:pointer;color:var(--d1);transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openAbout()">made by yNicolo, 14</span>
     <span style="color:var(--d0)">·</span>
-    <button id="pwa-install-btn" onclick="installPWA()" style="display:none;align-items:center;gap:5px;background:var(--acg);border:1px solid var(--ac);color:var(--ac);font-family:var(--font);font-size:.58rem;padding:3px 9px;border-radius:5px;cursor:pointer;transition:.2s;">⬇ install app</button>
+
   </span>
   <span style="display:flex;align-items:center;gap:10px;">
     <span id="ft-count">0 snippets</span>
@@ -1303,9 +1303,25 @@ footer .ac{color:var(--ac);}
     <div class="sg">
       <div class="sg-t">Account</div>
       <div id="s-account-info" style="font-size:.69rem;color:var(--d3);margin-bottom:10px;">not signed in</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
         <button class="btn" onclick="toggleSettings();doLogout()">⇤ sign out / switch account</button>
-        <button class="btn" onclick="downloadApp()" style="display:flex;align-items:center;gap:5px;">⬇ download as offline app</button>
+      </div>
+      <div style="background:var(--bg);border:1px solid var(--b1);border-radius:10px;padding:12px 14px;margin-bottom:6px;">
+        <div style="font-size:.62rem;color:var(--d3);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+          <span style="font-size:.85rem;">📲</span>
+          <span><b style="color:var(--tx);">Install as app</b> — works on Windows, Mac, Android, iOS</span>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button id="pwa-install-btn" onclick="installPWA()" style="display:none;align-items:center;gap:6px;background:var(--ac);border:none;color:#0d0f14;font-family:var(--font);font-size:.65rem;font-weight:700;padding:7px 14px;border-radius:7px;cursor:pointer;transition:.2s;">⬇ install lucode</button>
+          <button id="pwa-manual-btn" onclick="showInstallHelp()" style="display:none;align-items:center;gap:6px;background:var(--acg);border:1px solid var(--ac);color:var(--ac);font-family:var(--font);font-size:.62rem;padding:6px 12px;border-radius:7px;cursor:pointer;transition:.2s;">📖 how to install</button>
+          <button onclick="downloadApp()" style="display:flex;align-items:center;gap:6px;background:none;border:1px solid var(--b2);color:var(--d3);font-family:var(--font);font-size:.62rem;padding:6px 12px;border-radius:7px;cursor:pointer;transition:.2s;">⬇ download offline file</button>
+        </div>
+        <div id="install-help" style="display:none;margin-top:10px;font-size:.62rem;color:var(--d3);line-height:1.8;background:var(--s1);border-radius:7px;padding:10px 12px;">
+          <b style="color:var(--tx);">Chrome / Edge (PC):</b> look for the ⊕ icon in the address bar → click "Install lucode"<br>
+          <b style="color:var(--tx);">Android:</b> Chrome menu (⋮) → "Add to Home Screen" or "Install app"<br>
+          <b style="color:var(--tx);">iPhone / iPad:</b> Safari → Share button → "Add to Home Screen"<br>
+          <b style="color:var(--tx);">Already installed?</b> Open from your desktop or Start menu — it runs without the browser UI
+        </div>
       </div>
     </div>
 
@@ -4031,21 +4047,42 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredPrompt = e;
+  // Show the big install button
   const btn = document.getElementById('pwa-install-btn');
   if(btn) btn.style.display = 'flex';
+  // Hide the manual help btn since we have the real prompt
+  const manual = document.getElementById('pwa-manual-btn');
+  if(manual) manual.style.display = 'none';
 });
 window.addEventListener('appinstalled', () => {
   const btn = document.getElementById('pwa-install-btn');
   if(btn) btn.style.display = 'none';
-  toast('lucode installed as app ✓');
+  toast('lucode installed! Find it in your Start menu / home screen 🎉');
+});
+// If already installed or prompt not available, show manual instructions btn
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    if(!deferredPrompt) {
+      const manual = document.getElementById('pwa-manual-btn');
+      if(manual) manual.style.display = 'flex';
+    }
+  }, 2500);
 });
 function installPWA() {
-  if(!deferredPrompt) return;
+  if(!deferredPrompt) { showInstallHelp(); return; }
   deferredPrompt.prompt();
   deferredPrompt.userChoice.then(r => {
-    if(r.outcome === 'accepted') toast('Installing lucode...');
+    if(r.outcome === 'accepted') {
+      toast('Installing lucode...');
+      const btn = document.getElementById('pwa-install-btn');
+      if(btn) btn.style.display = 'none';
+    }
     deferredPrompt = null;
   });
+}
+function showInstallHelp() {
+  const help = document.getElementById('install-help');
+  if(help) { help.style.display = help.style.display === 'none' ? 'block' : 'none'; }
 }
 
 if('serviceWorker' in navigator) {
