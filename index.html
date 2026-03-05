@@ -11,6 +11,7 @@
 <meta name="apple-mobile-web-app-title" content="lucode">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fira+Code:wght@300;400;500&family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;1,300&family=Inconsolata:wght@300;400;500&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:ital,wght@0,400;1,400&family=Roboto+Mono:ital,wght@0,300;0,400;1,300&family=Cousine:ital,wght@0,400;1,400&family=Overpass+Mono:wght@300;400;500&family=Share+Tech+Mono&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 :root {
   --bg:#0d0f14; --s1:#13161e; --s2:#171b27;
@@ -369,7 +370,21 @@ footer .ac{color:var(--ac);}
 /* guest btn */
 .auth-guest{background:none;border:1px solid var(--b2);color:var(--d2);border-radius:8px;padding:11px;font-family:var(--font);font-size:.72rem;cursor:pointer;transition:.2s;width:100%;}
 .auth-guest:hover{border-color:var(--d2);color:var(--tx);}
-
+/* google btn */
+.auth-google{
+  background:#fff;border:none;border-radius:10px;
+  padding:12px 16px;font-family:var(--ui);font-size:.82rem;font-weight:600;
+  cursor:pointer;transition:all .2s;width:100%;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  color:#1f1f1f;box-shadow:0 2px 8px rgba(0,0,0,.25);
+  position:relative;overflow:hidden;
+}
+.auth-google:hover{background:#f8f8f8;box-shadow:0 4px 18px rgba(0,0,0,.35);transform:translateY(-2px);}
+.auth-google:active{transform:translateY(0);box-shadow:0 1px 4px rgba(0,0,0,.2);}
+.auth-google .fa-google{font-size:1rem;}
+.auth-google-divider{display:flex;align-items:center;gap:10px;margin:2px 0;}
+.auth-google-divider::before,.auth-google-divider::after{content:'';flex:1;height:1px;background:var(--b2);}
+.auth-google-divider span{font-size:.6rem;color:var(--d1);font-family:var(--font);}
 
 /* error / success msg */
 .auth-msg{font-size:.68rem;padding:9px 12px;border-radius:6px;display:none;animation:msgIn .2s ease;}
@@ -418,12 +433,15 @@ footer .ac{color:var(--ac);}
         <div class="cl-ver-hdr">
           <span class="cl-ver-tag latest">v1.5.0</span>
           <span class="cl-ver-date">Mar 2026</span>
-          <span class="cl-ver-title">Polish & Fixes</span>
+          <span class="cl-ver-title">Google Sign-In</span>
         </div>
         <div class="cl-items">
-          <div class="cl-item"><span class="cl-badge fix">fix</span>Auth screen always shows correctly on load</div>
-          <div class="cl-item"><span class="cl-badge imp">imp</span>Service worker updated — no more stale cache issues</div>
-          <div class="cl-item"><span class="cl-badge tweak">tweak</span>Login flow cleaned up</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Google Sign-In via Firebase — one click, no password needed</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Google profile photo used as avatar automatically</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Google button redesigned with Font Awesome icon — cleaner look</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>"or continue with" divider between forms for better visual flow</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Google button SVG was misaligned — replaced with proper FA icon</div>
+          <div class="cl-item"><span class="cl-badge tweak">tweak</span>Button hover effect with lift animation</div>
         </div>
       </div>
 
@@ -560,6 +578,11 @@ footer .ac{color:var(--ac);}
       </div>
       <div class="auth-forgot"><a onclick="switchAuthTab('forgot')">forgot password?</a></div>
       <button class="auth-submit" onclick="doLogin()">sign in →</button>
+      <div class="auth-google-divider"><span>or continue with</span></div>
+      <button class="auth-google" onclick="doGoogleLogin()">
+        <i class="fa-brands fa-google"></i>
+        Sign in with Google
+      </button>
       <div class="auth-divider">or</div>
       <button class="auth-guest" onclick="doGuest()">continue as guest</button>
     </div>
@@ -617,6 +640,11 @@ footer .ac{color:var(--ac);}
         <div class="pw-strength"><div class="pw-strength-bar" id="pw-bar"></div></div>
       </div>
       <button class="auth-submit" onclick="doRegister()">create account →</button>
+      <div class="auth-google-divider"><span>or continue with</span></div>
+      <button class="auth-google" onclick="doGoogleLogin()">
+        <i class="fa-brands fa-google"></i>
+        Sign up with Google
+      </button>
       <div class="auth-divider">or</div>
       <button class="auth-guest" onclick="doGuest()">continue as guest</button>
     </div>
@@ -3272,5 +3300,63 @@ document.getElementById('auth-screen').style.display = 'flex';
 document.getElementById('auth-screen').classList.remove('hide');
 </script>
 
+<!-- Firebase SDK (compat version — works without bundler) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script>
+// Fallback: if Firebase fails to load, doGoogleLogin shows friendly error
+window.doGoogleLogin = function() {
+  showAuthMsg('Google sign-in not available — use username/password', 'err');
+};
+window.doGoogleLogout = function() {};
+
+try {
+  const firebaseConfig = {
+    apiKey: "AIzaSyC-SqrAd5P9Bw6W-8z4Z4SfBa6RJK5F-R0",
+    authDomain: "lucode-972ef.firebaseapp.com",
+    projectId: "lucode-972ef",
+    storageBucket: "lucode-972ef.firebasestorage.app",
+    messagingSenderId: "1039658020992",
+    appId: "1:1039658020992:web:8e1f0298cf89d68718b665"
+  };
+
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  window.doGoogleLogin = async function() {
+    try {
+      showAuthMsg('opening Google...', '');
+      const result = await auth.signInWithPopup(provider);
+      const user = result.user;
+      const username = user.displayName || user.email.split('@')[0];
+      if(user.photoURL) localStorage.setItem('lucode_avatar_' + username, user.photoURL);
+      loginSuccess(username, { joined: Date.now(), google: true });
+    } catch(e) {
+      if(e.code !== 'auth/popup-closed-by-user') {
+        showAuthMsg('Google sign-in failed — try again', 'err');
+      } else {
+        document.getElementById('auth-msg').className = 'auth-msg';
+      }
+    }
+  };
+
+  window.doGoogleLogout = async function() {
+    await auth.signOut();
+  };
+
+  // auto login if Google session active
+  auth.onAuthStateChanged(user => {
+    if(user && document.getElementById('auth-screen').style.display !== 'none') {
+      const username = user.displayName || user.email.split('@')[0];
+      if(user.photoURL) localStorage.setItem('lucode_avatar_' + username, user.photoURL);
+      loginSuccess(username, { joined: Date.now(), google: true });
+    }
+  });
+
+} catch(e) {
+  console.warn('Firebase init failed:', e);
+}
+</script>
 </body>
 </html>
