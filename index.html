@@ -433,9 +433,63 @@ body.has-bg-img::before{content:'';position:fixed;inset:0;z-index:-1;background-
 .wmc-btn{background:none;border:none;color:var(--d2);font-family:var(--font);font-size:.6rem;padding:3px 8px;border-radius:4px;cursor:pointer;transition:.13s;}
 .wmc-btn.on{background:var(--acg);color:var(--ac);}
 
+/* ── MUSIC PLAYER MODAL ── */
+#music-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s;}
+#music-modal.open{opacity:1;pointer-events:all;}
+.music-box{background:var(--s1);border:1px solid var(--b2);border-radius:22px;width:400px;max-width:96vw;overflow:hidden;transform:scale(.96);transition:transform .22s;box-shadow:0 40px 100px rgba(0,0,0,.7);}
+#music-modal.open .music-box{transform:scale(1);}
+
+/* url bar */
+.music-url-bar{padding:14px 16px;border-bottom:1px solid var(--b1);display:flex;gap:8px;background:var(--bg);}
+.music-url-bar input{flex:1;background:var(--s1);border:1px solid var(--b2);border-radius:8px;color:var(--tx);font-family:var(--font);font-size:.68rem;padding:8px 12px;outline:none;transition:.18s;}
+.music-url-bar input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--acg);}
+.music-url-bar input::placeholder{color:var(--d1);}
+.music-url-go{background:var(--ac);border:none;border-radius:7px;color:#0d0f14;font-family:var(--font);font-size:.65rem;font-weight:700;padding:8px 13px;cursor:pointer;transition:.15s;white-space:nowrap;}
+.music-url-go:hover{filter:brightness(1.1);}
+
+/* cover art */
+.music-cover-wrap{position:relative;width:100%;padding-top:56.25%;background:var(--bg);overflow:hidden;}
+.music-cover-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.music-cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s;}
+.music-cover-blur{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,var(--s1) 100%);}
+.music-cover-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--d1);}
+
+/* info */
+.music-info{padding:16px 20px 10px;}
+.music-title{font-size:.82rem;color:var(--tb);font-weight:700;font-family:var(--ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
+.music-artist{font-size:.62rem;color:var(--d2);font-family:var(--font);}
+
+/* progress */
+.music-progress-wrap{padding:0 20px;margin:8px 0;}
+.music-progress-bar{width:100%;height:4px;background:var(--b1);border-radius:3px;cursor:pointer;position:relative;}
+.music-progress-fill{height:100%;border-radius:3px;background:var(--ac);width:0%;transition:width .5s linear;pointer-events:none;}
+.music-times{display:flex;justify-content:space-between;font-size:.55rem;color:var(--d2);font-family:var(--font);margin-top:4px;}
+
+/* controls */
+.music-controls{display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 20px 16px;}
+.mc-btn{background:none;border:none;color:var(--d3);cursor:pointer;font-size:1.1rem;transition:.15s;padding:6px;border-radius:8px;line-height:1;}
+.mc-btn:hover{color:var(--ac);background:var(--acg);}
+.mc-btn.play{width:44px;height:44px;background:var(--ac);border-radius:50%;color:#0d0f14;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.18s;}
+.mc-btn.play:hover{transform:scale(1.08);filter:brightness(1.1);}
+
+/* volume */
+.music-vol-row{display:flex;align-items:center;gap:10px;padding:0 20px 18px;}
+.music-vol-icon{font-size:.85rem;color:var(--d2);cursor:pointer;transition:.13s;flex-shrink:0;}
+.music-vol-icon:hover{color:var(--ac);}
+input[type=range].music-vol{-webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:3px;background:var(--b1);outline:none;cursor:pointer;}
+input[type=range].music-vol::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--ac);cursor:pointer;transition:.13s;}
+input[type=range].music-vol::-webkit-slider-thumb:hover{transform:scale(1.2);}
+.music-vol-pct{font-size:.58rem;color:var(--d2);font-family:var(--font);width:28px;text-align:right;}
+
+/* nav btn music */
+.music-nav-btn{position:relative;}
+.music-playing-dot{position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:var(--ac);display:none;animation:musicDot 1.2s ease-in-out infinite;}
+@keyframes musicDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+.music-nav-btn.playing .music-playing-dot{display:block;}
+
 footer{padding:11px 48px;border-top:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;font-size:.59rem;color:var(--d1);}
 footer .ac{color:var(--ac);}
-#hidden{position:fixed;top:0;left:0;opacity:0;pointer-events:none;width:1px;height:1px;}
+#hidden{position:fixed;top:-200px;left:-200px;opacity:0;pointer-events:none;width:1px;height:1px;}
 
 /* ── KEYBOARD HEATMAP ── */
 #kbd-wrap{width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;padding:18px 0 8px;opacity:0;pointer-events:none;max-height:0;overflow:hidden;transition:opacity .3s,max-height .4s;}
@@ -925,6 +979,60 @@ footer .ac{color:var(--ac);}
   </div>
 </div>
 
+<!-- ══ MUSIC PLAYER MODAL ══ -->
+<div id="music-modal" onclick="if(event.target===this)closeMusic()">
+  <div class="music-box">
+    <!-- URL bar -->
+    <div class="music-url-bar">
+      <input id="music-url-input" type="text" placeholder="paste YouTube URL or playlist link..." onkeydown="if(event.key==='Enter')loadMusicUrl()">
+      <button class="music-url-go" onclick="loadMusicUrl()">▶ load</button>
+    </div>
+
+    <!-- cover / iframe area -->
+    <div class="music-cover-wrap" id="music-cover-wrap">
+      <div class="music-cover-placeholder" id="music-placeholder">🎵</div>
+      <div id="music-iframe-wrap" style="display:none;position:absolute;inset:0;">
+        <iframe id="music-iframe" allow="autoplay" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>
+      </div>
+      <img id="music-thumb" class="music-cover-img" style="display:none;" alt="">
+      <div class="music-cover-blur" id="music-blur" style="display:none;"></div>
+    </div>
+
+    <!-- info -->
+    <div class="music-info">
+      <div class="music-title" id="music-title">No track loaded</div>
+      <div class="music-artist" id="music-artist">paste a YouTube link above ↑</div>
+    </div>
+
+    <!-- progress -->
+    <div class="music-progress-wrap">
+      <div class="music-progress-bar" id="music-prog-bar" onclick="seekMusic(event)">
+        <div class="music-progress-fill" id="music-prog-fill"></div>
+      </div>
+      <div class="music-times">
+        <span id="music-cur">0:00</span>
+        <span id="music-dur">0:00</span>
+      </div>
+    </div>
+
+    <!-- controls -->
+    <div class="music-controls">
+      <button class="mc-btn" onclick="musicPrev()" title="Previous / Restart">⏮</button>
+      <button class="mc-btn" onclick="musicToggle()" title="Shuffle">🔀</button>
+      <button class="mc-btn play" id="music-play-btn" onclick="musicPlayPause()">▶</button>
+      <button class="mc-btn" onclick="musicNext()" title="Next">⏭</button>
+      <button class="mc-btn" id="music-loop-btn" onclick="musicToggleLoop()" title="Loop">🔁</button>
+    </div>
+
+    <!-- volume -->
+    <div class="music-vol-row">
+      <span class="music-vol-icon" onclick="musicToggleMute()" id="music-vol-icon">🔊</span>
+      <input type="range" class="music-vol" id="music-vol-slider" min="0" max="100" value="70" oninput="musicSetVol(this.value)">
+      <span class="music-vol-pct" id="music-vol-pct">70%</span>
+    </div>
+  </div>
+</div>
+
 <!-- ── ACHIEVEMENT TOASTS ── -->
 <div id="ach-container"></div>
 
@@ -1126,6 +1234,7 @@ footer .ac{color:var(--ac);}
     <button class="nav-btn act" id="nav-practice" data-i18n="nav.practice">practice</button>
     <button class="nav-btn" onclick="openSpkr()" data-i18n="nav.snippets">snippets</button>
     <button class="nav-btn" id="nav-words" onclick="toggleWordMode(this)">Aa words</button>
+    <button class="nav-btn music-nav-btn" id="nav-music" onclick="openMusic()">🎵 music<span class="music-playing-dot"></span></button>
     <button class="nav-btn" onclick="openGame()" data-i18n="nav.race">🏁 race</button>
     <div class="sep"></div>
     <button class="paste-hero" onclick="openPaste()" id="nav-paste">⌨ <span data-i18n="nav.paste">paste your code</span></button>
@@ -1428,7 +1537,7 @@ footer .ac{color:var(--ac);}
         <div class="fc" data-font="'Martian Mono',monospace" onclick="setFont(this)"><div class="fn">Martian Mono</div><div class="fp" style="font-family:monospace">fn () {}</div></div>
       </div>
       <div style="margin-top:9px;">
-        <div class="sr"><div class="sr-left"><div class="sn">Size</div></div><select class="ssel" id="s-fs" onchange="sv('fontSize',this.value);applyFs(this.value)"><option value=".8">small</option><option value=".9">s-med</option><option value=".95" selected>medium</option><option value="1.05">m-large</option><option value="1.1">large</option><option value="1.3">xl</option></select></div>
+        <div class="sr"><div class="sr-left"><div class="sn">Size</div></div><select class="ssel" id="s-fs" onchange="sv('fontSize',this.value);applyFs(this.value)"><option value=".8">small</option><option value=".9">s-med</option><option value=".95" selected>medium</option><option value="1.05">m-large</option><option value="1.1">large</option><option value="1.3">xl</option><option value="1.6">xxl</option></select></div>
         <div class="sr"><div class="sr-left"><div class="sn">Weight</div></div><select class="ssel" id="s-fw" onchange="sv('fontWeight',this.value);applyFw(this.value)"><option value="300">light</option><option value="400" selected>regular</option><option value="500">medium</option></select></div>
         <div class="sr"><div class="sr-left"><div class="sn">Line height</div></div><select class="ssel" id="s-lh" onchange="sv('lineH',this.value);applyLh(this.value)"><option value="1.5">compact</option><option value="1.75">cozy</option><option value="1.95" selected>normal</option><option value="2.2">relaxed</option><option value="2.5">airy</option></select></div>
         <div class="sr"><div class="sr-left"><div class="sn">Letter spacing</div></div><select class="ssel" id="s-ls" onchange="sv('letterSpacing',this.value);applyLs(this.value)"><option value="-0.5px">tight</option><option value="0px" selected>normal</option><option value="0.5px">wide</option><option value="1px">wider</option></select></div>
@@ -4065,7 +4174,7 @@ function toast(msg) {
   toastT = setTimeout(() => qi('toast').classList.remove('show'), 2000);
 }
 
-function focus_() { qi('hidden').focus(); }
+function focus_() { if(document.getElementById('auth-screen') && document.getElementById('auth-screen').style.display !== 'none') return; qi('hidden').focus(); }
 
 const hi = qi('hidden');
 hi.addEventListener('keydown', handleKey);
@@ -5479,6 +5588,247 @@ function loadSnippet(snippet) {
   S.start=null; S.timer=null;
   const tb = document.getElementById('timer-bar');
   if(tb) tb.style.width = '100%';
+}
+
+
+// ═══════════════════════════════════════════════════════
+// MUSIC PLAYER — YouTube IFrame API
+// ═══════════════════════════════════════════════════════
+let YT_PLAYER = null;
+let YT_READY = false;
+let MUSIC_PLAYING = false;
+let MUSIC_LOOP = false;
+let MUSIC_MUTED = false;
+let MUSIC_PROG_INTERVAL = null;
+let MUSIC_CURRENT_URL = '';
+
+// Load YouTube IFrame API once
+(function loadYTApi() {
+  if(window.YT) { YT_READY = true; return; }
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+
+window.onYouTubeIframeAPIReady = function() {
+  YT_READY = true;
+};
+
+function openMusic() {
+  document.getElementById('music-modal').classList.add('open');
+}
+function closeMusic() {
+  document.getElementById('music-modal').classList.remove('open');
+}
+
+function extractYTId(url) {
+  // handles youtu.be, youtube.com/watch, youtube.com/playlist, music.youtube.com
+  try {
+    const u = new URL(url);
+    if(u.searchParams.get('list')) return { type:'playlist', id: u.searchParams.get('list') };
+    if(u.searchParams.get('v')) return { type:'video', id: u.searchParams.get('v') };
+    if(u.hostname === 'youtu.be') return { type:'video', id: u.pathname.slice(1).split('?')[0] };
+    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([^&?\/\s]{11})/);
+    if(match) return { type:'video', id: match[1] };
+  } catch(e) {}
+  return null;
+}
+
+function loadMusicUrl() {
+  const raw = document.getElementById('music-url-input').value.trim();
+  if(!raw) return;
+  const parsed = extractYTId(raw);
+  if(!parsed) { toast('Invalid YouTube URL — paste a video or playlist link'); return; }
+  MUSIC_CURRENT_URL = raw;
+  spawnPlayer(parsed);
+}
+
+function spawnPlayer(parsed) {
+  // show iframe wrap, hide placeholder
+  document.getElementById('music-placeholder').style.display = 'none';
+  document.getElementById('music-iframe-wrap').style.display = 'block';
+  document.getElementById('music-thumb').style.display = 'none';
+  document.getElementById('music-blur').style.display = 'block';
+
+  const vol = parseInt(document.getElementById('music-vol-slider').value);
+
+  const vars = {
+    autoplay: 1,
+    controls: 0,
+    rel: 0,
+    modestbranding: 1,
+    origin: window.location.origin,
+    enablejsapi: 1,
+    volume: vol,
+  };
+  if(parsed.type === 'playlist') vars.listType = 'playlist', vars.list = parsed.id;
+
+  // Destroy old player if exists
+  if(YT_PLAYER) { try { YT_PLAYER.destroy(); } catch(e){} YT_PLAYER = null; }
+
+  const iframe = document.getElementById('music-iframe');
+  const srcId = parsed.type === 'video' ? parsed.id : 'videoseries';
+  let src = `https://www.youtube.com/embed/${srcId}?autoplay=1&controls=0&rel=0&modestbranding=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`;
+  if(parsed.type === 'playlist') src += `&listType=playlist&list=${parsed.id}`;
+  iframe.src = src;
+
+  // Try to use YT API for richer control
+  function tryYTPlayer() {
+    if(!window.YT || !window.YT.Player) { setTimeout(tryYTPlayer, 300); return; }
+    YT_PLAYER = new window.YT.Player('music-iframe', {
+      events: {
+        onReady: (e) => {
+          e.target.setVolume(vol);
+          e.target.playVideo();
+          MUSIC_PLAYING = true;
+          updatePlayBtn();
+          startProgressPoll();
+        },
+        onStateChange: (e) => {
+          const S = window.YT.PlayerState;
+          MUSIC_PLAYING = (e.data === S.PLAYING);
+          updatePlayBtn();
+          if(e.data === S.PLAYING) {
+            updateTrackInfo();
+            startProgressPoll();
+          } else {
+            clearInterval(MUSIC_PROG_INTERVAL);
+          }
+          if(e.data === S.ENDED && MUSIC_LOOP) YT_PLAYER.seekTo(0);
+          // update playing dot
+          const navBtn = document.getElementById('nav-music');
+          if(navBtn) navBtn.classList.toggle('playing', MUSIC_PLAYING);
+        },
+        onError: () => toast('Could not load this video (may be restricted)')
+      }
+    });
+  }
+  tryYTPlayer();
+
+  // Optimistic UI
+  MUSIC_PLAYING = true;
+  updatePlayBtn();
+  document.getElementById('music-title').textContent = 'Loading...';
+  document.getElementById('music-artist').textContent = parsed.type === 'playlist' ? '▶ Playlist' : 'YouTube';
+
+  // Try to fetch video title via oEmbed (no API key needed)
+  if(parsed.type === 'video') {
+    fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${parsed.id}&format=json`)
+      .then(r => r.json())
+      .then(d => {
+        document.getElementById('music-title').textContent = d.title || 'Unknown';
+        document.getElementById('music-artist').textContent = d.author_name || 'YouTube';
+        // thumbnail
+        const thumb = document.getElementById('music-thumb');
+        thumb.src = `https://img.youtube.com/vi/${parsed.id}/mqdefault.jpg`;
+        thumb.style.display = 'block';
+        thumb.style.opacity = '0.18';
+      }).catch(() => {});
+  }
+}
+
+function updateTrackInfo() {
+  if(!YT_PLAYER || typeof YT_PLAYER.getVideoData !== 'function') return;
+  try {
+    const data = YT_PLAYER.getVideoData();
+    if(data && data.title) {
+      document.getElementById('music-title').textContent = data.title;
+      document.getElementById('music-artist').textContent = data.author || 'YouTube';
+    }
+  } catch(e) {}
+}
+
+function startProgressPoll() {
+  clearInterval(MUSIC_PROG_INTERVAL);
+  MUSIC_PROG_INTERVAL = setInterval(() => {
+    if(!YT_PLAYER || typeof YT_PLAYER.getCurrentTime !== 'function') return;
+    try {
+      const cur = YT_PLAYER.getCurrentTime() || 0;
+      const dur = YT_PLAYER.getDuration() || 0;
+      if(dur > 0) {
+        document.getElementById('music-prog-fill').style.width = ((cur/dur)*100)+'%';
+        document.getElementById('music-cur').textContent = fmtTime(cur);
+        document.getElementById('music-dur').textContent = fmtTime(dur);
+      }
+    } catch(e) {}
+  }, 800);
+}
+
+function fmtTime(s) {
+  s = Math.floor(s);
+  return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+}
+
+function musicPlayPause() {
+  if(!YT_PLAYER) return;
+  try {
+    if(MUSIC_PLAYING) { YT_PLAYER.pauseVideo(); MUSIC_PLAYING = false; }
+    else { YT_PLAYER.playVideo(); MUSIC_PLAYING = true; }
+    updatePlayBtn();
+    const navBtn = document.getElementById('nav-music');
+    if(navBtn) navBtn.classList.toggle('playing', MUSIC_PLAYING);
+  } catch(e) {}
+}
+
+function updatePlayBtn() {
+  const btn = document.getElementById('music-play-btn');
+  if(btn) btn.textContent = MUSIC_PLAYING ? '⏸' : '▶';
+}
+
+function musicNext() {
+  if(!YT_PLAYER) return;
+  try { YT_PLAYER.nextVideo(); } catch(e) {}
+}
+
+function musicPrev() {
+  if(!YT_PLAYER) return;
+  try {
+    const cur = YT_PLAYER.getCurrentTime();
+    if(cur > 3) YT_PLAYER.seekTo(0);
+    else YT_PLAYER.previousVideo();
+  } catch(e) {}
+}
+
+function musicToggle() {
+  // shuffle — jump to random time or random video in playlist
+  if(!YT_PLAYER) return;
+  try {
+    YT_PLAYER.setShuffle(true);
+    YT_PLAYER.nextVideo();
+  } catch(e) {}
+}
+
+function musicToggleLoop() {
+  MUSIC_LOOP = !MUSIC_LOOP;
+  const btn = document.getElementById('music-loop-btn');
+  if(btn) { btn.style.color = MUSIC_LOOP ? 'var(--ac)' : ''; btn.style.background = MUSIC_LOOP ? 'var(--acg)' : ''; }
+  if(YT_PLAYER) try { YT_PLAYER.setLoop(MUSIC_LOOP); } catch(e) {}
+}
+
+function musicSetVol(v) {
+  document.getElementById('music-vol-pct').textContent = v + '%';
+  const icon = document.getElementById('music-vol-icon');
+  if(icon) icon.textContent = v == 0 ? '🔇' : v < 40 ? '🔉' : '🔊';
+  if(YT_PLAYER) try { YT_PLAYER.setVolume(parseInt(v)); MUSIC_MUTED = false; } catch(e) {}
+}
+
+function musicToggleMute() {
+  if(!YT_PLAYER) return;
+  try {
+    MUSIC_MUTED = !MUSIC_MUTED;
+    if(MUSIC_MUTED) { YT_PLAYER.mute(); document.getElementById('music-vol-icon').textContent = '🔇'; }
+    else { YT_PLAYER.unMute(); const v = document.getElementById('music-vol-slider').value; document.getElementById('music-vol-icon').textContent = v < 40 ? '🔉' : '🔊'; }
+  } catch(e) {}
+}
+
+function seekMusic(e) {
+  if(!YT_PLAYER) return;
+  try {
+    const bar = document.getElementById('music-prog-bar');
+    const pct = e.offsetX / bar.offsetWidth;
+    const dur = YT_PLAYER.getDuration();
+    YT_PLAYER.seekTo(pct * dur, true);
+  } catch(e) {}
 }
 
 
