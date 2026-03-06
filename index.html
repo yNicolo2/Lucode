@@ -434,57 +434,115 @@ body.has-bg-img::before{content:'';position:fixed;inset:0;z-index:-1;background-
 .wmc-btn.on{background:var(--acg);color:var(--ac);}
 
 /* ── MUSIC PLAYER MODAL ── */
-#music-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s;}
+#music-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(16px);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .22s;}
 #music-modal.open{opacity:1;pointer-events:all;}
-.music-box{background:var(--s1);border:1px solid var(--b2);border-radius:22px;width:400px;max-width:96vw;overflow:hidden;transform:scale(.96);transition:transform .22s;box-shadow:0 40px 100px rgba(0,0,0,.7);}
-#music-modal.open .music-box{transform:scale(1);}
+
+.music-box{
+  width:360px;max-width:96vw;border-radius:26px;overflow:hidden;
+  transform:scale(.94) translateY(12px);transition:transform .28s cubic-bezier(.34,1.4,.64,1);
+  box-shadow:0 48px 120px rgba(0,0,0,.9);
+  position:relative;
+}
+#music-modal.open .music-box{transform:scale(1) translateY(0);}
+
+/* blurred album art as full background */
+.music-bg{position:absolute;inset:-20px;background-size:cover;background-position:center;filter:blur(28px) brightness(.35) saturate(1.4);transform:scale(1.1);z-index:0;transition:background-image .6s;}
+
+/* glass overlay */
+.music-glass{position:absolute;inset:0;background:rgba(8,10,16,.55);backdrop-filter:blur(2px);z-index:1;}
+
+/* all content above bg */
+.music-content{position:relative;z-index:2;}
 
 /* url bar */
-.music-url-bar{padding:14px 16px;border-bottom:1px solid var(--b1);display:flex;gap:8px;background:var(--bg);}
-.music-url-bar input{flex:1;background:var(--s1);border:1px solid var(--b2);border-radius:8px;color:var(--tx);font-family:var(--font);font-size:.68rem;padding:8px 12px;outline:none;transition:.18s;}
-.music-url-bar input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--acg);}
-.music-url-bar input::placeholder{color:var(--d1);}
-.music-url-go{background:var(--ac);border:none;border-radius:7px;color:#0d0f14;font-family:var(--font);font-size:.65rem;font-weight:700;padding:8px 13px;cursor:pointer;transition:.15s;white-space:nowrap;}
-.music-url-go:hover{filter:brightness(1.1);}
+.music-url-bar{display:flex;gap:8px;padding:16px 16px 0;}
+.music-url-bar input{
+  flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;color:#fff;font-family:var(--font);font-size:.65rem;
+  padding:9px 12px;outline:none;transition:.18s;
+}
+.music-url-bar input:focus{border-color:var(--ac);background:rgba(255,255,255,.13);}
+.music-url-bar input::placeholder{color:rgba(255,255,255,.3);}
+.music-url-go{
+  background:var(--ac);border:none;border-radius:10px;color:#0d0f14;
+  font-family:var(--font);font-size:.65rem;font-weight:700;padding:9px 14px;
+  cursor:pointer;transition:.15s;white-space:nowrap;flex-shrink:0;
+}
+.music-url-go:hover{filter:brightness(1.12);transform:scale(1.04);}
 
-/* cover art */
-.music-cover-wrap{position:relative;width:100%;padding-top:56.25%;background:var(--bg);overflow:hidden;}
-.music-cover-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-.music-cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s;}
-.music-cover-blur{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,var(--s1) 100%);}
-.music-cover-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--d1);}
+/* cover — big square */
+.music-cover-wrap{
+  position:relative;margin:18px 20px 0;
+  border-radius:18px;overflow:hidden;
+  aspect-ratio:1/1;background:rgba(255,255,255,.04);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.music-cover-img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s;display:block;}
+.music-cover-img.loaded{opacity:1;}
+.music-cover-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:rgba(255,255,255,.15);}
 
-/* info */
-.music-info{padding:16px 20px 10px;}
-.music-title{font-size:.82rem;color:var(--tb);font-weight:700;font-family:var(--ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
-.music-artist{font-size:.62rem;color:var(--d2);font-family:var(--font);}
+/* eq bars on cover */
+.music-eq{position:absolute;bottom:14px;right:14px;display:none;align-items:flex-end;gap:3px;height:20px;}
+.music-eq.playing{display:flex;}
+.music-eq-bar{width:3px;background:var(--ac);border-radius:2px;animation:eqBar .55s ease-in-out infinite alternate;box-shadow:0 0 6px var(--ac);}
+.music-eq-bar:nth-child(1){height:6px;animation-delay:0s;}
+.music-eq-bar:nth-child(2){height:16px;animation-delay:.12s;}
+.music-eq-bar:nth-child(3){height:10px;animation-delay:.24s;}
+.music-eq-bar:nth-child(4){height:18px;animation-delay:.06s;}
+.music-eq-bar:nth-child(5){height:8px;animation-delay:.18s;}
+@keyframes eqBar{from{transform:scaleY(.25)}to{transform:scaleY(1)}}
+
+/* track info */
+.music-info{padding:16px 22px 4px;text-align:center;}
+.music-title{font-size:.9rem;color:#fff;font-weight:700;font-family:var(--ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.music-artist{font-size:.62rem;color:rgba(255,255,255,.5);font-family:var(--font);margin-top:3px;}
 
 /* progress */
-.music-progress-wrap{padding:0 20px;margin:8px 0;}
-.music-progress-bar{width:100%;height:4px;background:var(--b1);border-radius:3px;cursor:pointer;position:relative;}
+.music-progress-wrap{padding:12px 22px 4px;}
+.music-progress-bar{width:100%;height:4px;background:rgba(255,255,255,.12);border-radius:3px;cursor:pointer;position:relative;}
+.music-progress-bar:hover{height:6px;margin-top:-1px;}
 .music-progress-fill{height:100%;border-radius:3px;background:var(--ac);width:0%;transition:width .5s linear;pointer-events:none;}
-.music-times{display:flex;justify-content:space-between;font-size:.55rem;color:var(--d2);font-family:var(--font);margin-top:4px;}
+.music-progress-bar:hover .music-progress-fill{box-shadow:0 0 8px var(--ac);}
+.music-times{display:flex;justify-content:space-between;font-size:.55rem;color:rgba(255,255,255,.35);font-family:var(--font);margin-top:6px;}
 
 /* controls */
-.music-controls{display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 20px 16px;}
-.mc-btn{background:none;border:none;color:var(--d3);cursor:pointer;font-size:1.1rem;transition:.15s;padding:6px;border-radius:8px;line-height:1;}
-.mc-btn:hover{color:var(--ac);background:var(--acg);}
-.mc-btn.play{width:44px;height:44px;background:var(--ac);border-radius:50%;color:#0d0f14;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.18s;}
-.mc-btn.play:hover{transform:scale(1.08);filter:brightness(1.1);}
+.music-controls{display:flex;align-items:center;justify-content:space-between;padding:10px 22px 4px;}
+.mc-btn{
+  background:none;border:none;cursor:pointer;transition:.18s;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:6px 8px;border-radius:10px;color:rgba(255,255,255,.5);
+}
+.mc-btn:hover{color:#fff;background:rgba(255,255,255,.08);}
+.mc-btn .mc-icon{font-size:1rem;line-height:1;}
+.mc-btn .mc-label{font-size:.45rem;letter-spacing:.5px;text-transform:uppercase;font-family:var(--font);}
+.mc-btn.play{
+  width:54px;height:54px;
+  background:var(--ac,#e2b714);border-radius:50%;
+  color:#0d0f14;font-size:1.2rem;
+  flex-direction:row;gap:0;padding:0;
+  box-shadow:0 8px 28px color-mix(in srgb,var(--ac,#e2b714) 50%,transparent);
+  transition:.2s;
+}
+.mc-btn.play:hover{transform:scale(1.1);}
+.mc-btn.play:active{transform:scale(.95);}
+.mc-btn.act{color:var(--ac);}
 
 /* volume */
-.music-vol-row{display:flex;align-items:center;gap:10px;padding:0 20px 18px;}
-.music-vol-icon{font-size:.85rem;color:var(--d2);cursor:pointer;transition:.13s;flex-shrink:0;}
-.music-vol-icon:hover{color:var(--ac);}
-input[type=range].music-vol{-webkit-appearance:none;appearance:none;flex:1;height:4px;border-radius:3px;background:var(--b1);outline:none;cursor:pointer;}
-input[type=range].music-vol::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--ac);cursor:pointer;transition:.13s;}
-input[type=range].music-vol::-webkit-slider-thumb:hover{transform:scale(1.2);}
-.music-vol-pct{font-size:.58rem;color:var(--d2);font-family:var(--font);width:28px;text-align:right;}
+.music-vol-row{display:flex;align-items:center;gap:10px;padding:10px 22px 22px;}
+.music-vol-icon{font-size:.85rem;color:rgba(255,255,255,.4);cursor:pointer;transition:.13s;flex-shrink:0;}
+.music-vol-icon:hover{color:rgba(255,255,255,.8);}
+input[type=range].music-vol{-webkit-appearance:none;appearance:none;flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.15);outline:none;cursor:pointer;}
+input[type=range].music-vol::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--ac,#e2b714);cursor:pointer;transition:.13s;}
+input[type=range].music-vol::-webkit-slider-thumb:hover{transform:scale(1.25);}
+.music-vol-pct{font-size:.55rem;color:rgba(255,255,255,.35);font-family:var(--font);width:26px;text-align:right;}
 
-/* nav btn music */
+/* YT iframe hidden */
+#music-iframe-wrap{position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;pointer-events:none;}
+
+/* header dot */
 .music-nav-btn{position:relative;}
 .music-playing-dot{position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:var(--ac);display:none;animation:musicDot 1.2s ease-in-out infinite;}
-@keyframes musicDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+@keyframes musicDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
 .music-nav-btn.playing .music-playing-dot{display:block;}
 
 /* ── FOCUS MODE ── */
@@ -681,7 +739,33 @@ footer .ac{color:var(--ac);}
 
       <div class="cl-version">
         <div class="cl-ver-hdr">
-          <span class="cl-ver-tag latest">v1.6.0</span>
+          <span class="cl-ver-tag latest">v1.6.1</span>
+          <span class="cl-ver-date">Mar 2026</span>
+          <span class="cl-ver-title">Music · Focus · Polish ✨</span>
+        </div>
+        <div class="cl-items">
+          <div class="cl-item"><span class="cl-badge new">new</span>Music player — YouTube video &amp; playlist support, album art, EQ bars, blurred dynamic background</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Focus mode — hides all UI, only the code visible. Toggle ⛶ in header or Ctrl+F, exit with Esc</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Split-screen login — live typing demo on the right, matrix rain background, typing logo animation</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Login user counter — starts at 1,200 and grows 3–7 per visit</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>Font size XXL added to Settings → Appearance</div>
+          <div class="cl-item"><span class="cl-badge new">new</span>PWA install moved to Settings → Account with step-by-step instructions per browser/OS</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Music player redesigned — glass panel, square cover art, dynamic blurred background per song</div>
+          <div class="cl-item"><span class="cl-badge imp">imp</span>Login screen redesigned — glassmorphism panel, logo cursor animation, shake on wrong password</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Cursor flash in all modals (music, race, snippets browser, paste panel) — fully eliminated</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Music player iframe hidden — no YouTube ads, overlays or video visible, audio only</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Play button &amp; URL button now correctly use the active theme accent color</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Forgot password — tabs hide cleanly, fields reset on open, duplicate button removed</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>About modal broken HTML tag fixed; 12 FAQ questions; new failure card added</div>
+          <div class="cl-item"><span class="cl-badge fix">fix</span>Service worker updated to v1.6.0 cache — forces fresh load for all users</div>
+        </div>
+      </div>
+
+      <div class="cl-divider"></div>
+
+      <div class="cl-version">
+        <div class="cl-ver-hdr">
+          <span class="cl-ver-tag">v1.6.0</span>
           <span class="cl-ver-date">Mar 2026</span>
           <span class="cl-ver-title">Engagement Update 🔥</span>
         </div>
@@ -997,56 +1081,73 @@ footer .ac{color:var(--ac);}
 <!-- ══ MUSIC PLAYER MODAL ══ -->
 <div id="music-modal" onclick="if(event.target===this)closeMusic()">
   <div class="music-box">
-    <!-- URL bar -->
-    <div class="music-url-bar">
-      <input id="music-url-input" type="text" placeholder="paste YouTube URL or playlist link..." tabindex="-1" onkeydown="if(event.key==='Enter')loadMusicUrl()">
-      <button class="music-url-go" onclick="loadMusicUrl()">▶ load</button>
-    </div>
+    <!-- blurred bg + glass -->
+    <div class="music-bg" id="music-bg"></div>
+    <div class="music-glass"></div>
 
-    <!-- cover / iframe area -->
-    <div class="music-cover-wrap" id="music-cover-wrap">
-      <div class="music-cover-placeholder" id="music-placeholder">🎵</div>
-      <div id="music-iframe-wrap" style="display:none;position:absolute;inset:0;">
-        <div id="yt-player-el" style="width:100%;height:100%;"></div>
+    <div class="music-content">
+      <!-- URL bar -->
+      <div class="music-url-bar">
+        <input id="music-url-input" type="text" placeholder="youtube.com/watch?v=... or playlist" tabindex="-1" onkeydown="if(event.key==='Enter')loadMusicUrl()">
+        <button class="music-url-go" onclick="loadMusicUrl()">▶</button>
       </div>
-      <img id="music-thumb" class="music-cover-img" style="display:none;" alt="">
-      <div class="music-cover-blur" id="music-blur" style="display:none;"></div>
-    </div>
 
-    <!-- info -->
-    <div class="music-info">
-      <div class="music-title" id="music-title">No track loaded</div>
-      <div class="music-artist" id="music-artist">paste a YouTube link above ↑</div>
-    </div>
-
-    <!-- progress -->
-    <div class="music-progress-wrap">
-      <div class="music-progress-bar" id="music-prog-bar" onclick="seekMusic(event)">
-        <div class="music-progress-fill" id="music-prog-fill"></div>
+      <!-- square cover art -->
+      <div class="music-cover-wrap">
+        <div class="music-cover-placeholder" id="music-placeholder">🎵</div>
+        <img id="music-thumb" class="music-cover-img" alt="">
+        <div class="music-eq" id="music-eq">
+          <div class="music-eq-bar"></div><div class="music-eq-bar"></div>
+          <div class="music-eq-bar"></div><div class="music-eq-bar"></div>
+          <div class="music-eq-bar"></div>
+        </div>
       </div>
-      <div class="music-times">
-        <span id="music-cur">0:00</span>
-        <span id="music-dur">0:00</span>
+
+      <!-- track info -->
+      <div class="music-info">
+        <div class="music-title" id="music-title">No track loaded</div>
+        <div class="music-artist" id="music-artist">paste a YouTube link above</div>
       </div>
-    </div>
 
-    <!-- controls -->
-    <div class="music-controls">
-      <button class="mc-btn" onclick="musicPrev()" title="Previous / Restart">⏮</button>
-      <button class="mc-btn" onclick="musicToggle()" title="Shuffle">🔀</button>
-      <button class="mc-btn play" id="music-play-btn" onclick="musicPlayPause()">▶</button>
-      <button class="mc-btn" onclick="musicNext()" title="Next">⏭</button>
-      <button class="mc-btn" id="music-loop-btn" onclick="musicToggleLoop()" title="Loop">🔁</button>
-    </div>
+      <!-- progress -->
+      <div class="music-progress-wrap">
+        <div class="music-progress-bar" id="music-prog-bar" onclick="seekMusic(event)">
+          <div class="music-progress-fill" id="music-prog-fill"></div>
+        </div>
+        <div class="music-times">
+          <span id="music-cur">0:00</span>
+          <span id="music-dur">0:00</span>
+        </div>
+      </div>
 
-    <!-- volume -->
-    <div class="music-vol-row">
-      <span class="music-vol-icon" onclick="musicToggleMute()" id="music-vol-icon">🔊</span>
-      <input type="range" class="music-vol" id="music-vol-slider" min="0" max="100" value="70" oninput="musicSetVol(this.value)">
-      <span class="music-vol-pct" id="music-vol-pct">70%</span>
-    </div>
+      <!-- controls with labels -->
+      <div class="music-controls">
+        <button class="mc-btn" onclick="musicPrev()">
+          <span class="mc-icon">⏮</span><span class="mc-label">prev</span>
+        </button>
+        <button class="mc-btn" id="music-shuf-btn" onclick="musicToggle()">
+          <span class="mc-icon">🔀</span><span class="mc-label">shuffle</span>
+        </button>
+        <button class="mc-btn play" id="music-play-btn" onclick="musicPlayPause()">▶</button>
+        <button class="mc-btn" id="music-loop-btn" onclick="musicToggleLoop()">
+          <span class="mc-icon">🔁</span><span class="mc-label">loop</span>
+        </button>
+        <button class="mc-btn" onclick="musicNext()">
+          <span class="mc-icon">⏭</span><span class="mc-label">next</span>
+        </button>
+      </div>
+
+      <!-- volume -->
+      <div class="music-vol-row">
+        <span class="music-vol-icon" onclick="musicToggleMute()" id="music-vol-icon">🔊</span>
+        <input type="range" class="music-vol" id="music-vol-slider" min="0" max="100" value="70" oninput="musicSetVol(this.value)">
+        <span class="music-vol-pct" id="music-vol-pct">70%</span>
+      </div>
+    </div><!-- end music-content -->
   </div>
 </div>
+<!-- YT iframe hidden (audio only) -->
+<div id="music-iframe-wrap"><div id="yt-player-el"></div></div>
 
 <!-- ── ACHIEVEMENT TOASTS ── -->
 <div id="ach-container"></div>
@@ -1415,7 +1516,7 @@ footer .ac{color:var(--ac);}
   <span style="display:flex;align-items:center;gap:10px;">
     <span id="ft-count">0 snippets</span>
     <span style="color:var(--d0)">·</span>
-    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.6.0</span>
+    <span style="color:var(--d1);cursor:pointer;transition:.13s;" onmouseover="this.style.color='var(--ac)'" onmouseout="this.style.color='var(--d1)'" onclick="openChangelog()">v1.6.1</span>
   </span>
 </footer>
 
@@ -4196,16 +4297,16 @@ function focus_() { if(document.getElementById('auth-screen') && document.getEle
 const hi = qi('hidden');
 hi.addEventListener('keydown', handleKey);
 hi.addEventListener('blur', () => {
-  // Don't steal focus if auth screen is showing or if user is typing in an input
   const auth = document.getElementById('auth-screen');
   if(auth && auth.style.display !== 'none') return;
   const active = document.activeElement;
   if(active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.tagName === 'SELECT')) return;
-  if(!qi('spkr').classList.contains('open') &&
-     !qi('pm').classList.contains('open') &&
-     !qi('sp').classList.contains('open') &&
-     !qi('run-panel').classList.contains('open'))
-    setTimeout(focus_, 60);
+  // Don't steal focus if any modal is open
+  const anyModalOpen = [
+    'spkr','pm','sp','run-panel',
+    'music-modal','game-modal','ach-modal','share-modal','about-modal','cl-modal'
+  ].some(id => { const el = document.getElementById(id); return el && (el.classList.contains('open') || el.style.display === 'flex'); });
+  if(!anyModalOpen) setTimeout(focus_, 60);
 });
 
 document.addEventListener('keydown', e => {
@@ -5656,7 +5757,32 @@ function loadYTApi(cb) {
   document.head.appendChild(tag);
 }
 
-function openMusic() { document.getElementById('music-modal').classList.add('open'); }
+
+function updateMusicColors() {
+  const ac = getComputedStyle(document.documentElement).getPropertyValue('--ac').trim() || '#e2b714';
+  const playBtn = document.getElementById('music-play-btn');
+  const goBtn = document.querySelector('.music-url-go');
+  if(playBtn) playBtn.style.background = ac;
+  if(goBtn) goBtn.style.background = ac;
+  document.querySelectorAll('.music-eq-bar').forEach(b => b.style.background = ac);
+  const fill = document.getElementById('music-prog-fill');
+  if(fill) fill.style.background = ac;
+}
+function openMusic() {
+  document.getElementById('music-modal').classList.add('open');
+  // Force accent color on music buttons (CSS var may not resolve in stacking context)
+  const ac = getComputedStyle(document.documentElement).getPropertyValue('--ac').trim() || '#e2b714';
+  const playBtn = document.getElementById('music-play-btn');
+  const goBtn = document.querySelector('.music-url-go');
+  const volThumb = document.getElementById('music-vol-slider');
+  if(playBtn) playBtn.style.background = ac;
+  if(goBtn) goBtn.style.background = ac;
+  // eq bars
+  document.querySelectorAll('.music-eq-bar').forEach(b => b.style.background = ac);
+  // progress fill
+  const fill = document.getElementById('music-prog-fill');
+  if(fill) fill.style.background = ac;
+}
 function closeMusic() { document.getElementById('music-modal').classList.remove('open'); }
 
 function extractYTId(url) {
@@ -5684,69 +5810,78 @@ function loadMusicUrl() {
 }
 
 function spawnPlayer(parsed) {
-  // Destroy old
   if(YT_PLAYER) { try { YT_PLAYER.destroy(); } catch(e){} YT_PLAYER = null; }
   clearInterval(MUSIC_PROG_INTERVAL);
 
-  // Replace iframe element (YT API needs a clean div/iframe)
+  // Recreate player div (API needs fresh element)
   const wrap = document.getElementById('music-iframe-wrap');
   wrap.innerHTML = '<div id="yt-player-el"></div>';
-  wrap.style.display = 'block';
+
+  // Hide placeholder, show cover area
   document.getElementById('music-placeholder').style.display = 'none';
-  document.getElementById('music-blur').style.display = 'block';
 
   const vol = parseInt(document.getElementById('music-vol-slider').value);
-
-  const playerVars = {
-    autoplay: 1, controls: 0, rel: 0, modestbranding: 1,
-    playsinline: 1, origin: window.location.origin,
-  };
-  if(parsed.type === 'playlist') {
-    playerVars.listType = 'playlist';
-    playerVars.list = parsed.id;
-    if(parsed.vid) playerVars.videoId = parsed.vid;
-  }
+  const playerVars = { autoplay:1, controls:0, rel:0, modestbranding:1, playsinline:1, fs:0, disablekb:1 };
+  if(parsed.type === 'playlist') { playerVars.listType='playlist'; playerVars.list=parsed.id; if(parsed.vid) playerVars.videoId=parsed.vid; }
 
   const config = {
-    width: '100%', height: '100%',
+    width:'320', height:'180',
     playerVars,
     events: {
       onReady(e) {
         e.target.setVolume(vol);
         if(MUSIC_MUTED) e.target.mute();
         e.target.playVideo();
+        updatePlayBtn();
       },
       onStateChange(e) {
         const S = window.YT.PlayerState;
-        MUSIC_PLAYING = e.data === S.PLAYING;
+        MUSIC_PLAYING = (e.data === S.PLAYING);
         updatePlayBtn();
+        // EQ bars animation
+        const eq = document.getElementById('music-eq');
+        if(eq) eq.classList.toggle('playing', MUSIC_PLAYING);
+        // header dot
         const dot = document.getElementById('nav-music');
         if(dot) dot.classList.toggle('playing', MUSIC_PLAYING);
         if(e.data === S.PLAYING) { updateTrackInfo(); startProgressPoll(); }
         else clearInterval(MUSIC_PROG_INTERVAL);
-        if(e.data === S.ENDED && MUSIC_LOOP) e.target.seekTo(0);
+        if(e.data === S.ENDED && MUSIC_LOOP) e.target.seekTo(0, true);
       },
       onError(e) {
-        const codes = {2:'invalid video ID',5:'HTML5 error',100:'video not found',101:'embedding disabled',150:'embedding disabled'};
-        toast('YouTube: ' + (codes[e.data] || 'playback error'));
+        const codes = {2:'invalid ID',5:'HTML5 error',100:'video not found',101:'embedding disabled',150:'embedding disabled'};
+        toast('YouTube error: ' + (codes[e.data] || 'playback error. Try another video.'));
       }
     }
   };
-
   if(parsed.type === 'video') config.videoId = parsed.id;
   YT_PLAYER = new window.YT.Player('yt-player-el', config);
 
-  // Fetch metadata via oEmbed (no API key)
+  // Load thumbnail — also update blurred bg
+  const setThumb = (videoId) => {
+    const thumb = document.getElementById('music-thumb');
+    const bg = document.getElementById('music-bg');
+    thumb.classList.remove('loaded');
+    thumb.onload = () => {
+      thumb.classList.add('loaded');
+      if(bg) bg.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
+    };
+    thumb.onerror = () => {
+      const fallback = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      thumb.src = fallback;
+      if(bg) bg.style.backgroundImage = `url(${fallback})`;
+    };
+    thumb.src = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  };
+
   if(parsed.type === 'video') {
+    setThumb(parsed.id);
     fetch(`https://www.youtube.com/oembed?url=https://youtube.com/watch?v=${parsed.id}&format=json`)
       .then(r => r.json()).then(d => {
         document.getElementById('music-title').textContent = d.title || 'Unknown';
         document.getElementById('music-artist').textContent = d.author_name || 'YouTube';
-        const thumb = document.getElementById('music-thumb');
-        thumb.src = `https://img.youtube.com/vi/${parsed.id}/mqdefault.jpg`;
-        thumb.style.display = 'block'; thumb.style.opacity = '0.2';
       }).catch(() => {
-        document.getElementById('music-title').textContent = 'Video loaded';
+        document.getElementById('music-title').textContent = 'Track loaded';
         document.getElementById('music-artist').textContent = 'YouTube';
       });
   } else {
@@ -5762,11 +5897,16 @@ function updateTrackInfo() {
     if(d && d.title) {
       document.getElementById('music-title').textContent = d.title;
       document.getElementById('music-artist').textContent = d.author || 'YouTube';
-      // update thumb for playlist tracks
       if(d.video_id) {
         const thumb = document.getElementById('music-thumb');
-        thumb.src = `https://img.youtube.com/vi/${d.video_id}/mqdefault.jpg`;
-        thumb.style.display = 'block'; thumb.style.opacity = '0.2';
+        thumb.classList.remove('loaded');
+        const bg2 = document.getElementById('music-bg');
+        thumb.onload = () => {
+          thumb.classList.add('loaded');
+          if(bg2) bg2.style.backgroundImage = `url(${thumb.src})`;
+        };
+        thumb.onerror = () => { thumb.src = `https://img.youtube.com/vi/${d.video_id}/hqdefault.jpg`; };
+        thumb.src = `https://img.youtube.com/vi/${d.video_id}/maxresdefault.jpg`;
       }
     }
   } catch(e) {}
@@ -5804,6 +5944,9 @@ function musicPlayPause() {
 function updatePlayBtn() {
   const btn = document.getElementById('music-play-btn');
   if(btn) btn.textContent = MUSIC_PLAYING ? '⏸' : '▶';
+  // update placeholder visibility
+  const ph = document.getElementById('music-placeholder');
+  if(ph) ph.style.display = 'none';
 }
 
 function musicNext() {
